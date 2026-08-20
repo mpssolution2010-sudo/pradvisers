@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+// Homepage 2026 - Property Advisersimport { createFileRoute } from '@tanstack/react-router'
 import SurveyForm from '../components/SurveyForm'
 
 export const Route = createFileRoute('/')({
