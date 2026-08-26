@@ -1,4 +1,3 @@
-```tsx
 // Homepage 2026 - Property Advisers
 import { createFileRoute } from '@tanstack/react-router'
 import SurveyForm from '../components/SurveyForm'
@@ -675,4 +674,4 @@ function Home() {
     </div>
   )
 }
-```
+
