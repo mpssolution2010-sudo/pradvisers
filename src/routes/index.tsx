@@ -53,7 +53,7 @@ function Home() {
           {/* LOGO */}
           <a href="/" className="flex items-center shrink-0">
             <img
-              src="/images/logo-property-advisers.png"
+              src="/images/LOGO TU HOGAR, TU VIDA, NUESTRA MISION.png"
               alt="Property Advisers Real Estate"
               className="w-40 sm:w-48 lg:w-56 h-auto"
             />
