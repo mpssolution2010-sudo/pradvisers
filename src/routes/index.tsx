@@ -47,8 +47,7 @@ function Home() {
   return (
     <div className="min-h-screen bg-[#f5f5f5] text-gray-900">
 
-      </header>
-          {/* HEADER PROPERTY ADVISERS 2026 */}
+      {/* HEADER PROPERTY ADVISERS 2026 */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
 
