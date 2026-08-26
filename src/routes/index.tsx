@@ -47,51 +47,74 @@ function Home() {
   return (
     <div className="min-h-screen bg-[#f5f5f5] text-gray-900">
 
-      {/* HEADER */}
-      <header className="sticky top-0 z-50 bg-[#071a32]/95 backdrop-blur border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      </header>
+          {/* HEADER PROPERTY ADVISERS 2026 */}
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
 
-          <a href="/" className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-full bg-[#c9a646] flex items-center justify-center text-[#071a32] font-black text-lg">
-              PA
-            </div>
-
-            <div>
-              <p className="text-white font-black tracking-wide leading-none">
-                PROPERTY ADVISERS
-              </p>
-              <p className="text-[#d4af57] text-xs tracking-[0.2em] mt-1">
-                REAL ESTATE
-              </p>
-            </div>
+          {/* LOGO */}
+          <a href="/" className="flex items-center shrink-0">
+            <img
+              src="/images/logo-property-advisers.png"
+              alt="Property Advisers Real Estate"
+              className="w-40 sm:w-48 lg:w-56 h-auto"
+            />
           </a>
 
-          <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-white">
-            <a href="#inicio" className="hover:text-[#d4af57] transition">
-              Inicio
+          {/* MENÚ */}
+          <nav className="hidden lg:flex items-center gap-5 text-xs xl:text-sm font-bold text-[#246b8e]">
+
+            <a href="#inicio" className="hover:text-[#f5b51b] transition">
+              INICIO
             </a>
 
-            <a href="#servicios" className="hover:text-[#d4af57] transition">
-              Servicios
+            <a href="#propiedades" className="hover:text-[#f5b51b] transition">
+              PROPIEDADES
             </a>
 
-            <a href="#nosotros" className="hover:text-[#d4af57] transition">
-              Nosotros
+            <a href="#comprar" className="hover:text-[#f5b51b] transition">
+              COMPRAR
             </a>
 
-            <a href="#contacto" className="hover:text-[#d4af57] transition">
-              Contacto
+            <a href="#vender" className="hover:text-[#f5b51b] transition">
+              VENDER
             </a>
 
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-[#c9a646] text-[#071a32] px-5 py-2.5 rounded-full font-bold hover:brightness-110 transition"
-            >
-              WhatsApp
+            <a href="#servicios" className="hover:text-[#f5b51b] transition">
+              SERVICIOS
             </a>
+
+            <a href="#herencias" className="hover:text-[#f5b51b] transition">
+              HERENCIAS
+            </a>
+
+            <a href="#nosotros" className="hover:text-[#f5b51b] transition">
+              NOSOTROS
+            </a>
+
+            <a href="#contacto" className="hover:text-[#f5b51b] transition">
+              CONTACTO
+            </a>
+
           </nav>
+
+          {/* WHATSAPP */}
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden sm:flex items-center gap-2 bg-[#25D366] text-white px-4 py-2.5 rounded-full font-bold text-sm shadow-md hover:scale-105 transition"
+          >
+            <span className="text-lg">●</span>
+
+            <span className="hidden xl:inline">
+              WHATSAPP 787-393-5871
+            </span>
+
+            <span className="xl:hidden">
+              WHATSAPP
+            </span>
+          </a>
 
         </div>
       </header>
