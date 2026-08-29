@@ -387,17 +387,17 @@ function MiCasoDashboard() {
 
               <div className="rounded-2xl bg-[#f8f9fa] p-4">
                 <p className="font-bold text-[#071a32]">
-                  Estados bancarios
+                  {casoCliente.accionRequerida.titulo}
                 </p>
                 <p className="mt-1 text-sm text-gray-500">
-                  Solicitado por originación hipotecaria.
+                  {casoCliente.accionRequerida.detalle}
                 </p>
 
                 <button
                   type="button"
                   className="mt-4 text-sm font-black text-[#246b8e]"
                 >
-                  SUBIR AHORA →
+                  {casoCliente.accionRequerida.boton →
                 </button>
               </div>
 
