@@ -3,6 +3,27 @@ import { createFileRoute } from '@tanstack/react-router'
 export const Route = createFileRoute('/mi-caso/dashboard')({
   component: MiCasoDashboard,
 })
+const casoCliente = {
+  cliente: {
+    nombre: 'María Rodríguez',
+    iniciales: 'MR',
+    tipo: 'Cliente',
+  },
+  caso: {
+    numero: 'PA-2026-0001',
+    tipo: 'Compra de propiedad',
+    propiedad: 'Urb. Jardines del Caribe',
+    ubicacion: 'Carolina, Puerto Rico',
+    progreso: 65,
+    estado: 'Caso activo',
+  },
+  actualizacion: {
+    esperando: 'Informe final de tasación',
+    detalle:
+      'La inspección fue realizada. Actualmente estamos esperando que el tasador entregue el informe final.',
+    fecha: '28 de agosto de 2026',
+  },
+}
 
 const etapas = [
   {
@@ -118,15 +139,15 @@ function MiCasoDashboard() {
 
             <div className="hidden text-right sm:block">
               <p className="text-sm font-black text-[#071a32]">
-                María Rodríguez
+                {casoCliente.nombre}
               </p>
               <p className="text-xs text-gray-500">
-                Cliente
+                {casoCliente.cliente.tipo}
               </p>
             </div>
 
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071a32] font-black text-white">
-              MR
+              {casoCliente.cliente.iniciales}
             </div>
           </div>
 
@@ -148,7 +169,7 @@ function MiCasoDashboard() {
               </p>
 
               <h1 className="text-3xl font-black sm:text-4xl">
-                Hola, María.
+                Hola, {casoCliente.cliente.nombre.split(' ')[0]}.
               </h1>
 
               <p className="mt-2 max-w-2xl text-white/70">
@@ -162,7 +183,7 @@ function MiCasoDashboard() {
                 Número de caso
               </p>
               <p className="mt-1 text-xl font-black text-[#d4af57]">
-                PA-2026-0001
+                {casoCliente.caso.numero}
               </p>
             </div>
 
@@ -181,20 +202,20 @@ function MiCasoDashboard() {
 
               <div>
                 <p className="text-xs font-black uppercase tracking-widest text-[#c9a646]">
-                  Compra de propiedad
+                  {casoCliente.caso.tipo}
                 </p>
 
                 <h2 className="mt-2 text-2xl font-black text-[#071a32]">
-                  Urb. Jardines del Caribe
+                  {casoCliente.caso.propiedad}
                 </h2>
 
                 <p className="mt-1 text-gray-500">
-                  Carolina, Puerto Rico
+                  {casoCliente.caso.ubicacion}
                 </p>
               </div>
 
               <span className="w-fit rounded-full bg-blue-50 px-4 py-2 text-xs font-black text-[#246b8e]">
-                CASO ACTIVO
+                {casoCliente.caso.estado.toUpperCase()}
               </span>
 
             </div>
@@ -212,13 +233,16 @@ function MiCasoDashboard() {
                 </div>
 
                 <p className="text-3xl font-black text-[#c9a646]">
-                  65%
+                  {casoCliente.caso.progreso}%
                 </p>
               </div>
 
-              <div className="h-4 overflow-hidden rounded-full bg-gray-100">
-                <div className="h-full w-[65%] rounded-full bg-[#c9a646]" />
-              </div>
+           <div className="h-4 overflow-hidden rounded-full bg-gray-100">
+           <div
+                className="h-full rounded-full bg-[#c9a646]"
+                style={{ width: `${casoCliente.caso.progreso}%` }}
+               />
+             </div>
 
             </div>
           </div>
@@ -235,12 +259,11 @@ function MiCasoDashboard() {
             </p>
 
             <h3 className="mt-2 text-xl font-black text-[#071a32]">
-              Informe final de tasación
+              {casoCliente.actualizacion.esperando}
             </h3>
 
             <p className="mt-3 text-sm leading-relaxed text-gray-600">
-              La inspección fue realizada. Actualmente estamos esperando que
-              el tasador entregue el informe final.
+              {casoCliente.actualizacion.detalle}
             </p>
 
             <div className="mt-5 border-t border-[#ead9a6] pt-4">
@@ -248,7 +271,7 @@ function MiCasoDashboard() {
                 Última actualización
               </p>
               <p className="text-sm font-bold text-[#071a32]">
-                28 de agosto de 2026
+                {casoCliente.actualizacion.fecha}
               </p>
             </div>
 
