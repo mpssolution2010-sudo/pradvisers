@@ -35,6 +35,24 @@ const casoCliente = {
       'La inspección de tasación fue completada. Te notificaremos tan pronto recibamos el informe.' ,
     fecha: '28 ago 2026', 
     hora: '3:42 PM' ,
+      },
+  documentos: [
+    {
+      nombre: 'Contrato de opción',
+      estado: 'Recibido • PDF',
+      icono: '📄',
+    },
+    {
+      nombre: 'Identificación',
+      estado: 'Recibido • Verificado',
+      icono: '🪪',
+    },
+    {
+      nombre: 'Estados bancarios',
+      estado: 'Pendiente de recibir',
+      icono: '＋',
+    },
+  ],
 }
 
 const etapas = [
@@ -475,36 +493,32 @@ function MiCasoDashboard() {
 
           <div className="grid gap-4 md:grid-cols-3">
 
-            <div className="rounded-2xl border border-gray-100 p-5">
-              <div className="text-3xl">📄</div>
-              <p className="mt-3 font-black text-[#071a32]">
-                Contrato de opción
-              </p>
-              <p className="mt-1 text-xs text-gray-500">
-                Recibido • PDF
-              </p>
-            </div>
+          {casoCliente.documentos.map((documento) => (
+  <div
+    key={documento.nombre}
+    className={
+      documento.estado === 'Pendiente de recibir'
+        ? 'rounded-2xl border border-dashed border-gray-300 p-5'
+        : 'rounded-2xl border border-gray-100 p-5'
+    }
+  >
+    <div className="text-3xl">{documento.icono}</div>
 
-            <div className="rounded-2xl border border-gray-100 p-5">
-              <div className="text-3xl">🪪</div>
-              <p className="mt-3 font-black text-[#071a32]">
-                Identificación
-              </p>
-              <p className="mt-1 text-xs text-gray-500">
-                Recibido • Verificado
-              </p>
-            </div>
+    <p className="mt-3 font-black text-[#071a32]">
+      {documento.nombre}
+    </p>
 
-            <div className="rounded-2xl border border-dashed border-gray-300 p-5">
-              <div className="text-3xl">＋</div>
-              <p className="mt-3 font-black text-[#071a32]">
-                Estados bancarios
-              </p>
-              <p className="mt-1 text-xs text-red-500">
-                Pendiente de recibir
-              </p>
-            </div>
-
+    <p
+      className={
+        documento.estado === 'Pendiente de recibir'
+          ? 'mt-1 text-xs text-red-500'
+          : 'mt-1 text-xs text-gray-500'
+      }
+    >
+      {documento.estado}
+    </p>
+  </div>
+))}
           </div>
         </section>
 
