@@ -29,6 +29,12 @@ const casoCliente = {
       'Favor subir los estados bancarios solicitados por el originador hipotecario.',
     boton: 'SUBIR DOCUMENTO',
   },
+  mensaje: {
+    remitente:  'Property Advisers',
+    texto:
+      'La inspección de tasación fue completada. Te notificaremos tan pronto recibamos el informe.' ,
+    fecha: '28 ago 2026', 
+    hora: '3:42 PM' ,
 }
 
 const etapas = [
@@ -416,16 +422,15 @@ function MiCasoDashboard() {
 
               <div className="rounded-2xl border border-gray-100 p-4">
                 <p className="text-xs font-black uppercase text-[#c9a646]">
-                  Property Advisers
+                  {casoCliente.mensaje.remitente}
                 </p>
 
                 <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  La inspección de tasación fue completada. Te notificaremos
-                  tan pronto recibamos el informe.
+                  {casoCliente.mensaje.texto}
                 </p>
 
                 <p className="mt-3 text-xs text-gray-400">
-                  28 ago 2026 • 3:42 PM
+                  {casoCliente.mensaje.fecha} • {casoCliente.mensaje.hora}
                 </p>
               </div>
 
