@@ -53,6 +53,33 @@ const casoCliente = {
       icono: '＋',
     },
   ],
+  equipo: [
+  {
+    icono: '🏡',
+    nombre: 'Property Advisers',
+    funcion: 'Corredor inmobiliario',
+  },
+  {
+    icono: '🏦',
+    nombre: 'Originador',
+    funcion: 'Financiamiento',
+  },
+  {
+    icono: '📊',
+    nombre: 'Tasador',
+    funcion: 'Tasación',
+  },
+  {
+    icono: '📐',
+    nombre: 'Agrimensor',
+    funcion: 'Mensura',
+  },
+  {
+    icono: '⚖️',
+    nombre: 'Notario',
+    funcion: 'Cierre',
+  },
+],
 }
 
 const etapas = [
@@ -540,22 +567,17 @@ function MiCasoDashboard() {
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
 
-            {[
-              ['🏡', 'Property Advisers', 'Corredor inmobiliario'],
-              ['🏦', 'Originador', 'Financiamiento'],
-              ['📊', 'Tasador', 'Tasación'],
-              ['📐', 'Agrimensor', 'Mensura'],
-              ['⚖️', 'Notario', 'Cierre'],
-            ].map(([icono, nombre, funcion]) => (
-              <div
-                key={nombre}
-                className="rounded-2xl border border-white/10 bg-white/10 p-5"
-              >
-                <div className="text-3xl">{icono}</div>
-                <p className="mt-3 font-black">{nombre}</p>
-                <p className="mt-1 text-sm text-white/60">{funcion}</p>
-              </div>
-            ))}
+            {casoCliente.equipo.map((miembro) => (
+  <div
+    key={miembro.nombre}
+    className="rounded-2xl border border-white/10 bg-white/10 p-5"
+  >
+    <div className="text-3xl">{miembro.icono}</div>
+    <p className="mt-3 font-black">{miembro.nombre}</p>
+    <p className="mt-1 text-sm text-white/60">{miembro.funcion}</p>
+  </div>
+))}
+          
 
           </div>
         </section>
