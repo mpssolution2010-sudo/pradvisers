@@ -448,9 +448,8 @@ function MiCasoDashboard() {
                   type="button"
                   className="mt-4 text-sm font-black text-[#246b8e]"
                 >
-                  {casoCliente.accionRequerida.boton →
-                </button>
-              </div>
+                  {casoCliente.accionRequerida.boton} {'→'}
+                </button> </div>
 
             </section>
 
