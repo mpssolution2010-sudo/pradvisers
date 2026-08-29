@@ -23,6 +23,12 @@ const casoCliente = {
       'La inspección fue realizada. Actualmente estamos esperando que el tasador entregue el informe final.',
     fecha: '28 de agosto de 2026',
   },
+  accionRequerida: {
+    titulo: 'Necesitamos un documento de tu parte',
+    detalle:
+      'Favor subir los estados bancarios solicitados por el originador hipotecario.',
+    boton: 'SUBIR DOCUMENTO',
+  },
 }
 
 const etapas = [
@@ -296,12 +302,11 @@ function MiCasoDashboard() {
                 </p>
 
                 <h3 className="mt-1 text-lg font-black text-[#071a32]">
-                  Necesitamos un documento de tu parte
+                  {casoCliente.accionRequerida.titulo}
                 </h3>
 
                 <p className="mt-1 text-sm text-gray-500">
-                  Favor subir los estados bancarios solicitados por el
-                  originador hipotecario.
+                  {casoCliente.accionRequerida.detalle}
                 </p>
               </div>
 
@@ -311,7 +316,7 @@ function MiCasoDashboard() {
               type="button"
               className="shrink-0 rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white hover:bg-[#0b294d]"
             >
-              SUBIR DOCUMENTO
+              {casoCliente.accionRequerida.boton}
             </button>
 
           </div>
