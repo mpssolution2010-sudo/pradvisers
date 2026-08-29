@@ -508,12 +508,15 @@ function MiCasoDashboard() {
               </h2>
             </div>
 
-            <button
-              type="button"
-              className="rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white"
-            >
-              + SUBIR DOCUMENTO
-            </button>
+      <label className="cursor-pointer rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white">
+  + SUBIR DOCUMENTO
+
+  <input
+    type="file"
+    className="hidden"
+    accept=".pdf,.jpg,.jpeg,.png"
+  />
+</label>
 
           </div>
 
