@@ -508,16 +508,42 @@ function MiCasoDashboard() {
               </h2>
             </div>
 
-      <label className="cursor-pointer rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white">
-  + SUBIR DOCUMENTO
+     <form
+  name="documentos-cliente"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  encType="multipart/form-data"
+  className="flex flex-col gap-3 sm:flex-row sm:items-center"
+>
+  <input type="hidden" name="form-name" value="documentos-cliente" />
 
-  <input
-    type="file"
-    className="hidden"
-    accept=".pdf,.jpg,.jpeg,.png"
-  />
-</label>
+  <p className="hidden">
+    <label>
+      No llenar:
+      <input name="bot-field" />
+    </label>
+  </p>
 
+  <label className="cursor-pointer rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white">
+    + SELECCIONAR DOCUMENTO
+
+    <input
+      type="file"
+      name="documento"
+      className="hidden"
+      accept=".pdf,.jpg,.jpeg,.png"
+      required
+    />
+  </label>
+
+  <button
+    type="submit"
+    className="rounded-xl bg-[#246b8e] px-5 py-3 text-sm font-black text-white"
+  >
+    ENVIAR DOCUMENTO
+  </button>
+</form>
           </div>
 
           <div className="grid gap-4 md:grid-cols-3">
