@@ -518,6 +518,8 @@ function MiCasoDashboard() {
   className="flex flex-col gap-3 sm:flex-row sm:items-center"
 >
   <input type="hidden" name="form-name" value="documentos-cliente" />
+  <input type="hidden" name="numero-caso" Value={casoCliente.caso.numero} />
+       
 
   <p className="hidden">
     <label>
