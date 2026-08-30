@@ -514,7 +514,7 @@ function MiCasoDashboard() {
   method="POST"
        action="/documento-recibido"
   data-netlify="true"
-  netlify-honeypot="bot-field"
+  netlify-honeypot="bot-field-documentos"
   encType="multipart/form-data"
   className="flex flex-col gap-3 sm:flex-row sm:items-center"
 >
@@ -525,7 +525,7 @@ function MiCasoDashboard() {
   <p className="hidden">
     <label>
       No llenar:
-      <input name="bot-field" />
+      <input name="bot-field-documentos" />
     </label>
   </p>
 
