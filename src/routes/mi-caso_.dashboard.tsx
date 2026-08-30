@@ -523,7 +523,7 @@ function MiCasoDashboard() {
     const form = event.currentTarget
     const formData = new FormData(form)
 
-    const response = await fetch('/', {
+    const response = await fetch('/form-survey.html', {
       method: 'POST',
       body: formData,
     })
