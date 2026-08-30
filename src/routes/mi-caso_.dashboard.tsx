@@ -509,15 +509,33 @@ function MiCasoDashboard() {
               </h2>
             </div>
 
-     <form
+  <form
   name="documentos-cliente"
   method="POST"
-       action="/documento-recibido"
+  action="/"
   data-netlify="true"
   netlify-honeypot="bot-field-documentos"
   encType="multipart/form-data"
   className="flex flex-col gap-3 sm:flex-row sm:items-center"
+  onSubmit={async (event) => {
+    event.preventDefault()
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+
+    const response = await fetch('/', {
+      method: 'POST',
+      body: formData,
+    })
+
+    if (response.ok) {
+      window.location.href = '/documento-recibido'
+    } else {
+      alert('No se pudo enviar el documento. Intenta nuevamente.')
+    }
+  }}
 >
+
   <input type="hidden" name="form-name" value="documentos-cliente" />
   <input type="hidden" name="numero-caso" Value={casoCliente.caso.numero} />
   <input type="hidden" name="tipo-documentos" Value="estados-bancarios" />
