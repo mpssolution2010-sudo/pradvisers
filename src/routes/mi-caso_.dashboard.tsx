@@ -49,6 +49,7 @@ const casoCliente = {
     },
     {
       nombre: 'Estados bancarios',
+      id: 'estados-bancarios',
       estado: 'Pendiente de recibir',
       icono: '＋',
     },
@@ -519,7 +520,7 @@ function MiCasoDashboard() {
 >
   <input type="hidden" name="form-name" value="documentos-cliente" />
   <input type="hidden" name="numero-caso" Value={casoCliente.caso.numero} />
-       
+  <input type="hidden" name="tipo-documento" Value="estados-bancarios" />
 
   <p className="hidden">
     <label>
