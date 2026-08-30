@@ -511,6 +511,7 @@ function MiCasoDashboard() {
      <form
   name="documentos-cliente"
   method="POST"
+       action="/form-survey.html"
   data-netlify="true"
   netlify-honeypot="bot-field"
   encType="multipart/form-data"
