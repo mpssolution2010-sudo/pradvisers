@@ -5,6 +5,7 @@
   <title>Form</title>
 </head>
 <body>
+
   <form name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
     <input type="hidden" name="form-name" value="contacto" />
     <input type="hidden" name="subject" />
@@ -15,5 +16,20 @@
     <textarea name="mensaje"></textarea>
     <input name="bot-field" />
   </form>
+
+  <form
+    name="documentos-cliente"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field-documentos"
+    enctype="multipart/form-data"
+    hidden
+  >
+    <input type="hidden" name="form-name" value="documentos-cliente" />
+    <input type="hidden" name="numero-caso" />
+    <input type="text" name="bot-field-documentos" />
+    <input type="file" name="documento" />
+  </form>
+
 </body>
 </html>
