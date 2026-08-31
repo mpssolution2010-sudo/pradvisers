@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/mi-caso/dashboard')({
   component: MiCasoDashboard,
@@ -159,6 +160,25 @@ function Badge({ estado }: { estado: string }) {
 }
 
 function MiCasoDashboard() {
+  const [documentoRecibido, setDocumentoRecibido] = useState(false)
+    useEffect(() => {
+    const cargarEstadoDocumento = async () => {
+      try {
+        const response = await fetch(
+          `/api/estado-documento?numero-caso=${casoCliente.caso.numero}&tipo-documentos=estados-bancarios`,
+        )
+
+        if (!response.ok) return
+
+        const data = await response.json()
+        setDocumentoRecibido(Boolean(data.recibido))
+      } catch (error) {
+        console.error('Error consultando estado del documento:', error)
+      }
+    }
+
+    cargarEstadoDocumento()
+  }, [])
   return (
     <div className="min-h-screen bg-[#f4f6f8] text-gray-900">
 
@@ -574,7 +594,8 @@ function MiCasoDashboard() {
   <div
     key={documento.nombre}
     className={
-      documento.estado === 'Pendiente de recibir'
+      documento.estado === 'Pendiente de recibir' &&
+      ! (documento.nombre === 'Estados bancarios' && documentoRecibido)
         ? 'rounded-2xl border border-dashed border-gray-300 p-5'
         : 'rounded-2xl border border-gray-100 p-5'
     }
@@ -587,12 +608,15 @@ function MiCasoDashboard() {
 
     <p
       className={
-        documento.estado === 'Pendiente de recibir'
+        documento.estado === 'Pendiente de recibir' &&
+        ! (documento.nombre === 'Estados bancarios' && documentoRecibido)
           ? 'mt-1 text-xs text-red-500'
           : 'mt-1 text-xs text-gray-500'
       }
     >
-      {documento.estado}
+      {documento.nombre === 'Estados bancarios' && documentoRecibido
+  ? 'Recibido ✓'
+  : documento.estado}
     </p>
   </div>
 ))}
