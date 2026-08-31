@@ -15,7 +15,7 @@ export default async (req: Request, _context: Context) => {
   }
 
 const store = getStore(
-  'documentos-clientes-homepage-2026',
+  'documentos-clientes-homegage-2026',
   { consistency: 'strong' },
 )
 
