@@ -1,5 +1,5 @@
 import type { Config, Context } from '@netlify/functions'
-import { getDeployStore, getStore } from '@netlify/blobs'
+import { getStore } from '@netlify/blobs'
 
 export default async (req: Request, _context: Context) => {
   const url = new URL(req.url)
@@ -16,9 +16,12 @@ export default async (req: Request, _context: Context) => {
 
   const isProduction = Netlify.context?.deploy.context === 'production'
 
-  const store = isProduction
-    ? getStore('documentos-clientes', { consistency: 'strong' })
-    : getDeployStore('documentos-clientes')
+  const store = getStore(
+  isProduction
+    ? 'documentos-clientes'
+    : 'documentos-clientes-homepage-2026' ,
+{ consistency: 'strong' },
+)
 
   const documento = await store.get(
     `${numeroCaso}/${tipoDocumento}`,
