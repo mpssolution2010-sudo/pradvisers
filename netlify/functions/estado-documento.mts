@@ -18,15 +18,17 @@ export default async (req: Request, _context: Context) => {
   'documentos-clientes-homepage-2026',
   { consistency: 'strong' },
 )
-  const documento = await store.get(
-    `${numeroCaso}/${tipoDocumento}`,  
-  )
+ const claveBuscada = `${numeroCaso}/${tipoDocumento}`
 
-  return Response.json({
-    recibido: Boolean(documento),
-    documento: documento ?? null,
-  })
-}
+const resultado = await store.list({
+  prefix: `${numeroCaso}/`,
+})
+
+return Response.json({
+  claveBuscada,
+  clavesEncontradas: resultado.blobs.map((blob) => blob.key),
+})
+{
 
 export const config: Config = {
   path: '/api/estado-documento',
