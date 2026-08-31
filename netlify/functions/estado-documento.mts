@@ -14,15 +14,10 @@ export default async (req: Request, _context: Context) => {
     )
   }
 
-  const isProduction = Netlify.context?.deploy.context === 'production'
-
   const store = getStore(
-  isProduction
-    ? 'documentos-clientes'
-    : 'documentos-clientes-homepage-2026' ,
-{ consistency: 'strong' },
+  'documentos-clientes-homepage-2026',
+  { consistency: 'strong' },
 )
-
   const documento = await store.get(
     `${numeroCaso}/${tipoDocumento}`,  
   )
