@@ -1,5 +1,5 @@
 import type { Context } from '@netlify/functions'
-import { getDeployStore, getStore } from '@netlify/blobs'
+import { getStore } from '@netlify/blobs'
 
 const RECIPIENT = 'jmlpropertyadviserspr@gmail.com'
 const FROM = 'Property Advisers <onboarding@resend.dev>'
@@ -39,9 +39,12 @@ if (payload?.form_name === 'documentos-cliente') {
 
   const isProduction = Netlify.context?.deploy.context === 'production'
 
-  const store = isProduction
-    ? getStore('documentos-clientes', { consistency: 'strong' })
-    : getDeployStore('documentos-clientes')
+  const store = getStore(
+    isProduction
+    ? 'documentos-clientes'
+    : 'documentos-clientes-homegage-2026' ,
+  { consistency: 'strong' },
+)
 
   await store.setJSON(`${numeroCaso}/${tipoDocumento}`, {
     estado: 'recibido',
