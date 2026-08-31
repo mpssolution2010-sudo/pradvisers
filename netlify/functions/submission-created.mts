@@ -1,4 +1,5 @@
 import type { Context } from '@netlify/functions'
+import { getDeployStore, getStore } from '@netlify/blobs'
 
 const RECIPIENT = 'jmlpropertyadviserspr@gmail.com'
 const FROM = 'Property Advisers <onboarding@resend.dev>'
@@ -27,10 +28,34 @@ const fieldLabels: Record<string, string> = {
 
 export default async (req: Request, _context: Context) => {
   const { payload } = (await req.json()) as { payload: SubmissionPayload }
+if (payload?.form_name === 'documentos-cliente') {
+  const data = payload.data ?? {}
+  const numeroCaso = data['numero-caso']
+  const tipoDocumento = data['tipo-documentos']
 
-  if (payload?.form_name !== 'contacto') {
-    return new Response('Ignored', { status: 200 })
+  if (!numeroCaso || !tipoDocumento) {
+    return new Response('Documento sin caso o tipo', { status: 200 })
   }
+
+  const isProduction = Netlify.context?.deploy.context === 'production'
+
+  const store = isProduction
+    ? getStore('documentos-clientes', { consistency: 'strong' })
+    : getDeployStore('documentos-clientes')
+
+  await store.setJSON(`${numeroCaso}/${tipoDocumento}`, {
+    estado: 'recibido',
+    numeroCaso,
+    tipoDocumento,
+    recibidoEn: payload.created_at ?? new Date().toISOString(),
+  })
+
+  return new Response('Documento registrado', { status: 200 })
+}
+
+if (payload?.form_name !== 'contacto') {
+  return new Response('Ignored', { status: 200 })
+}
 
   const apiKey = process.env.RESEND_API_KEY
   if (!apiKey) {
