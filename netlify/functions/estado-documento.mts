@@ -24,8 +24,7 @@ export default async (req: Request, _context: Context) => {
 )
 
   const documento = await store.get(
-    `${numeroCaso}/${tipoDocumento}`,
-    { type: 'json' },
+    `${numeroCaso}/${tipoDocumento}`,  
   )
 
   return Response.json({
