@@ -28,7 +28,7 @@ return Response.json({
   claveBuscada,
   clavesEncontradas: resultado.blobs.map((blob) => blob.key),
 })
-{
+}
 
 export const config: Config = {
   path: '/api/estado-documento',
