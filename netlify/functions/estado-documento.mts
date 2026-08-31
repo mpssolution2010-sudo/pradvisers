@@ -1,5 +1,5 @@
 import type { Config, Context } from '@netlify/functions'
-import { getStore } from '@netlify/blobs'
+import { getStore, listStores } from '@netlify/blobs'
 
 export default async (req: Request, _context: Context) => {
   const url = new URL(req.url)
@@ -14,11 +14,14 @@ export default async (req: Request, _context: Context) => {
     )
   }
 
-  const store = getStore(
+const store = getStore(
   'documentos-clientes-homepage-2026',
   { consistency: 'strong' },
 )
- const claveBuscada = `${numeroCaso}/${tipoDocumento}`
+
+const storesDisponibles = await listStores()
+
+const claveBuscada = `${numeroCaso}/${tipoDocumento}`
 
 const resultado = await store.list({
   prefix: `${numeroCaso}/`,
@@ -26,6 +29,7 @@ const resultado = await store.list({
 
 return Response.json({
   claveBuscada,
+  storesDisponibles: storesDisponibles.stores,
   clavesEncontradas: resultado.blobs.map((blob) => blob.key),
 })
 }
