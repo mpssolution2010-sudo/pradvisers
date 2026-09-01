@@ -169,6 +169,7 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
 const [progresoSubida, setProgresoSubida] = useState(0)
 const [subiendoDocumento, setSubiendoDocumento] = useState(false)
 const [nombreArchivo, setNombreArchivo] = useState('')
+const [tipoDocumentoSubida, setTipoDocumentoSubida] = useState('estados-bancarios')
 
 useEffect(() => {
   const cargarEstadosDocumentos = async () => {
@@ -609,7 +610,7 @@ onSubmit={(event) => {
 
   <input type="hidden" name="form-name" value="documentos-cliente" />
   <input type="hidden" name="numero-caso" Value={casoCliente.caso.numero} />
-  <input type="hidden" name="tipo-documentos" Value="estados-bancarios" />
+  <input type="hidden" name="tipo-documentos" Value={tipoDocumentoSubida} />
 
   <p className="hidden">
     <label>
@@ -618,6 +619,25 @@ onSubmit={(event) => {
     </label>
   </p>
 
+  <div className="w-full">
+  <label className="mb-2 block text-sm font-bold text-gray-700">
+    Tipo de documento
+  </label>
+
+  <select
+    value={tipoDocumentoSubida}
+    onChange={(event) => {
+      setTipoDocumentoSubida(event.target.value)
+      setNombreArchivo('')
+      setProgresoSubida(0)
+    }}
+    className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-bold text-gray-700"
+  >
+    <option value="contrato-opcion">Contrato de opción</option>
+    <option value="identificacion">Identificación</option>
+    <option value="estados-bancarios">Estados bancarios</option>
+  </select>
+</div>
   <label className="cursor-pointer rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white">
     + SELECCIONAR DOCUMENTO
 
@@ -674,19 +694,19 @@ onSubmit={(event) => {
     key={documento.nombre}
     className={
       documento.estado === 'Pendiente de recibir' &&
-      ! (documento.nombre === 'Estados bancarios' && documentoRecibido)
+      !(documentoRecibidos[documento.id]
         ? 'rounded-2xl border border-dashed border-gray-300 p-5'
         : 'rounded-2xl border border-gray-100 p-5'
     }
   >
 <div
   className={
-    documento.nombre === 'Estados bancarios' && documentoRecibido
+    documentoRecibidos[documento.id]
       ? 'text-3xl text-green-600'
       : 'text-3xl'
   }
 >
-  {documento.nombre === 'Estados bancarios' && documentoRecibido
+  {documentoRecibidos[documento.id]
     ? '✓'
     : documento.icono}
 </div>
@@ -698,12 +718,12 @@ onSubmit={(event) => {
     <p
       className={
         documento.estado === 'Pendiente de recibir' &&
-        ! (documento.nombre === 'Estados bancarios' && documentoRecibido)
+        ! documentosRecibidos[documento.id]
           ? 'mt-1 text-xs text-red-500'
           : 'mt-1 text-xs text-gray-500'
       }
     >
-      {documento.nombre === 'Estados bancarios' && documentoRecibido
+      {documentosRecibidos[documento.id] 
   ? 'Recibido ✓'
   : documento.estado}
     </p>
