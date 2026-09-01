@@ -18,7 +18,6 @@ const store = getStore(
   'documentos-clientes-homegage-2026',
   { consistency: 'strong' },
 )
-
 const claveBuscada = `${numeroCaso}/${tipoDocumento}`
 
 const documento = await store.get(claveBuscada, {
