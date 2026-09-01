@@ -222,7 +222,16 @@ const [progresoSubida, setProgresoSubida] = useState(0)
 const [subiendoDocumento, setSubiendoDocumento] = useState(false)
 const [nombreArchivo, setNombreArchivo] = useState('')
 const [tipoDocumentoSubida, setTipoDocumentoSubida] = useState('estados-bancarios')
-
+const [documentosRequeridos, setDocumentosRequeridos] = useState<
+  Record<string, boolean>
+>(() =>
+  Object.fromEntries(
+    casoCliente.documentos.map((documento) => [
+      documento.id,
+      documento.requerido,
+    ]),
+  ),
+)
 useEffect(() => {
   const cargarEstadosDocumentos = async () => {
     const documentosConId = casoCliente.documentos.filter(
