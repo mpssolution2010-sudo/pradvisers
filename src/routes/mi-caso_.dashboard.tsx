@@ -56,6 +56,12 @@ const casoCliente = {
       estado: 'Pendiente de recibir',
       icono: '＋',
     },
+    {
+  nombre: 'Carta de preaprobación',
+  id: 'carta-preaprobacion',
+  estado: 'Pendiente de recibir',
+  icono: '+',
+},
   ],
   equipo: [
   {
@@ -636,6 +642,7 @@ onSubmit={(event) => {
     <option value="contrato-opcion">Contrato de opción</option>
     <option value="identificacion">Identificación</option>
     <option value="estados-bancarios">Estados bancarios</option>
+    <option value="carta-preaprobacion">carta de pre aprobación</option>
   </select>
 </div>
   <label className="cursor-pointer rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white">
