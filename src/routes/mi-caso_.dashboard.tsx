@@ -567,7 +567,11 @@ const documentoRecibido =
               </h2>
             </div>
 
-    {!documentoRecibido && (
+  {casoCliente.documentos.some(
+  (documento) =>
+    documento.estado === 'Pendiente de recibir' &&
+    !documentosRecibidos[documento.id],
+) && (
      <form
   name="documentos-cliente"
   method="POST"
