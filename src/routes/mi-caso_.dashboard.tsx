@@ -746,7 +746,9 @@ onSubmit={(event) => {
 
           <div className="grid gap-4 md:grid-cols-3">
 
-          {casoCliente.documentos.map((documento) => (
+          {casoCliente.documentos
+            .filter((documento) => documento.requerido)
+            .map((documento) => (
   <div
     key={documento.nombre}
     className={
