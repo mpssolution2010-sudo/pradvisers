@@ -162,30 +162,54 @@ function Badge({ estado }: { estado: string }) {
 }
 
 function MiCasoDashboard() {
-  const [documentoRecibido, setDocumentoRecibido] = useState(false)
-  const [progresoSubida, setProgresoSubida] = useState(0)
-  const [subiendoDocumento, setSubiendoDocumento] = useState(false)
-  const [nombreArchivo, setNombreArchivo] = useState('')
+const [documentosRecibidos, setDocumentosRecibidos] = useState<
+  Record<string, boolean>
+>({})
+
+const [progresoSubida, setProgresoSubida] = useState(0)
+const [subiendoDocumento, setSubiendoDocumento] = useState(false)
+const [nombreArchivo, setNombreArchivo] = useState('')
+
+useEffect(() => {
+  const cargarEstadosDocumentos = async () => {
+    const documentosConId = casoCliente.documentos.filter(
+      (documento) => documento.id,
+    )
+
+    const resultados = await Promise.all(
+      documentosConId.map(async (documento) => {
+        try {
+          const response = await fetch(
+            `/api/estado-documento?numero-caso=${casoCliente.caso.numero}&tipo-documentos=${documento.id}`,
+          )
+
+          if (!response.ok) {
+            return [documento.id, false] as const
+          }
+
+          const data = await response.json()
+
+          return [documento.id, Boolean(data.recibido)] as const
+        } catch (error) {
+          console.error(
+            `Error consultando estado de ${documento.id}:`,
+            error,
+          )
+
+          return [documento.id, false] as const
+        }
+      }),
+    )
+
+    setDocumentosRecibidos(Object.fromEntries(resultados))
+  }
+
+  cargarEstadosDocumentos()
+}, [])
+
+const documentoRecibido =
+  documentosRecibidos['estados-bancarios'] ?? false
   
-    useEffect(() => {
-      
-    const cargarEstadoDocumento = async () => {
-      try {
-        const response = await fetch(
-          `/api/estado-documento?numero-caso=${casoCliente.caso.numero}&tipo-documentos=estados-bancarios`,
-        )
-
-        if (!response.ok) return
-
-        const data = await response.json()
-        setDocumentoRecibido(Boolean(data.recibido))
-      } catch (error) {
-        console.error('Error consultando estado del documento:', error)
-      }
-    }
-
-    cargarEstadoDocumento()
-  }, [])
   return (
     <div className="min-h-screen bg-[#f4f6f8] text-gray-900">
 
