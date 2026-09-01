@@ -694,19 +694,19 @@ onSubmit={(event) => {
     key={documento.nombre}
     className={
       documento.estado === 'Pendiente de recibir' &&
-      !(documentoRecibidos[documento.id]
+      !documentosRecibidos[documento.id]
         ? 'rounded-2xl border border-dashed border-gray-300 p-5'
         : 'rounded-2xl border border-gray-100 p-5'
     }
   >
 <div
   className={
-    documentoRecibidos[documento.id]
+    documentosRecibidos[documento.id]
       ? 'text-3xl text-green-600'
       : 'text-3xl'
   }
 >
-  {documentoRecibidos[documento.id]
+  {documentosRecibidos[documento.id]
     ? '✓'
     : documento.icono}
 </div>
@@ -715,13 +715,13 @@ onSubmit={(event) => {
       {documento.nombre}
     </p>
 
-    <p
-      className={
-        documento.estado === 'Pendiente de recibir' &&
-        ! documentosRecibidos[documento.id]
-          ? 'mt-1 text-xs text-red-500'
-          : 'mt-1 text-xs text-gray-500'
-      }
+   <p
+  className={
+    documento.estado === 'Pendiente de recibir' &&
+    !documentosRecibidos[documento.id]
+      ? 'mt-1 text-xs text-red-500'
+      : 'mt-1 text-xs text-gray-500'
+  }
     >
       {documentosRecibidos[documento.id] 
   ? 'Recibido ✓'
