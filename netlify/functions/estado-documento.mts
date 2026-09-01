@@ -1,5 +1,5 @@
 import type { Config, Context } from '@netlify/functions'
-import { getStore, listStores } from '@netlify/blobs'
+import { getStore } from '@netlify/blobs'
 
 export default async (req: Request, _context: Context) => {
   const url = new URL(req.url)
@@ -19,20 +19,16 @@ const store = getStore(
   { consistency: 'strong' },
 )
 
-const storesDisponibles = await listStores()
-
 const claveBuscada = `${numeroCaso}/${tipoDocumento}`
 
-const resultado = await store.list({
-  prefix: `${numeroCaso}/`,
+const documento = await store.get(claveBuscada, {
+  type: 'json',
 })
 
 return Response.json({
-  claveBuscada,
-  storesDisponibles: storesDisponibles.stores,
-  clavesEncontradas: resultado.blobs.map((blob) => blob.key),
+  recibido: Boolean(documento),
+  documento: documento ?? null,
 })
-}
 
 export const config: Config = {
   path: '/api/estado-documento',
