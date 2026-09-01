@@ -40,11 +40,13 @@ const casoCliente = {
   documentos: [
     {
       nombre: 'Contrato de opción',
+      id: 'contrato-opcion', 
       estado: 'Recibido • PDF',
       icono: '📄',
     },
     {
       nombre: 'Identificación',
+      id: 'identificacion', 
       estado: 'Recibido • Verificado',
       icono: '🪪',
     },
