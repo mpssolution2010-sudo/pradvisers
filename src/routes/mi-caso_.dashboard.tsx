@@ -753,52 +753,48 @@ onSubmit={(event) => {
           )}
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-3">
+  {casoCliente.documentos
+    .filter((documento) => documentosRequeridos[documento.id])
+    .map((documento) => (
+      <div
+        key={documento.nombre}
+        className={
+          documento.estado === 'Pendiente de recibir' &&
+          !documentosRecibidos[documento.id]
+            ? 'rounded-2xl border border-dashed border-gray-300 p-5'
+            : 'rounded-2xl border border-gray-100 p-5'
+        }
+      >
+        <div
+          className={
+            documentosRecibidos[documento.id]
+              ? 'text-3xl text-green-600'
+              : 'text-3xl'
+          }
+        >
+          {documentosRecibidos[documento.id] ? '✓' : documento.icono}
+        </div>
 
-          {casoCliente.documentos
-            .filter((documento) => documentoRequeridos[documento.id]
-            .map((documento) => (
-  <div
-    key={documento.nombre}
-    className={
-      documento.estado === 'Pendiente de recibir' &&
-      !documentosRecibidos[documento.id]
-        ? 'rounded-2xl border border-dashed border-gray-300 p-5'
-        : 'rounded-2xl border border-gray-100 p-5'
-    }
-  >
-<div
-  className={
-    documentosRecibidos[documento.id]
-      ? 'text-3xl text-green-600'
-      : 'text-3xl'
-  }
->
-  {documentosRecibidos[documento.id]
-    ? '✓'
-    : documento.icono}
-</div>
+        <p className="mt-3 font-black text-[#071a32]">
+          {documento.nombre}
+        </p>
 
-    <p className="mt-3 font-black text-[#071a32]">
-      {documento.nombre}
-    </p>
-
-   <p
-  className={
-    documento.estado === 'Pendiente de recibir' &&
-    !documentosRecibidos[documento.id]
-      ? 'mt-1 text-xs text-red-500'
-      : 'mt-1 text-xs text-gray-500'
-  }
-    >
-      {documentosRecibidos[documento.id] 
-  ? 'Recibido ✓'
-  : documento.estado}
-    </p>
-  </div>
-))}
-          </div>
-        </section>
+        <p
+          className={
+            documento.estado === 'Pendiente de recibir' &&
+            !documentosRecibidos[documento.id]
+              ? 'mt-1 text-xs text-red-500'
+              : 'mt-1 text-xs text-gray-500'
+          }
+        >
+          {documentosRecibidos[documento.id]
+            ? 'Recibido ✓'
+            : documento.estado}
+        </p>
+      </div>
+    ))}
+</div>        </section>
 
         {/* EQUIPO */}
         <section
