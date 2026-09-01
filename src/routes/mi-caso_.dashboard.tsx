@@ -653,7 +653,17 @@ onSubmit={(event) => {
         : 'rounded-2xl border border-gray-100 p-5'
     }
   >
-    <div className="text-3xl">{documento.icono}</div>
+<div
+  className={
+    documento.nombre === 'Estados bancarios' && documentoRecibido
+      ? 'text-3xl text-green-600'
+      : 'text-3xl'
+  }
+>
+  {documento.nombre === 'Estados bancarios' && documentoRecibido
+    ? '✓'
+    : documento.icono}
+</div>
 
     <p className="mt-3 font-black text-[#071a32]">
       {documento.nombre}
