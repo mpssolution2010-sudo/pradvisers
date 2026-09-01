@@ -534,7 +534,8 @@ function MiCasoDashboard() {
               </h2>
             </div>
 
-  <form
+    {!documentoRecibido && (
+     <form
   name="documentos-cliente"
   method="POST"
   action="/"
@@ -637,6 +638,7 @@ onSubmit={(event) => {
     ENVIAR DOCUMENTO
   </button>
 </form>
+          )}
           </div>
 
           <div className="grid gap-4 md:grid-cols-3">
