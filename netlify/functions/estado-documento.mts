@@ -28,7 +28,7 @@ return Response.json({
   recibido: Boolean(documento),
   documento: documento ?? null,
 })
-
+}
 export const config: Config = {
   path: '/api/estado-documento',
 }
