@@ -161,7 +161,12 @@ function Badge({ estado }: { estado: string }) {
 
 function MiCasoDashboard() {
   const [documentoRecibido, setDocumentoRecibido] = useState(false)
+  const [progresoSubida, setProgresoSubida] = useState(0)
+  const [subiendoDocumento, setSubiendoDocumento] = useState(false)
+  const [nombreArchivo, setNombreArchivo] = useState('')
+  
     useEffect(() => {
+      
     const cargarEstadoDocumento = async () => {
       try {
         const response = await fetch(
@@ -537,23 +542,42 @@ function MiCasoDashboard() {
   netlify-honeypot="bot-field-documentos"
   encType="multipart/form-data"
   className="flex flex-col gap-3 sm:flex-row sm:items-center"
-  onSubmit={async (event) => {
-    event.preventDefault()
+onSubmit={(event) => {
+  event.preventDefault()
 
-    const form = event.currentTarget
-    const formData = new FormData(form)
+  const form = event.currentTarget
+  const formData = new FormData(form)
 
-    const response = await fetch('/form-survey.html', {
-      method: 'POST',
-      body: formData,
-    })
+  setSubiendoDocumento(true)
+  setProgresoSubida(0)
 
-    if (response.ok) {
+  const xhr = new XMLHttpRequest()
+
+  xhr.upload.addEventListener('progress', (event) => {
+    if (event.lengthComputable) {
+      const porcentaje = Math.round((event.loaded / event.total) * 100)
+      setProgresoSubida(porcentaje)
+    }
+  })
+
+  xhr.addEventListener('load', () => {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      setProgresoSubida(100)
       window.location.href = '/documento-recibido'
     } else {
+      setSubiendoDocumento(false)
       alert('No se pudo enviar el documento. Intenta nuevamente.')
     }
-  }}
+  })
+
+  xhr.addEventListener('error', () => {
+    setSubiendoDocumento(false)
+    alert('No se pudo enviar el documento. Intenta nuevamente.')
+  })
+
+  xhr.open('POST', '/form-survey.html')
+  xhr.send(formData)
+}}
 >
 
   <input type="hidden" name="form-name" value="documentos-cliente" />
@@ -576,9 +600,36 @@ function MiCasoDashboard() {
       className="hidden"
       accept=".pdf,.jpg,.jpeg,.png"
       required
+    onChange={(event) => {
+  const archivo = event.target.files?.[0]
+  setNombreArchivo(archivo?.name ?? '')
+  setProgresoSubida(0)
+}}
     />
+    
   </label>
+{nombreArchivo && (
+  <div className="w-full">
+    <p className="mb-2 text-sm font-bold text-gray-700">
+      {nombreArchivo}
+    </p>
 
+    {subiendoDocumento && (
+      <>
+        <div className="h-3 w-full overflow-hidden rounded-full bg-gray-200">
+          <div
+            className="h-full rounded-full bg-green-600 transition-all duration-300"
+            style={{ width: `${progresoSubida}%` }}
+          />
+        </div>
+
+        <p className="mt-2 text-sm font-bold text-green-700">
+          Subiendo documento... {progresoSubida}%
+        </p>
+      </>
+    )}
+  </div>
+)}
   <button
     type="submit"
     className="rounded-xl bg-[#246b8e] px-5 py-3 text-sm font-black text-white"
