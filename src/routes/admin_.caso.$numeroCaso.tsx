@@ -73,7 +73,32 @@ function AdminCasoPage() {
           <p className="mt-2 text-sm text-gray-600">
             Aquí podrás definir qué documentos necesita este cliente.
           </p>
-        </section>
+          <div className="mt-6 space-y-3">
+  {[
+    'Contrato de opción',
+    'Identificación',
+    'Estados bancarios',
+    'Carta de preaprobación',
+    'Carta de capitulaciones',
+    'Estudio de título',
+    'Evidencia de ingresos',
+    'Declaratoria de herederos',
+    'Caudal relicto',
+  ].map((documento) => (
+    <div
+      key={documento}
+      className="flex items-center justify-between rounded-2xl border border-gray-200 p-4"
+    >
+      <span className="font-bold text-[#071a32]">
+        {documento}
+      </span>
+
+      <span className="text-sm font-bold text-gray-500">
+        Requerido: Sí / No
+      </span>
+    </div>
+  ))}
+</div>        </section>
       </main>
     </div>
   )
