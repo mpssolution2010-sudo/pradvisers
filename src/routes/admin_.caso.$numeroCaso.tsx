@@ -1,6 +1,6 @@
 
 import { createFileRoute } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/admin/caso/$numeroCaso')({
   component: AdminCasoPage,
@@ -22,8 +22,53 @@ function AdminCasoPage() {
   'Declaratoria de herederos': false,
   'Caudal relicto': false,
 })
+useEffect(() => {
+  const cargarConfiguracion = async () => {
+    try {
+      const response = await fetch(
+        `/api/configuracion-documentos?numero-caso=${numeroCaso}`,
+      )
 
-  return (
+      if (!response.ok) {
+        return
+      }
+
+      const data = await response.json()
+
+      if (data.documentosRequeridos) {
+        setDocumentosRequeridos(data.documentosRequeridos)
+      }
+    } catch (error) {
+      console.error('Error cargando configuración de documentos:', error)
+    }
+  }
+
+  cargarConfiguracion()
+}, [numeroCaso])
+  const guardarConfiguracion = async () => {
+  try {
+    const response = await fetch('/api/configuracion-documentos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        numeroCaso,
+        documentosRequeridos,
+      }),
+    })
+
+    if (!response.ok) {
+      alert('No se pudo guardar la configuración.')
+      return
+    }
+
+    alert('Configuración guardada correctamente.')
+  } catch (error) {
+    console.error('Error guardando configuración:', error)
+    alert('No se pudo guardar la configuración.')
+  }
+}  return (
     <div className="min-h-screen bg-[#f4f6f8] text-gray-900">
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-7xl px-6 py-5">
@@ -145,7 +190,17 @@ function AdminCasoPage() {
 </div>
     </div>
   ))}
-</div>        </section>
+</div>
+
+<button
+  type="button"
+  onClick={guardarConfiguracion}
+  className="mt-6 rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white"
+>
+  GUARDAR CAMBIOS
+</button>
+
+</section>
       </main>
     </div>
   )
