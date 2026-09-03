@@ -57,12 +57,12 @@ function AdminPage() {
         </p>
       </div>
 
-      <button
-        type="button"
-        className="rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white"
-      >
-        ABRIR EXPEDIENTE
-      </button>
+      <a
+  href="/admin/caso/PA-2026-0001"
+  className="rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white"
+>
+  ABRIR EXPEDIENTE
+</a>
     </div>
   </div>
 </div>
