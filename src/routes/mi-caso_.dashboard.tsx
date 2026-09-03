@@ -221,7 +221,7 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
 const [progresoSubida, setProgresoSubida] = useState(0)
 const [subiendoDocumento, setSubiendoDocumento] = useState(false)
 const [nombreArchivo, setNombreArchivo] = useState('')
-const [tipoDocumentoSubida, setTipoDocumentoSubida] = useState('estados-bancarios')
+const [tipoDocumentoSubida, setTipoDocumentoSubida] = useState('')
 const [documentosRequeridos, setDocumentosRequeridos] = useState<
   Record<string, boolean>
 >(() =>
@@ -268,10 +268,13 @@ useEffect(() => {
 
   cargarEstadosDocumentos()
 }, [])
-
-const documentoRecibido =
-  documentosRecibidos['estados-bancarios'] ?? false
   
+  const documentosPendientes = casoCliente.documentos.filter(
+  (documento) =>
+    documentosRequeridos[documento.id] &&
+    !documentosRecibidos[documento.id] &&
+    !documento.estado.startsWith('Recibido'),
+)
   return (
     <div className="min-h-screen bg-[#f4f6f8] text-gray-900">
 
@@ -698,10 +701,13 @@ onSubmit={(event) => {
     }}
     className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-bold text-gray-700"
   >
-    <option value="contrato-opcion">Contrato de opción</option>
-    <option value="identificacion">Identificación</option>
-    <option value="estados-bancarios">Estados bancarios</option>
-    <option value="carta-preaprobacion">carta de pre aprobación</option>
+   <option value="">Selecciona un documento</option>
+
+{documentosPendientes.map((documento) => (
+  <option key={documento.id} value={documento.id}>
+    {documento.nombre}
+  </option>
+))}
   </select>
 </div>
   <label className="cursor-pointer rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white">
@@ -745,6 +751,7 @@ onSubmit={(event) => {
 )}
   <button
     type="submit"
+    disabled={!tipoDocumentoSubida || !nombreArchivo || subiendoDocumento}
     className="rounded-xl bg-[#246b8e] px-5 py-3 text-sm font-black text-white"
   >
     ENVIAR DOCUMENTO
