@@ -68,7 +68,8 @@ useEffect(() => {
     console.error('Error guardando configuración:', error)
     alert('No se pudo guardar la configuración.')
   }
-}  return (
+};
+    return (
     <div className="min-h-screen bg-[#f4f6f8] text-gray-900">
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-7xl px-6 py-5">
