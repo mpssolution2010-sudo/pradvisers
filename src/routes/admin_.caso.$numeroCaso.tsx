@@ -1,5 +1,6 @@
 
 import { createFileRoute } from '@tanstack/react-router'
+import { useState } from 'react'
 
 export const Route = createFileRoute('/admin/caso/$numeroCaso')({
   component: AdminCasoPage,
@@ -7,6 +8,20 @@ export const Route = createFileRoute('/admin/caso/$numeroCaso')({
 
 function AdminCasoPage() {
   const { numeroCaso } = Route.useParams()
+
+  const [documentosRequeridos, setDocumentosRequeridos] = useState<
+  Record<string, boolean>
+>({
+  'Contrato de opción': true,
+  Identificación: true,
+  'Estados bancarios': true,
+  'Carta de preaprobación': true,
+  'Carta de capitulaciones': false,
+  'Estudio de título': false,
+  'Evidencia de ingresos': false,
+  'Declaratoria de herederos': false,
+  'Caudal relicto': false,
+})
 
   return (
     <div className="min-h-screen bg-[#f4f6f8] text-gray-900">
@@ -93,9 +108,41 @@ function AdminCasoPage() {
         {documento}
       </span>
 
-      <span className="text-sm font-bold text-gray-500">
-        Requerido: Sí / No
-      </span>
+     <div className="flex items-center gap-2">
+  <button
+    type="button"
+    onClick={() =>
+      setDocumentosRequeridos((actual) => ({
+        ...actual,
+        [documento]: true,
+      }))
+    }
+    className={
+      documentosRequeridos[documento]
+        ? 'rounded-lg bg-green-600 px-3 py-2 text-xs font-black text-white'
+        : 'rounded-lg border border-gray-300 px-3 py-2 text-xs font-black text-gray-500'
+    }
+  >
+    SÍ
+  </button>
+
+  <button
+    type="button"
+    onClick={() =>
+      setDocumentosRequeridos((actual) => ({
+        ...actual,
+        [documento]: false,
+      }))
+    }
+    className={
+      !documentosRequeridos[documento]
+        ? 'rounded-lg bg-gray-700 px-3 py-2 text-xs font-black text-white'
+        : 'rounded-lg border border-gray-300 px-3 py-2 text-xs font-black text-gray-500'
+    }
+  >
+    NO
+  </button>
+</div>
     </div>
   ))}
 </div>        </section>
