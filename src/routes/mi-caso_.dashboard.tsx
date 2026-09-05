@@ -232,6 +232,41 @@ const [documentosRequeridos, setDocumentosRequeridos] = useState<
     ]),
   ),
 )
+ useEffect(() => {
+  const cargarDocumentosRequeridos = async () => {
+    try {
+      const response = await fetch(
+        `/api/configuracion-documentos?numero-caso=${casoCliente.caso.numero}`,
+      )
+
+      if (!response.ok) {
+        return
+      }
+
+      const data = await response.json()
+
+      if (data.documentosRequeridos) {
+        const configuracionPorId = Object.fromEntries(
+          casoCliente.documentos.map((documento) => [
+            documento.id,
+            Boolean(data.documentosRequeridos[documento.nombre]),
+          ]),
+        )
+
+        setDocumentosRequeridos(configuracionPorId)
+      }
+    } catch (error) {
+      console.error(
+        'Error cargando documentos requeridos del expediente:',
+        error,
+      )
+    }
+  }
+
+  cargarDocumentosRequeridos()
+}, [])
+
+  
 useEffect(() => {
   const cargarEstadosDocumentos = async () => {
     const documentosConId = casoCliente.documentos.filter(
