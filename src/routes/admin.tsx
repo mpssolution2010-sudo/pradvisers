@@ -54,6 +54,31 @@ const casosConPendientes = casos.filter(
 const casosCompletados = casos.filter(
   (caso) => caso.estado === 'Completado',
 ).length
+const guardarCasosEnSistema = async () => {
+  try {
+    const response = await fetch('/api/casos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        casos,
+      }),
+    })
+
+    if (!response.ok) {
+      alert('No se pudieron guardar los expedientes.')
+      return
+    }
+
+    const data = await response.json()
+
+    alert(`Expedientes guardados: ${data.total}`)
+  } catch (error) {
+    console.error('Error guardando expedientes:', error)
+    alert('No se pudieron guardar los expedientes.')
+  }
+}  
   
   return (
     
@@ -87,6 +112,13 @@ const casosCompletados = casos.filter(
   <p className="mt-2 text-sm text-gray-600">
     Desde aquí podrás administrar los expedientes de tus clientes.
   </p>
+<button
+  type="button"
+  onClick={guardarCasosEnSistema}
+  className="mt-4 rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white"
+>
+  GUARDAR CASOS EN SISTEMA
+</button>
 
 <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
   <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
