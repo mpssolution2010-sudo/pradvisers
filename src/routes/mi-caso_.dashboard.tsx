@@ -728,7 +728,7 @@ onSubmit={(event) => {
   </label>
 
   <select
-    value={tipoDocumentoSubida}
+    defaultValue=""
     onChange={(event) => {
       setTipoDocumentoSubida(event.target.value)
       setNombreArchivo('')
