@@ -9,6 +9,10 @@ function AdminPage() {
   const [busqueda, setBusqueda] = useState('')
   const [filtroEstado, setFiltroEstado] = useState('todos')
   const [soloPendientes, setSoloPendientes] = useState(false)
+  const totalCasos = 3
+  const casosActivos = 3
+  const casosConPendientes = 2
+  const casosCompletados = 1
   
   return (
     
@@ -42,6 +46,44 @@ function AdminPage() {
   <p className="mt-2 text-sm text-gray-600">
     Desde aquí podrás administrar los expedientes de tus clientes.
   </p>
+
+<div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+  <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+    <p className="text-xs font-black uppercase tracking-wide text-gray-500">
+      Total de casos
+    </p>
+    <p className="mt-1 text-2xl font-black text-[#071a32]">
+      {totalCasos}
+    </p>
+  </div>
+
+  <div className="rounded-2xl border border-green-200 bg-green-50 p-4">
+    <p className="text-xs font-black uppercase tracking-wide text-green-700">
+      Casos activos
+    </p>
+    <p className="mt-1 text-2xl font-black text-green-700">
+      {casosActivos}
+    </p>
+  </div>
+
+  <div className="rounded-2xl border border-red-200 bg-red-50 p-4">
+    <p className="text-xs font-black uppercase tracking-wide text-red-600">
+      Con pendientes
+    </p>
+    <p className="mt-1 text-2xl font-black text-red-600">
+      {casosConPendientes}
+    </p>
+  </div>
+
+  <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
+    <p className="text-xs font-black uppercase tracking-wide text-blue-700">
+      Completados
+    </p>
+    <p className="mt-1 text-2xl font-black text-blue-700">
+      {casosCompletados}
+    </p>
+  </div>
+</div>
           
     <div className="mt-5">
   <input
