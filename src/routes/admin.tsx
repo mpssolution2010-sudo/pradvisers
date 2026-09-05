@@ -9,9 +9,7 @@ function AdminPage() {
   const [busqueda, setBusqueda] = useState('')
   const [filtroEstado, setFiltroEstado] = useState('todos')
   const [soloPendientes, setSoloPendientes] = useState(false)
-  const casos = [
-    // los 3 casos actuales
-    ]
+  
   const [casosCargados, setCasosCargados] = useSate(casos)
   useEffect(() => {
   const cargarCasos = async () => {
@@ -64,7 +62,6 @@ function AdminPage() {
     pendientes: 0,
   },
 ]
-const totalCasos = casos.length
 
 const totalCasos = casosCargados.length
 
@@ -78,7 +75,6 @@ const casosConPendientes = casosCargados.filter(
 
 const casosCompletados = casosCargados.filter(
   (caso) => caso.estado === 'Completado',
-).length
 ).length
 const guardarCasosEnSistema = async () => {
   try {
