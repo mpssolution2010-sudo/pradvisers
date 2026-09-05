@@ -193,9 +193,18 @@ const totalPendientes = totalRequeridos - totalRecibidos
           </h2>
 
   <p className="mt-2 text-sm text-gray-600">
-    Aquí podrás definir qué documentos necesita este cliente.
-  </p>
- <div className="mt-5 grid gap-3 sm:grid-cols-3">
+  Aquí podrás definir qué documentos necesita este cliente.
+</p>
+
+{mensajeGuardado && (
+  <div className="mt-4 rounded-2xl border border-green-200 bg-green-50 px-4 py-3">
+    <p className="text-sm font-black text-green-700">
+      ✓ {mensajeGuardado}
+    </p>
+  </div>
+)}
+
+<div className="mt-5 grid gap-3 sm:grid-cols-3">
   <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
     <p className="text-xs font-black uppercase tracking-wide text-gray-500">
       Requeridos
