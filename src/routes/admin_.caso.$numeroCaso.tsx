@@ -117,12 +117,14 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
       return
     }
 
-    alert('Configuración guardada correctamente.')
+   setMensajeGuardado('Configuración guardada correctamente.')
+setTimeout(() => setMensajeGuardado(''), 3000)
   } catch (error) {
     console.error('Error guardando configuración:', error)
     alert('No se pudo guardar la configuración.')
   }
 };
+  const [mensajeGuardado, setMensajeGuardado] = useState('')
   const totalRequeridos = Object.values(documentosRequeridos).filter(Boolean).length
 
 const totalRecibidos = Object.entries(documentosRequeridos).filter(
