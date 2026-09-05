@@ -8,6 +8,7 @@ export const Route = createFileRoute('/admin')({
 function AdminPage() {
   const [busqueda, setBusqueda] = useState('')
   const [filtroEstado, setFiltroEstado] = useState('todos')
+  const [soloPendientes, setSoloPendientes] = useState(false)
   
   return (
     
@@ -55,6 +56,14 @@ function AdminPage() {
           <div className="mt-3">
   <select
     value={filtroEstado}
+    <label className="mt-3 flex items-center gap-2 text-sm font-bold text-gray-700">
+  <input
+    type="checkbox"
+    checked={soloPendientes}
+    onChange={(event) => setSoloPendientes(event.target.checked)}
+  />
+  Solo casos con documentos pendientes
+</label>
     onChange={(event) => setFiltroEstado(event.target.value)}
     className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-700 outline-none"
   >
@@ -95,7 +104,10 @@ function AdminPage() {
   const coincideEstado =
     filtroEstado === 'todos' || caso.estado === filtroEstado
 
-  return coincideBusqueda && coincideEstado
+  const coincidePendientes =
+    !soloPendientes || caso.pendientes > 0
+
+  return coincideBusqueda && coincideEstado && coincidePendientes
 })
   .map((caso) => (
   <div
