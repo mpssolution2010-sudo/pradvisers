@@ -1,11 +1,15 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useState } from 'react'
 
 export const Route = createFileRoute('/admin')({
   component: AdminPage,
 })
 
 function AdminPage() {
+  const [busqueda, setBusqueda] = useState('')
+  
   return (
+    
     <div className="min-h-screen bg-[#f4f6f8] text-gray-900">
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-7xl px-6 py-5">
@@ -36,6 +40,16 @@ function AdminPage() {
   <p className="mt-2 text-sm text-gray-600">
     Desde aquí podrás administrar los expedientes de tus clientes.
   </p>
+          
+    <div className="mt-5">
+  <input
+    type="text"
+    value={busqueda}
+    onChange={(event) => setBusqueda(event.target.value)}
+    placeholder="Buscar por cliente o número de caso"
+    className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-700 outline-none"
+  />
+</div>      
 
   {[
   {
@@ -58,7 +72,16 @@ function AdminPage() {
   progreso: 30,
   pendientes: 6,
 },
-].map((caso) => (
+]
+  .filter((caso) => {
+    const texto = busqueda.toLowerCase()
+
+    return (
+      caso.numero.toLowerCase().includes(texto) ||
+      caso.cliente.toLowerCase().includes(texto)
+    )
+  })
+  .map((caso) => (
   <div
     key={caso.numero}
     className="mt-6 rounded-2xl border border-gray-200 p-5"
