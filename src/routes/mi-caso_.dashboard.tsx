@@ -648,7 +648,7 @@ useEffect(() => {
           className="rounded-3xl bg-white p-6 shadow-sm"
         >
 
-          <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+          <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row smf:items-center">
 
             <div>
               <p className="text-xs font-black uppercase tracking-widest text-[#c9a646]">
@@ -660,7 +660,7 @@ useEffect(() => {
               </h2>
             </div>
             {documentosPendientes.length > 0 && (
-          </form>
+          <form
   name="documentos-cliente"
   method="POST"
   action="/"
