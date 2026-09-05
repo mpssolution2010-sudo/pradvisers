@@ -48,6 +48,16 @@ function AdminPage() {
     progreso: 65,
     pendientes: 4,
   },
+      {
+  numero: 'PA-2026-0002',
+  cliente: 'Carlos Rivera',
+  tipo: 'Venta de propiedad',
+  propiedad: 'Urb. Los Ángeles',
+  ubicacion: 'Carolina, Puerto Rico',
+  estado: 'Caso activo',
+  progreso: 30,
+  pendientes: 6,
+},
 ].map((caso) => (
   <div
     key={caso.numero}
