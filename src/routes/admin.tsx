@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/admin')({
   component: AdminPage,
@@ -9,6 +9,29 @@ function AdminPage() {
   const [busqueda, setBusqueda] = useState('')
   const [filtroEstado, setFiltroEstado] = useState('todos')
   const [soloPendientes, setSoloPendientes] = useState(false)
+  const casos = [
+    // los 3 casos actuales
+    ]
+  const [casosCargados, setCasosCargados] = useSate(casos)
+  useEffect(() => {
+  const cargarCasos = async () => {
+    try {
+      const response = await fetch('/api/casos')
+
+      if (!response.ok) return
+
+      const data = await response.json()
+
+      if (Array.isArray(data.casos)) {
+        setCasosCargados(data.casos)
+      }
+    } catch (error) {
+      console.error('Error cargando expedientes:', error)
+    }
+  }
+
+  cargarCasos()
+}, [])
   const casos = [
   {
     numero: 'PA-2026-0001',
@@ -43,16 +66,19 @@ function AdminPage() {
 ]
 const totalCasos = casos.length
 
-const casosActivos = casos.filter(
+const totalCasos = casosCargados.length
+
+const casosActivos = casosCargados.filter(
   (caso) => caso.estado === 'Caso activo',
 ).length
 
-const casosConPendientes = casos.filter(
+const casosConPendientes = casosCargados.filter(
   (caso) => caso.pendientes > 0,
 ).length
 
-const casosCompletados = casos.filter(
+const casosCompletados = casosCargados.filter(
   (caso) => caso.estado === 'Completado',
+).length
 ).length
 const guardarCasosEnSistema = async () => {
   try {
@@ -189,7 +215,7 @@ const guardarCasosEnSistema = async () => {
   Solo casos con documentos pendientes
 </label>
 
-  {casos
+  {casosCargados
 .filter((caso) => {
   const texto = busqueda.toLowerCase()
 
