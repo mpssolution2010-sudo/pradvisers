@@ -10,7 +10,7 @@ function AdminPage() {
   const [filtroEstado, setFiltroEstado] = useState('todos')
   const [soloPendientes, setSoloPendientes] = useState(false)
   
-  const [casosCargados, setCasosCargados] = useSate(casos)
+const [casosCargados, setCasosCargados] = useState<any[]>([])
   useEffect(() => {
   const cargarCasos = async () => {
     try {
