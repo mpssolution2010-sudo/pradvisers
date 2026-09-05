@@ -100,7 +100,6 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
   cargarConfiguracion()
 }, [numeroCaso])
   const guardarConfiguracion = async () => {
-    alert('Entró a guardar')
   try {
     const response = await fetch('/api/configuracion-documentos', {
       method: 'POST',
