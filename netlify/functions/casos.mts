@@ -1,5 +1,5 @@
 import type { Config, Context } from '@netlify/functions'
-import { getStore } from '@netlify/blobs
+import { getStore } from '@netlify/blobs'
 
 export default async (req: Request, _context: Context) => {
  const esProduccion =
