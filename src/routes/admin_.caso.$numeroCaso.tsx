@@ -25,7 +25,7 @@ function AdminCasoPage() {
 const [documentosRecibidos, setDocumentosRecibidos] = useState<
   Record<string, boolean>
 >({})
-useEffect(() => {
+  
   useEffect(() => {
   const cargarDocumentosRecibidos = async () => {
     const documentos = [
@@ -76,6 +76,7 @@ useEffect(() => {
 
   cargarDocumentosRecibidos()
 }, [numeroCaso])
+  useEffect(() => {
   const cargarConfiguracion = async () => {
     try {
       const response = await fetch(
