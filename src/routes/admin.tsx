@@ -94,6 +94,17 @@ function AdminPage() {
   progreso: 30,
   pendientes: 6,
 },
+      
+    {
+  numero: 'PA-2026-0003',
+  cliente: 'Ana Martínez',
+  tipo: 'Compra de propiedad',
+  propiedad: 'Cond. Vista Verde',
+  ubicacion: 'San Juan, Puerto Rico',
+  estado: 'Caso activo',
+  progreso: 100,
+  pendientes: 0,
+},
 ]
 .filter((caso) => {
   const texto = busqueda.toLowerCase()
