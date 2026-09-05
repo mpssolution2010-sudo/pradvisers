@@ -1,10 +1,16 @@
 import type { Config, Context } from '@netlify/functions'
-import { getStore } from '@netlify/blobs'
+import { getStore } from '@netlify/blobs
 
 export default async (req: Request, _context: Context) => {
-  const store = getStore('casos-property-advisers', {
-    consistency: 'strong',
-  })
+ const esProduccion =
+  Netlify.context?.deploy.context === 'production'
+
+const store = getStore(
+  esProduccion
+    ? 'casos-property-advisers'
+    : 'casos-property-advisers-homepage-2026',
+  { consistency: 'strong' },
+)
 
   if (req.method === 'POST') {
     const body = await req.json()
