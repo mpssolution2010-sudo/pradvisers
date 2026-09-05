@@ -30,38 +30,7 @@ const [casosCargados, setCasosCargados] = useState<any[]>([])
 
   cargarCasos()
 }, [])
-  const casos = [
-  {
-    numero: 'PA-2026-0001',
-    cliente: 'María Rodríguez',
-    tipo: 'Compra de propiedad',
-    propiedad: 'Urb. Jardines del Caribe',
-    ubicacion: 'Carolina, Puerto Rico',
-    estado: 'Caso activo',
-    progreso: 65,
-    pendientes: 4,
-  },
-  {
-    numero: 'PA-2026-0002',
-    cliente: 'Carlos Rivera',
-    tipo: 'Venta de propiedad',
-    propiedad: 'Urb. Los Ángeles',
-    ubicacion: 'Carolina, Puerto Rico',
-    estado: 'Caso activo',
-    progreso: 30,
-    pendientes: 6,
-  },
-  {
-    numero: 'PA-2026-0003',
-    cliente: 'Ana Martínez',
-    tipo: 'Compra de propiedad',
-    propiedad: 'Cond. Vista Verde',
-    ubicacion: 'San Juan, Puerto Rico',
-    estado: 'Completado',
-    progreso: 100,
-    pendientes: 0,
-  },
-]
+
 
 const totalCasos = casosCargados.length
 
@@ -76,31 +45,6 @@ const casosConPendientes = casosCargados.filter(
 const casosCompletados = casosCargados.filter(
   (caso) => caso.estado === 'Completado',
 ).length
-const guardarCasosEnSistema = async () => {
-  try {
-    const response = await fetch('/api/casos', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        casos,
-      }),
-    })
-
-    if (!response.ok) {
-      alert('No se pudieron guardar los expedientes.')
-      return
-    }
-
-    const data = await response.json()
-
-    alert(`Expedientes guardados: ${data.total}`)
-  } catch (error) {
-    console.error('Error guardando expedientes:', error)
-    alert('No se pudieron guardar los expedientes.')
-  }
-}  
   
   return (
     
@@ -134,13 +78,6 @@ const guardarCasosEnSistema = async () => {
   <p className="mt-2 text-sm text-gray-600">
     Desde aquí podrás administrar los expedientes de tus clientes.
   </p>
-<button
-  type="button"
-  onClick={guardarCasosEnSistema}
-  className="mt-4 rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white"
->
-  GUARDAR CASOS EN SISTEMA
-</button>
 
 <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
   <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
