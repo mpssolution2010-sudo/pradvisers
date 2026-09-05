@@ -123,7 +123,14 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
     alert('No se pudo guardar la configuración.')
   }
 };
-    return (
+  const totalRequeridos = Object.values(documentosRequeridos).filter(Boolean).length
+
+const totalRecibidos = Object.entries(documentosRequeridos).filter(
+  ([documento, requerido]) => requerido && documentosRecibidos[documento],
+).length
+
+const totalPendientes = totalRequeridos - totalRecibidos 
+  return (
     <div className="min-h-screen bg-[#f4f6f8] text-gray-900">
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-7xl px-6 py-5">
@@ -185,11 +192,39 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
             Configuración del expediente
           </h2>
 
-          <p className="mt-2 text-sm text-gray-600">
-            Aquí podrás definir qué documentos necesita este cliente.
-          </p>
-          <div className="mt-6 space-y-3">
-  {[
+  <p className="mt-2 text-sm text-gray-600">
+    Aquí podrás definir qué documentos necesita este cliente.
+  </p>
+ <div className="mt-5 grid gap-3 sm:grid-cols-3">
+  <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+    <p className="text-xs font-black uppercase tracking-wide text-gray-500">
+      Requeridos
+    </p>
+    <p className="mt-1 text-2xl font-black text-[#071a32]">
+      {totalRequeridos}
+    </p>
+  </div>
+
+  <div className="rounded-2xl border border-green-200 bg-green-50 p-4">
+    <p className="text-xs font-black uppercase tracking-wide text-green-700">
+      Recibidos
+    </p>
+    <p className="mt-1 text-2xl font-black text-green-700">
+      {totalRecibidos}
+    </p>
+  </div>
+
+  <div className="rounded-2xl border border-red-200 bg-red-50 p-4">
+    <p className="text-xs font-black uppercase tracking-wide text-red-600">
+      Pendientes
+    </p>
+    <p className="mt-1 text-2xl font-black text-red-600">
+      {totalPendientes}
+    </p>
+  </div>
+</div>
+  <div className="mt-6 space-y-3">
+    {[
     'Contrato de opción',
     'Identificación',
     'Estados bancarios',
