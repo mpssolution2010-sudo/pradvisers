@@ -207,14 +207,20 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
       <span className="font-bold text-[#071a32]">
         {documento}
       </span>
-      <span
+     <span
   className={
     documentosRecibidos[documento]
       ? 'ml-3 text-xs font-black text-green-600'
-      : 'ml-3 text-xs font-black text-red-500'
+      : documentosRequeridos[documento]
+        ? 'ml-3 text-xs font-black text-red-500'
+        : 'ml-3 text-xs font-black text-gray-400'
   }
 >
-  {documentosRecibidos[documento] ? 'Recibido ✓' : 'Pendiente'}
+  {documentosRecibidos[documento]
+    ? 'Recibido ✓'
+    : documentosRequeridos[documento]
+      ? 'Pendiente'
+      : 'No requerido'}
 </span>
      <div className="flex items-center gap-2">
   <button
