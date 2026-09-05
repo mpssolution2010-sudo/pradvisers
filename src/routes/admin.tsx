@@ -7,6 +7,7 @@ export const Route = createFileRoute('/admin')({
 
 function AdminPage() {
   const [busqueda, setBusqueda] = useState('')
+  const [filtroEstado, setFiltroEstado] = useState('todos')
   
   return (
     
@@ -49,7 +50,18 @@ function AdminPage() {
     placeholder="Buscar por cliente o número de caso"
     className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-700 outline-none"
   />
-</div>      
+</div> 
+  
+          <div className="mt-3">
+  <select
+    value={filtroEstado}
+    onChange={(event) => setFiltroEstado(event.target.value)}
+    className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-700 outline-none"
+  >
+    <option value="todos">Todos los estados</option>
+    <option value="Caso activo">Caso activo</option>
+  </select>
+</div>       
 
   {[
   {
@@ -73,14 +85,18 @@ function AdminPage() {
   pendientes: 6,
 },
 ]
-  .filter((caso) => {
-    const texto = busqueda.toLowerCase()
+.filter((caso) => {
+  const texto = busqueda.toLowerCase()
 
-    return (
-      caso.numero.toLowerCase().includes(texto) ||
-      caso.cliente.toLowerCase().includes(texto)
-    )
-  })
+  const coincideBusqueda =
+    caso.numero.toLowerCase().includes(texto) ||
+    caso.cliente.toLowerCase().includes(texto)
+
+  const coincideEstado =
+    filtroEstado === 'todos' || caso.estado === filtroEstado
+
+  return coincideBusqueda && coincideEstado
+})
   .map((caso) => (
   <div
     key={caso.numero}
