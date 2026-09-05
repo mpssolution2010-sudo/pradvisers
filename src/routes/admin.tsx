@@ -56,7 +56,15 @@ function AdminPage() {
           <div className="mt-3">
   <select
     value={filtroEstado}
-    <label className="mt-3 flex items-center gap-2 text-sm font-bold text-gray-700">
+   
+    onChange={(event) => setFiltroEstado(event.target.value)}
+    className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-700 outline-none"
+  >
+    <option value="todos">Todos los estados</option>
+    <option value="Caso activo">Caso activo</option>
+  </select>
+</div>   
+   <label className="mt-3 flex items-center gap-2 text-sm font-bold text-gray-700">
   <input
     type="checkbox"
     checked={soloPendientes}
@@ -64,13 +72,6 @@ function AdminPage() {
   />
   Solo casos con documentos pendientes
 </label>
-    onChange={(event) => setFiltroEstado(event.target.value)}
-    className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-700 outline-none"
-  >
-    <option value="todos">Todos los estados</option>
-    <option value="Caso activo">Caso activo</option>
-  </select>
-</div>       
 
   {[
   {
