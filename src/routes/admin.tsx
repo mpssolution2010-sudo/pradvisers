@@ -145,6 +145,7 @@ const casosCompletados = casos.filter(
   >
     <option value="todos">Todos los estados</option>
     <option value="Caso activo">Caso activo</option>
+    <option value="Completado">Completado</option>
   </select>
 </div>   
    <label className="mt-3 flex items-center gap-2 text-sm font-bold text-gray-700">
