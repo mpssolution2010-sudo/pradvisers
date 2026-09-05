@@ -115,39 +115,7 @@ function AdminPage() {
   Solo casos con documentos pendientes
 </label>
 
-  {[
-  {
-    numero: 'PA-2026-0001',
-    cliente: 'María Rodríguez',
-    tipo: 'Compra de propiedad',
-    propiedad: 'Urb. Jardines del Caribe',
-    ubicacion: 'Carolina, Puerto Rico',
-    estado: 'Caso activo',
-    progreso: 65,
-    pendientes: 4,
-  },
-      {
-  numero: 'PA-2026-0002',
-  cliente: 'Carlos Rivera',
-  tipo: 'Venta de propiedad',
-  propiedad: 'Urb. Los Ángeles',
-  ubicacion: 'Carolina, Puerto Rico',
-  estado: 'Caso activo',
-  progreso: 30,
-  pendientes: 6,
-},
-      
-    {
-  numero: 'PA-2026-0003',
-  cliente: 'Ana Martínez',
-  tipo: 'Compra de propiedad',
-  propiedad: 'Cond. Vista Verde',
-  ubicacion: 'San Juan, Puerto Rico',
-  estado: 'Caso activo',
-  progreso: 100,
-  pendientes: 0,
-},
-]
+  {casos
 .filter((caso) => {
   const texto = busqueda.toLowerCase()
 
