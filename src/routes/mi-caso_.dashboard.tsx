@@ -659,13 +659,8 @@ useEffect(() => {
                 Documentos
               </h2>
             </div>
-
-  {casoCliente.documentos.some(
-  (documento) =>
-    documento.estado === 'Pendiente de recibir' &&
-    !documentosRecibidos[documento.id],
-) && (
-     <form
+            {documentosPendientes.length > 0 && (
+          </form>
   name="documentos-cliente"
   method="POST"
   action="/"
@@ -793,6 +788,13 @@ onSubmit={(event) => {
   </button>
 </form>
           )}
+            {documentosPendientes.length === 0 && (
+  <div className="rounded-2xl border border-green-200 bg-green-50 px-5 py-4">
+    <p className="font-black text-green-700">
+      ✓ Todos los documentos requeridos han sido recibidos.
+    </p>
+  </div>
+)}
           </div>
 
         <div className="grid gap-4 md:grid-cols-3">
