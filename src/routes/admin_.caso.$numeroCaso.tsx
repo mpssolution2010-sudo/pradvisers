@@ -22,7 +22,60 @@ function AdminCasoPage() {
   'Declaratoria de herederos': false,
   'Caudal relicto': false,
 })
+const [documentosRecibidos, setDocumentosRecibidos] = useState<
+  Record<string, boolean>
+>({})
 useEffect(() => {
+  useEffect(() => {
+  const cargarDocumentosRecibidos = async () => {
+    const documentos = [
+      'Contrato de opción',
+      'Identificación',
+      'Estados bancarios',
+      'Carta de preaprobación',
+      'Carta de capitulaciones',
+      'Estudio de título',
+      'Evidencia de ingresos',
+      'Declaratoria de herederos',
+      'Caudal relicto',
+    ]
+
+    const ids: Record<string, string> = {
+      'Contrato de opción': 'contrato-opcion',
+      Identificación: 'identificacion',
+      'Estados bancarios': 'estados-bancarios',
+      'Carta de preaprobación': 'carta-preaprobacion',
+      'Carta de capitulaciones': 'carta-capitulaciones',
+      'Estudio de título': 'estudio-titulo',
+      'Evidencia de ingresos': 'evidencia-ingresos',
+      'Declaratoria de herederos': 'declaratoria-herederos',
+      'Caudal relicto': 'caudal-relicto',
+    }
+
+    const resultados = await Promise.all(
+      documentos.map(async (documento) => {
+        try {
+          const response = await fetch(
+            `/api/estado-documento?numero-caso=${numeroCaso}&tipo-documentos=${ids[documento]}`,
+          )
+
+          if (!response.ok) {
+            return [documento, false] as const
+          }
+
+          const data = await response.json()
+          return [documento, Boolean(data.recibido)] as const
+        } catch {
+          return [documento, false] as const
+        }
+      }),
+    )
+
+    setDocumentosRecibidos(Object.fromEntries(resultados))
+  }
+
+  cargarDocumentosRecibidos()
+}, [numeroCaso])
   const cargarConfiguracion = async () => {
     try {
       const response = await fetch(
@@ -153,7 +206,15 @@ useEffect(() => {
       <span className="font-bold text-[#071a32]">
         {documento}
       </span>
-
+      <span
+  className={
+    documentosRecibidos[documento]
+      ? 'ml-3 text-xs font-black text-green-600'
+      : 'ml-3 text-xs font-black text-red-500'
+  }
+>
+  {documentosRecibidos[documento] ? 'Recibido ✓' : 'Pendiente'}
+</span>
      <div className="flex items-center gap-2">
   <button
     type="button"
