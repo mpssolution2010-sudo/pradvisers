@@ -37,34 +37,64 @@ function AdminPage() {
     Desde aquí podrás administrar los expedientes de tus clientes.
   </p>
 
-  <div className="mt-6 rounded-2xl border border-gray-200 p-5">
+  {[
+  {
+    numero: 'PA-2026-0001',
+    cliente: 'María Rodríguez',
+    tipo: 'Compra de propiedad',
+    propiedad: 'Urb. Jardines del Caribe',
+    ubicacion: 'Carolina, Puerto Rico',
+    estado: 'Caso activo',
+    progreso: 65,
+    pendientes: 4,
+  },
+].map((caso) => (
+  <div
+    key={caso.numero}
+    className="mt-6 rounded-2xl border border-gray-200 p-5"
+  >
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <div>
         <p className="text-xs font-black uppercase tracking-[0.15em] text-[#c9a646]">
-          PA-2026-0001
+          {caso.numero}
         </p>
 
         <h3 className="mt-1 text-xl font-black text-[#071a32]">
-          María Rodríguez
+          {caso.cliente}
         </h3>
 
         <p className="mt-1 text-sm text-gray-600">
-          Compra de propiedad · Urb. Jardines del Caribe
+          {caso.tipo} · {caso.propiedad}
         </p>
 
         <p className="mt-1 text-sm text-gray-500">
-          Carolina, Puerto Rico
+          {caso.ubicacion}
         </p>
+
+        <div className="mt-3 flex flex-wrap gap-2 text-xs font-bold">
+          <span className="rounded-full bg-green-50 px-3 py-1 text-green-700">
+            {caso.estado}
+          </span>
+
+          <span className="rounded-full bg-gray-100 px-3 py-1 text-gray-600">
+            Progreso {caso.progreso}%
+          </span>
+
+          <span className="rounded-full bg-red-50 px-3 py-1 text-red-600">
+            {caso.pendientes} pendientes
+          </span>
+        </div>
       </div>
 
       <a
-  href="/admin/caso/PA-2026-0001"
-  className="rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white"
->
-  ABRIR EXPEDIENTE
-</a>
+        href={`/admin/caso/${caso.numero}`}
+        className="rounded-xl bg-[#071a32] px-5 py-3 text-center text-sm font-black text-white"
+      >
+        ABRIR EXPEDIENTE
+      </a>
     </div>
   </div>
+))}
 </div>
       </main>  
     </div>
