@@ -9,10 +9,51 @@ function AdminPage() {
   const [busqueda, setBusqueda] = useState('')
   const [filtroEstado, setFiltroEstado] = useState('todos')
   const [soloPendientes, setSoloPendientes] = useState(false)
-  const totalCasos = 3
-  const casosActivos = 3
-  const casosConPendientes = 2
-  const casosCompletados = 1
+  const casos = [
+  {
+    numero: 'PA-2026-0001',
+    cliente: 'María Rodríguez',
+    tipo: 'Compra de propiedad',
+    propiedad: 'Urb. Jardines del Caribe',
+    ubicacion: 'Carolina, Puerto Rico',
+    estado: 'Caso activo',
+    progreso: 65,
+    pendientes: 4,
+  },
+  {
+    numero: 'PA-2026-0002',
+    cliente: 'Carlos Rivera',
+    tipo: 'Venta de propiedad',
+    propiedad: 'Urb. Los Ángeles',
+    ubicacion: 'Carolina, Puerto Rico',
+    estado: 'Caso activo',
+    progreso: 30,
+    pendientes: 6,
+  },
+  {
+    numero: 'PA-2026-0003',
+    cliente: 'Ana Martínez',
+    tipo: 'Compra de propiedad',
+    propiedad: 'Cond. Vista Verde',
+    ubicacion: 'San Juan, Puerto Rico',
+    estado: 'Completado',
+    progreso: 100,
+    pendientes: 0,
+  },
+]
+const totalCasos = casos.length
+
+const casosActivos = casos.filter(
+  (caso) => caso.estado === 'Caso activo',
+).length
+
+const casosConPendientes = casos.filter(
+  (caso) => caso.pendientes > 0,
+).length
+
+const casosCompletados = casos.filter(
+  (caso) => caso.estado === 'Completado',
+).length
   
   return (
     
