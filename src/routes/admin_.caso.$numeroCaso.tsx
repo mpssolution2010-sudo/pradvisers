@@ -9,6 +9,11 @@ export const Route = createFileRoute('/admin/caso/$numeroCaso')({
 function AdminCasoPage() {
   const { numeroCaso } = Route.useParams()
   const [caso, setCaso] = useState<any>(null)
+  const [clienteEditado, setClienteEditado] = useState('')
+  const [tipoEditado, setTipoEditado] = useState('')
+  const [propiedadEditada, setPropiedadEditada] = useState('')
+  const [ubicacionEditada, setUbicacionEditada] = useState('')
+  const [progresoEditado, setProgresoEditado] = useState(0)
   useEffect(() => {
   const cargarCaso = async () => {
     try {
@@ -22,9 +27,14 @@ function AdminCasoPage() {
         (item: any) => item.numero === numeroCaso,
       )
 
-      if (casoEncontrado) {
-        setCaso(casoEncontrado)
-      }
+    if (casoEncontrado) {
+  setCaso(casoEncontrado)
+  setClienteEditado(casoEncontrado.cliente ?? '')
+  setTipoEditado(casoEncontrado.tipo ?? '')
+  setPropiedadEditada(casoEncontrado.propiedad ?? '')
+  setUbicacionEditada(casoEncontrado.ubicacion ?? '')
+  setProgresoEditado(casoEncontrado.progreso ?? 0)
+}
     } catch (error) {
       console.error('Error cargando expediente:', error)
     }
@@ -100,6 +110,63 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
 
   cargarDocumentosRecibidos()
 }, [numeroCaso])
+  const guardarDatosExpediente = async () => {
+  try {
+    const responseActual = await fetch('/api/casos')
+
+    if (!responseActual.ok) {
+      alert('No se pudieron cargar los expedientes.')
+      return
+    }
+
+    const dataActual = await responseActual.json()
+    const casosActuales = Array.isArray(dataActual.casos)
+      ? dataActual.casos
+      : []
+
+    const casosActualizados = casosActuales.map((item: any) =>
+      item.numero === numeroCaso
+        ? {
+            ...item,
+            cliente: clienteEditado,
+            tipo: tipoEditado,
+            propiedad: propiedadEditada,
+            ubicacion: ubicacionEditada,
+            progreso: progresoEditado,
+          }
+        : item,
+    )
+
+    const responseGuardar = await fetch('/api/casos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        casos: casosActualizados,
+      }),
+    })
+
+    if (!responseGuardar.ok) {
+      alert('No se pudieron guardar los cambios.')
+      return
+    }
+
+    setCaso((casoActual: any) => ({
+      ...casoActual,
+      cliente: clienteEditado,
+      tipo: tipoEditado,
+      propiedad: propiedadEditada,
+      ubicacion: ubicacionEditada,
+      progreso: progresoEditado,
+    }))
+
+    alert('Expediente actualizado correctamente.')
+  } catch (error) {
+    console.error('Error actualizando expediente:', error)
+    alert('No se pudieron guardar los cambios.')
+  }
+}
   useEffect(() => {
   const cargarConfiguracion = async () => {
     try {
@@ -193,6 +260,78 @@ const totalPendientes = totalRequeridos - totalRecibidos
                {caso?.ubicacion ?? 'cargando...'}
             </p>
           </section>
+
+{/* AQUÍ PEGAS EL BLOQUE DE EDICIÓN */}
+
+<section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+  <div className="mt-6 grid gap-4 md:grid-cols-2">
+  <div>
+    <label className="text-xs font-black uppercase tracking-wide text-gray-500">
+      Cliente
+    </label>
+    <input
+      value={clienteEditado}
+      onChange={(event) => setClienteEditado(event.target.value)}
+      className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3"
+    />
+  </div>
+
+  <div>
+    <label className="text-xs font-black uppercase tracking-wide text-gray-500">
+      Tipo de caso
+    </label>
+    <input
+      value={tipoEditado}
+      onChange={(event) => setTipoEditado(event.target.value)}
+      className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3"
+    />
+  </div>
+
+  <div>
+    <label className="text-xs font-black uppercase tracking-wide text-gray-500">
+      Propiedad
+    </label>
+    <input
+      value={propiedadEditada}
+      onChange={(event) => setPropiedadEditada(event.target.value)}
+      className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3"
+    />
+  </div>
+
+  <div>
+    <label className="text-xs font-black uppercase tracking-wide text-gray-500">
+      Ubicación
+    </label>
+    <input
+      value={ubicacionEditada}
+      onChange={(event) => setUbicacionEditada(event.target.value)}
+      className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3"
+    />
+  </div>
+
+  <div>
+    <label className="text-xs font-black uppercase tracking-wide text-gray-500">
+      Progreso
+    </label>
+    <input
+      type="number"
+      min="0"
+      max="100"
+      value={progresoEditado}
+      onChange={(event) => setProgresoEditado(Number(event.target.value))}
+      className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3"
+    />
+  </div>
+</div>
+
+<button
+  type="button"
+  onClick={guardarDatosExpediente}
+  className="mt-5 rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white"
+>
+  GUARDAR DATOS DEL EXPEDIENTE
+</button>
+</section>
 
           <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-[#c9a646]">
