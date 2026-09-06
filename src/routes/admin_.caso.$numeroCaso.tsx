@@ -158,15 +158,15 @@ const totalPendientes = totalRequeridos - totalRecibidos
             </p>
 
             <h2 className="mt-2 text-2xl font-black text-[#071a32]">
-              María Rodríguez
+              {caso?.cliente ?? 'cargando...'}
             </h2>
 
             <p className="mt-2 text-sm text-gray-600">
-              Compra de propiedad · Urb. Jardines del Caribe
+              {caso ? `${caso.tipo} · ${caso.propiedad}` : 'Cargando...'}
             </p>
 
             <p className="mt-1 text-sm text-gray-500">
-              Carolina, Puerto Rico
+               {caso?.ubicacion ?? 'cargando...'}
             </p>
           </section>
 
@@ -176,11 +176,11 @@ const totalPendientes = totalRequeridos - totalRecibidos
             </p>
 
             <h2 className="mt-2 text-xl font-black text-[#071a32]">
-              Caso activo
+            {caso?.estado ?? 'cargando...'}
             </h2>
 
             <p className="mt-2 text-sm text-gray-600">
-              Progreso actual: 65%
+            Progreso actual: {caso?.progreso ?? 0}%
             </p>
           </section>
         </div>
