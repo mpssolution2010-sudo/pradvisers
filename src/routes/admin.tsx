@@ -78,6 +78,12 @@ const casosCompletados = casosCargados.filter(
   <p className="mt-2 text-sm text-gray-600">
     Desde aquí podrás administrar los expedientes de tus clientes.
   </p>
+<a
+  href="/admin/nuevo-caso"
+  className="mt-4 inline-block rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white"
+>
+  + NUEVO EXPEDIENTE
+</a>
 
 <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
   <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
