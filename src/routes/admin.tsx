@@ -20,9 +20,70 @@ const [casosCargados, setCasosCargados] = useState<any[]>([])
 
       const data = await response.json()
 
-      if (Array.isArray(data.casos)) {
-        setCasosCargados(data.casos)
+    if (Array.isArray(data.casos)) {
+  const idsDocumentos: Record<string, string> = {
+    'Contrato de opción': 'contrato-opcion',
+    Identificación: 'identificacion',
+    'Estados bancarios': 'estados-bancarios',
+    'Carta de preaprobación': 'carta-preaprobacion',
+    'Carta de capitulaciones': 'carta-capitulaciones',
+    'Estudio de título': 'estudio-titulo',
+    'Evidencia de ingresos': 'evidencia-ingresos',
+    'Declaratoria de herederos': 'declaratoria-herederos',
+    'Caudal relicto': 'caudal-relicto',
+  }
+
+  const casosConPendientes = await Promise.all(
+    data.casos.map(async (caso: any) => {
+      const responseConfiguracion = await fetch(
+        `/api/configuracion-documentos?numero-caso=${caso.numero}`,
+      )
+
+      const dataConfiguracion = responseConfiguracion.ok
+        ? await responseConfiguracion.json()
+        : {}
+
+      const configuracion =
+        dataConfiguracion.documentosRequeridos ?? {
+          'Contrato de opción': true,
+          Identificación: true,
+          'Estados bancarios': true,
+          'Carta de preaprobación': true,
+        }
+
+      const requeridos = Object.entries(configuracion).filter(
+        ([, requerido]) => Boolean(requerido),
+      )
+
+      const estados = await Promise.all(
+        requeridos.map(async ([nombre]) => {
+          const id = idsDocumentos[nombre]
+
+          if (!id) return false
+
+          const responseDocumento = await fetch(
+            `/api/estado-documento?numero-caso=${caso.numero}&tipo-documentos=${id}`,
+          )
+
+          if (!responseDocumento.ok) return false
+
+          const dataDocumento = await responseDocumento.json()
+
+          return Boolean(dataDocumento.recibido)
+        }),
+      )
+
+      const recibidos = estados.filter(Boolean).length
+
+      return {
+        ...caso,
+        pendientes: requeridos.length - recibidos,
       }
+    }),
+  )
+
+  setCasosCargados(casosConPendientes)
+}
     } catch (error) {
       console.error('Error cargando expedientes:', error)
     }
