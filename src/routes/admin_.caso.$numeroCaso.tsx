@@ -14,6 +14,7 @@ function AdminCasoPage() {
   const [propiedadEditada, setPropiedadEditada] = useState('')
   const [ubicacionEditada, setUbicacionEditada] = useState('')
   const [progresoEditado, setProgresoEditado] = useState(0)
+  const [estadoEditado, setEstadoEditado] = useState('Caso activo')
   useEffect(() => {
   const cargarCaso = async () => {
     try {
@@ -34,6 +35,7 @@ function AdminCasoPage() {
   setPropiedadEditada(casoEncontrado.propiedad ?? '')
   setUbicacionEditada(casoEncontrado.ubicacion ?? '')
   setProgresoEditado(casoEncontrado.progreso ?? 0)
+  setEstadoEditado(casoEncontrado.estado ?? 'Caso activo')
 }
     } catch (error) {
       console.error('Error cargando expediente:', error)
@@ -132,6 +134,7 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
             tipo: tipoEditado,
             propiedad: propiedadEditada,
             ubicacion: ubicacionEditada,
+            estado: estadoEditado,
             progreso: progresoEditado,
           }
         : item,
@@ -158,6 +161,7 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
       tipo: tipoEditado,
       propiedad: propiedadEditada,
       ubicacion: ubicacionEditada,
+      estado: estadoEditado
       progreso: progresoEditado,
     }))
 
