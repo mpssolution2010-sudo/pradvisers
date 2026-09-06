@@ -8,6 +8,30 @@ export const Route = createFileRoute('/admin/caso/$numeroCaso')({
 
 function AdminCasoPage() {
   const { numeroCaso } = Route.useParams()
+  const [caso, setCaso] = useState<any>(null)
+  useEffect(() => {
+  const cargarCaso = async () => {
+    try {
+      const response = await fetch('/api/casos')
+
+      if (!response.ok) return
+
+      const data = await response.json()
+
+      const casoEncontrado = data.casos?.find(
+        (item: any) => item.numero === numeroCaso,
+      )
+
+      if (casoEncontrado) {
+        setCaso(casoEncontrado)
+      }
+    } catch (error) {
+      console.error('Error cargando expediente:', error)
+    }
+  }
+
+  cargarCaso()
+}, [numeroCaso])
 
   const [documentosRequeridos, setDocumentosRequeridos] = useState<
   Record<string, boolean>
