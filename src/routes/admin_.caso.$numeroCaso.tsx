@@ -312,7 +312,20 @@ const totalPendientes = totalRequeridos - totalRecibidos
       className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3"
     />
   </div>
+<div>
+  <label className="text-xs font-black uppercase tracking-wide text-gray-500">
+    Estado
+  </label>
 
+  <select
+    value={estadoEditado}
+    onChange={(event) => setEstadoEditado(event.target.value)}
+    className="mt-2 w-full rounded-xl border border-gray-300 bg-white px-4 py-3"
+  >
+    <option value="Caso activo">Caso activo</option>
+    <option value="Completado">Completado</option>
+  </select>
+</div>
   <div>
     <label className="text-xs font-black uppercase tracking-wide text-gray-500">
       Progreso
