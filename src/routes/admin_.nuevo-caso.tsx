@@ -13,6 +13,66 @@ function NuevoCasoPage() {
   const [ubicacion, setUbicacion] = useState('')
   const [estado, setEstado] = useState('Caso activo')
   const [progreso, setProgreso] = useState(0)
+  const crearExpediente = async () => {
+  try {
+    if (!numero || !cliente || !tipo || !propiedad || !ubicacion) {
+      alert('Completa todos los campos requeridos.')
+      return
+    }
+
+    const responseActual = await fetch('/api/casos')
+
+    if (!responseActual.ok) {
+      alert('No se pudieron cargar los expedientes actuales.')
+      return
+    }
+
+    const dataActual = await responseActual.json()
+    const casosActuales = Array.isArray(dataActual.casos)
+      ? dataActual.casos
+      : []
+
+    const yaExiste = casosActuales.some(
+      (caso: any) => caso.numero === numero,
+    )
+
+    if (yaExiste) {
+      alert('Ya existe un expediente con ese número de caso.')
+      return
+    }
+
+    const nuevoCaso = {
+      numero,
+      cliente,
+      tipo,
+      propiedad,
+      ubicacion,
+      estado,
+      progreso,
+      pendientes: 0,
+    }
+
+    const responseGuardar = await fetch('/api/casos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        casos: [...casosActuales, nuevoCaso],
+      }),
+    })
+
+    if (!responseGuardar.ok) {
+      alert('No se pudo crear el expediente.')
+      return
+    }
+
+    window.location.href = '/admin'
+  } catch (error) {
+    console.error('Error creando expediente:', error)
+    alert('No se pudo crear el expediente.')
+  }
+}
 
   return (
     <div className="min-h-screen bg-[#f4f6f8] text-gray-900">
@@ -141,6 +201,7 @@ function NuevoCasoPage() {
 
             <button
               type="button"
+              onClick={crearExpediente}
               className="rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white"
             >
               CREAR EXPEDIENTE
