@@ -34,12 +34,18 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 useEffect(() => {
   const iniciarIdentity = async () => {
     try {
-     const resultado = await handleAuthCallback()
+
+      const resultado = await handleAuthCallback()
+
+alert(
+  resultado
+    ? `Identity detectó: ${resultado.type}`
+    : 'Identity no detectó ningún callback',
+)
 
 if (resultado?.type === 'recovery') {
   setRecuperandoPassword(true)
 }
-
       const modulo = await import('netlify-identity-widget')
       const netlifyIdentity = modulo.default
 
@@ -48,6 +54,7 @@ if (resultado?.type === 'recovery') {
       })
     } catch (error) {
       console.error('Error procesando Identity:', error)
+      alert(`Error de Identity: ${String(error)}`)
     }
   }
 
