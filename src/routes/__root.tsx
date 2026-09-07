@@ -1,5 +1,6 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { useEffect } from 'react'
+import { handleAuthCallback } from '@netlify/identity'
 
 import '../styles.css'
 
@@ -30,12 +31,18 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 useEffect(() => {
   const iniciarIdentity = async () => {
-    const modulo = await import('netlify-identity-widget')
-    const netlifyIdentity = modulo.default
+    try {
+      await handleAuthCallback()
 
-    netlifyIdentity.init({
-      APIUrl: 'https://propertyadvisers-pr.com/.netlify/identity',
-    })
+      const modulo = await import('netlify-identity-widget')
+      const netlifyIdentity = modulo.default
+
+      netlifyIdentity.init({
+        APIUrl: 'https://propertyadvisers-pr.com/.netlify/identity',
+      })
+    } catch (error) {
+      console.error('Error procesando Identity:', error)
+    }
   }
 
   iniciarIdentity()
