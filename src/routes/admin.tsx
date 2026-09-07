@@ -9,7 +9,53 @@ function AdminPage() {
   const [busqueda, setBusqueda] = useState('')
   const [filtroEstado, setFiltroEstado] = useState('todos')
   const [soloPendientes, setSoloPendientes] = useState(false)
-  
+
+  const [usuarioAdmin, setUsuarioAdmin] = useState<any>(null)
+  const [verificandoAcceso, setVerificandoAcceso] = useState(true)
+  useEffect(() => {
+  let activo = true
+
+  const prepararIdentity = async () => {
+    const modulo = await import('netlify-identity-widget')
+    const netlifyIdentity = modulo.default
+
+    const verificarUsuario = (usuario: any) => {
+      if (!activo) return
+
+      const roles = usuario?.app_metadata?.roles ?? []
+
+      if (usuario && roles.includes('admin')) {
+        setUsuarioAdmin(usuario)
+      } else {
+        setUsuarioAdmin(null)
+      }
+
+      setVerificandoAcceso(false)
+    }
+
+    netlifyIdentity.on('init', verificarUsuario)
+    netlifyIdentity.on('login', verificarUsuario)
+
+    netlifyIdentity.on('logout', () => {
+      if (!activo) return
+      setUsuarioAdmin(null)
+      setVerificandoAcceso(false)
+    })
+
+    netlifyIdentity.init()
+  }
+
+  prepararIdentity()
+
+  return () => {
+    activo = false
+  }
+}, [])
+
+  const abrirLogin = async () => {
+  const modulo = await import('netlify-identity-widget')
+  modulo.default.open('login')
+}  
 const [casosCargados, setCasosCargados] = useState<any[]>([])
   useEffect(() => {
   const cargarCasos = async () => {
@@ -108,8 +154,45 @@ const casosConPendientes = casosCargados.filter(
 const casosCompletados = casosCargados.filter(
   (caso) => caso.estado === 'Completado',
 ).length
-  
+  if (verificandoAcceso) {
   return (
+    <div className="min-h-screen bg-[#f4f6f8] p-8 text-gray-900">
+      <div className="mx-auto max-w-xl rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
+        <p className="text-sm font-black text-[#071a32]">
+          Verificando acceso...
+        </p>
+      </div>
+    </div>
+  )
+}
+
+if (!usuarioAdmin) {
+  return (
+    <div className="min-h-screen bg-[#f4f6f8] p-8 text-gray-900">
+      <div className="mx-auto max-w-xl rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-[#c9a646]">
+          Property Advisers Real Estate
+        </p>
+
+        <h1 className="mt-3 text-3xl font-black text-[#071a32]">
+          Acceso administrativo
+        </h1>
+
+        <p className="mt-3 text-sm text-gray-600">
+          Inicia sesión con una cuenta autorizada para acceder al panel.
+        </p>
+
+        <button
+          type="button"
+          onClick={abrirLogin}
+          className="mt-6 rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white"
+        >
+          INICIAR SESIÓN
+        </button>
+      </div>
+    </div>
+  )
+}  return (
     
     <div className="min-h-screen bg-[#f4f6f8] text-gray-900">
       <header className="border-b border-gray-200 bg-white">
