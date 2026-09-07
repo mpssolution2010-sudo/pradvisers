@@ -36,10 +36,6 @@ useEffect(() => {
     netlifyIdentity.init({
       APIUrl: 'https://propertyadvisers-pr.com/.netlify/identity',
     })
-
-    if (window.location.hash.includes('recovery_token=')) {
-      netlifyIdentity.open('recovery')
-    }
   }
 
   iniciarIdentity()
