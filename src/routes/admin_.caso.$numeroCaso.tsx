@@ -161,7 +161,7 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
       tipo: tipoEditado,
       propiedad: propiedadEditada,
       ubicacion: ubicacionEditada,
-      estado: estadoEditado
+      estado: estadoEditado,
       progreso: progresoEditado,
     }))
 
