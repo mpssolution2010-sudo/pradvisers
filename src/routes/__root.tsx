@@ -27,19 +27,16 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+
   useEffect(() => {
-  const abrirInvitacion = async () => {
-    if (!window.location.hash.includes('invite_token=')) return
-
+  const iniciarIdentity = async () => {
     const modulo = await import('netlify-identity-widget')
-    const netlifyIdentity = modulo.default
-
-    netlifyIdentity.init()
-    netlifyIdentity.open('signup')
+    modulo.default.init()
   }
 
-  abrirInvitacion()
+  iniciarIdentity()
 }, [])
+  
   return (
     <html lang="es">
       <head>
