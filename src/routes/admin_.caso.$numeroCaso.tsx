@@ -265,8 +265,6 @@ const totalPendientes = totalRequeridos - totalRecibidos
             </p>
           </section>
 
-{/* AQUÍ PEGAS EL BLOQUE DE EDICIÓN */}
-
 <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
   <div className="mt-6 grid gap-4 md:grid-cols-2">
   <div>
