@@ -28,15 +28,17 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 
-  useEffect(() => {
+useEffect(() => {
   const iniciarIdentity = async () => {
     const modulo = await import('netlify-identity-widget')
+
     modulo.default.init({
-    APIUrl: 'https://propertyadvisers-pr.com/ .netlify/identity',
-  })
- 
+      APIUrl: 'https://propertyadvisers-pr.com/.netlify/identity',
+    })
+  }
+
   iniciarIdentity()
-}, [])
+}, [])  
   
   return (
     <html lang="es">
