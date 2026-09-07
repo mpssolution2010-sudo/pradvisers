@@ -31,9 +31,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   useEffect(() => {
   const iniciarIdentity = async () => {
     const modulo = await import('netlify-identity-widget')
-    modulo.default.init()
-  }
-
+    modulo.default.init({
+    APIUrl: 'https://propertyadvisers-pr.com/ .netlify/identity',
+  })
+ 
   iniciarIdentity()
 }, [])
   
