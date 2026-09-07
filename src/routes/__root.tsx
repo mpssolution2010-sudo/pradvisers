@@ -1,5 +1,5 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
+import { useEffect } from 'react'
 
 import '../styles.css'
 
@@ -27,6 +27,19 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+  const abrirInvitacion = async () => {
+    if (!window.location.hash.includes('invite_token=')) return
+
+    const modulo = await import('netlify-identity-widget')
+    const netlifyIdentity = modulo.default
+
+    netlifyIdentity.init()
+    netlifyIdentity.open('signup')
+  }
+
+  abrirInvitacion()
+}, [])
   return (
     <html lang="es">
       <head>
