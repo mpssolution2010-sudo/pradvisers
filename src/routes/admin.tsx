@@ -100,7 +100,9 @@ const casosActivos = casosCargados.filter(
 ).length
 
 const casosConPendientes = casosCargados.filter(
-  (caso) => caso.pendientes > 0,
+  (caso) =>
+    caso.estado !== 'Completado' &&
+    caso.pendientes > 0,
 ).length
 
 const casosCompletados = casosCargados.filter(
