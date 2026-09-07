@@ -39,7 +39,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 useEffect(() => {
   const iniciarIdentity = async () => {
     try {
+const inviteToken = new URLSearchParams(
+  window.location.hash.substring(1),
+).get('invite_token')
 
+if (inviteToken) {
+  localStorage.setItem('invite_token', inviteToken)
+  setEsInvitacion(true)
+  setRecuperandoPassword(true)
+  return
+}
       const resultado = await handleAuthCallback()
       
       if (resultado?.type === 'invite') {
