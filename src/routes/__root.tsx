@@ -31,14 +31,19 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 useEffect(() => {
   const iniciarIdentity = async () => {
     const modulo = await import('netlify-identity-widget')
+    const netlifyIdentity = modulo.default
 
-    modulo.default.init({
+    netlifyIdentity.init({
       APIUrl: 'https://propertyadvisers-pr.com/.netlify/identity',
     })
+
+    if (window.location.hash.includes('recovery_token=')) {
+      netlifyIdentity.open('recovery')
+    }
   }
 
   iniciarIdentity()
-}, [])  
+}, [])
   
   return (
     <html lang="es">
