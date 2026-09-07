@@ -12,37 +12,49 @@ function AdminPage() {
 
   const [usuarioAdmin, setUsuarioAdmin] = useState<any>(null)
   const [verificandoAcceso, setVerificandoAcceso] = useState(true)
+
   useEffect(() => {
   let activo = true
 
-  const prepararIdentity = async () => {
-    const modulo = await import('netlify-identity-widget')
-    const netlifyIdentity = modulo.default
+  const verificarUsuario = (usuario: any) => {
+    if (!activo) return
 
-    const verificarUsuario = (usuario: any) => {
-      if (!activo) return
+    const roles = usuario?.app_metadata?.roles ?? []
 
-      const roles = usuario?.app_metadata?.roles ?? []
-
-      if (usuario && roles.includes('admin')) {
-        setUsuarioAdmin(usuario)
-      } else {
-        setUsuarioAdmin(null)
-      }
-
-      setVerificandoAcceso(false)
+    if (usuario && roles.includes('admin')) {
+      setUsuarioAdmin(usuario)
+    } else {
+      setUsuarioAdmin(null)
     }
 
-    netlifyIdentity.on('init', verificarUsuario)
-    netlifyIdentity.on('login', verificarUsuario)
+    setVerificandoAcceso(false)
+  }
 
-    netlifyIdentity.on('logout', () => {
-      if (!activo) return
-      setUsuarioAdmin(null)
-      setVerificandoAcceso(false)
-    })
+  const prepararIdentity = async () => {
+    try {
+      const modulo = await import('netlify-identity-widget')
+      const netlifyIdentity = modulo.default
 
-    netlifyIdentity.init()
+      netlifyIdentity.on('login', (usuario: any) => {
+        verificarUsuario(usuario)
+        netlifyIdentity.close()
+      })
+
+      netlifyIdentity.on('logout', () => {
+        verificarUsuario(null)
+      })
+
+      netlifyIdentity.init()
+
+      verificarUsuario(netlifyIdentity.currentUser())
+    } catch (error) {
+      console.error('Error iniciando Netlify Identity:', error)
+
+      if (activo) {
+        setUsuarioAdmin(null)
+        setVerificandoAcceso(false)
+      }
+    }
   }
 
   prepararIdentity()
@@ -57,6 +69,7 @@ function AdminPage() {
   modulo.default.open('login')
 }  
 const [casosCargados, setCasosCargados] = useState<any[]>([])
+ 
   useEffect(() => {
   const cargarCasos = async () => {
     try {
