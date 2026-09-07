@@ -1,6 +1,10 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import { handleAuthCallback, updateUser } from '@netlify/identity'
+import {
+  acceptInvite,
+  handleAuthCallback,
+  updateUser,
+} from '@netlify/identity'
 
 import '../styles.css'
 
@@ -30,12 +34,19 @@ export const Route = createRootRoute({
 function RootDocument({ children }: { children: React.ReactNode }) {
   const [recuperandoPassword, setRecuperandoPassword] = useState(false)
   const [nuevaPassword, setNuevaPassword] = useState('')
+  const [esInvitacion, setEsInvitacion] = useState(false)
   
 useEffect(() => {
   const iniciarIdentity = async () => {
     try {
 
       const resultado = await handleAuthCallback()
+      
+      if (resultado?.type === 'invite') {
+  localStorage.setItem('invite_token', resultado.token)
+  setEsInvitacion(true)
+  setRecuperandoPassword(true)
+}
 
 alert(
   resultado
@@ -63,9 +74,16 @@ if (resultado?.type === 'recovery') {
 
   const guardarNuevaPassword = async () => {
   try {
-    await updateUser({
-      password: nuevaPassword,
-    })
+    const inviteToken = localStorage.getItem('invite_token')
+
+if (inviteToken) {
+  await acceptInvite(inviteToken, nuevaPassword)
+  localStorage.removeItem('invite_token')
+} else {
+  await updateUser({
+    password: nuevaPassword,
+  })
+}
 
     alert('Contraseña actualizada correctamente.')
     setRecuperandoPassword(false)
@@ -90,9 +108,11 @@ if (resultado?.type === 'recovery') {
         Property Advisers Real Estate
       </p>
 
-      <h2 className="mt-2 text-2xl font-black text-[#071a32]">
-        Crear nueva contraseña
-      </h2>
+  <h2 className="mt-2 text-2xl font-black text-[#071a32]">
+  {esInvitacion
+    ? 'Crear contraseña de acceso'
+    : 'Crear nueva contraseña'}
+</h2>
 
       <input
         type="password"
