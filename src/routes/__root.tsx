@@ -71,12 +71,6 @@ const resultado = await handleAuthCallback()
   setRecuperandoPassword(true)
 }
 
-alert(
-  resultado
-    ? `Identity detectó: ${resultado.type}`
-    : 'Identity no detectó ningún callback',
-)
-
 if (resultado?.type === 'recovery') {
   setRecuperandoPassword(true)
 }
