@@ -34,6 +34,8 @@ export const Route = createRootRoute({
 function RootDocument({ children }: { children: React.ReactNode }) {
   const [recuperandoPassword, setRecuperandoPassword] = useState(false)
   const [nuevaPassword, setNuevaPassword] = useState('')
+  const [confirmarPassword, setConfirmarPassword] = useState('')
+  const [mostrarPassword, setMostrarPassword] = useState(false)
   const [esInvitacion, setEsInvitacion] = useState(false)
   
 useEffect(() => {
@@ -82,6 +84,10 @@ if (resultado?.type === 'recovery') {
 }, [])
 
   const guardarNuevaPassword = async () => {
+    if (nuevaPassword !== confirmarPassword) {
+  alert('Las contraseñas no coinciden.')
+  return
+}
   try {
     const inviteToken = localStorage.getItem('invite_token')
 
@@ -124,12 +130,28 @@ if (inviteToken) {
 </h2>
 
       <input
-        type="password"
+        type={mostrarPassword ? 'text' : 'password'}
         value={nuevaPassword}
         onChange={(event) => setNuevaPassword(event.target.value)}
         placeholder="Nueva contraseña"
         className="mt-5 w-full rounded-xl border border-gray-300 px-4 py-3"
       />
+      
+       <button
+  type="button"
+  onClick={() => setMostrarPassword((valor) => !valor)}
+  className="mt-2 text-sm font-bold text-[#071a32]"
+>
+  {mostrarPassword ? 'OCULTAR CONTRASEÑA' : 'VER CONTRASEÑA'}
+</button>
+      
+      <input
+  type={mostrarPassword ? 'text' : 'password'}
+  value={confirmarPassword}
+  onChange={(event) => setConfirmarPassword(event.target.value)}
+  placeholder="Confirmar contraseña"
+  className="mt-4 w-full rounded-xl border border-gray-300 px-4 py-3"
+/>
 
       <button
         type="button"
