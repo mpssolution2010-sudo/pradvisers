@@ -98,10 +98,10 @@ if (inviteToken) {
     setRecuperandoPassword(false)
     setNuevaPassword('')
     window.location.href = '/admin'
-  } catch (error) {
-    console.error('Error actualizando contraseña:', error)
-    alert('No se pudo actualizar la contraseña.')
-  }
+} catch (error) {
+  console.error('Error actualizando contraseña:', error)
+  alert(`Error al crear contraseña: ${String(error)}`)
+}
 }
   
   return (
