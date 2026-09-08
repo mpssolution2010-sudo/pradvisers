@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import {
   acceptInvite,
   handleAuthCallback,
+  recoverPassword,
   updateUser,
 } from '@netlify/identity'
 
@@ -51,7 +52,18 @@ if (inviteToken) {
   setRecuperandoPassword(true)
   return
 }
-      const resultado = await handleAuthCallback()
+const recoveryToken = new URLSearchParams(
+  window.location.hash.substring(1),
+).get('recovery_token')
+
+if (recoveryToken) {
+  localStorage.setItem('recovery_token', recoveryToken)
+  setEsInvitacion(false)
+  setRecuperandoPassword(true)
+  return
+}
+const resultado = await handleAuthCallback()
+
       
       if (resultado?.type === 'invite') {
   localStorage.setItem('invite_token', resultado.token)
@@ -89,17 +101,20 @@ if (resultado?.type === 'recovery') {
   return
 }
   try {
-    const inviteToken = localStorage.getItem('invite_token')
+  const inviteToken = localStorage.getItem('invite_token')
+const recoveryToken = localStorage.getItem('recovery_token')
 
 if (inviteToken) {
   await acceptInvite(inviteToken, nuevaPassword)
   localStorage.removeItem('invite_token')
+} else if (recoveryToken) {
+  await recoverPassword(recoveryToken, nuevaPassword)
+  localStorage.removeItem('recovery_token')
 } else {
   await updateUser({
     password: nuevaPassword,
   })
 }
-
     alert('Contraseña actualizada correctamente.')
     setRecuperandoPassword(false)
     setNuevaPassword('')
