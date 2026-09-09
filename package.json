@@ -4,16 +4,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000",
-    "build": "vite build"
+    "build": "npx @tanstack/router-cli@1.167.21 generate && vite build"
   },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.0.6",
-    "@tanstack/react-router": "1.168.22",
+  
+"dependencies": {
+  "@netlify/blobs": "^10.0.0",
+  "@netlify/identity": "^2.0.0",
+  "@tailwindcss/vite": "^4.0.6",
+  "@tanstack/react-router": "1.168.22",    
     "@tanstack/react-start": "1.167.41",
     "@tanstack/react-store": "0.10.0",
     "@tanstack/router-plugin": "1.167.22",
     "@tanstack/store": "0.10.0",
     "lucide-react": "^0.576.0",
+    "netlify-identity-widget": "^2.0.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.0.6",
