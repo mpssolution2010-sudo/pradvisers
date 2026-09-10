@@ -10,6 +10,7 @@ function AdminCasoPage() {
   const { numeroCaso } = Route.useParams()
   const [caso, setCaso] = useState<any>(null)
   const [clienteEditado, setClienteEditado] = useState('')
+  const [emailCliente, setEmailCliente] = useState('')
   const [tipoEditado, setTipoEditado] = useState('')
   const [propiedadEditada, setPropiedadEditada] = useState('')
   const [ubicacionEditada, setUbicacionEditada] = useState('')
@@ -31,6 +32,7 @@ function AdminCasoPage() {
     if (casoEncontrado) {
   setCaso(casoEncontrado)
   setClienteEditado(casoEncontrado.cliente ?? '')
+  SetEmailCliente(casoEncontrado.email ?? '')
   setTipoEditado(casoEncontrado.tipo ?? '')
   setPropiedadEditada(casoEncontrado.propiedad ?? '')
   setUbicacionEditada(casoEncontrado.ubicacion ?? '')
@@ -131,6 +133,7 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
         ? {
             ...item,
             cliente: clienteEditado,
+            email: emailCliente,
             tipo: tipoEditado,
             propiedad: propiedadEditada,
             ubicacion: ubicacionEditada,
@@ -158,6 +161,7 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
     setCaso((casoActual: any) => ({
       ...casoActual,
       cliente: clienteEditado,
+      email: emailCliente,
       tipo: tipoEditado,
       propiedad: propiedadEditada,
       ubicacion: ubicacionEditada,
@@ -212,13 +216,56 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
       return
     }
 
-   setMensajeGuardado('Configuración guardada correctamente.')
+setMensajeGuardado('Configuración guardada correctamente.')
 setTimeout(() => setMensajeGuardado(''), 3000)
   } catch (error) {
     console.error('Error guardando configuración:', error)
     alert('No se pudo guardar la configuración.')
   }
 };
+  const enviarSolicitudDocumentos = async () => {
+  const documentosSeleccionados = Object.entries(documentosRequeridos)
+    .filter(([, requerido]) => requerido)
+    .map(([documento]) => documento)
+
+  if (!emailCliente) {
+    alert('Escribe el email del cliente antes de enviar la solicitud.')
+    return
+  }
+
+  if (documentosSeleccionados.length === 0) {
+    alert('Selecciona al menos un documento.')
+    return
+  }
+
+  try {
+    const response = await fetch('/api/solicitud-documentos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        emailCliente,
+        nombreCliente: clienteEditado,
+        numeroCaso,
+        mensajeCliente,
+        documentos: documentosSeleccionados,
+      }),
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      alert(data.error ?? 'No se pudo enviar la solicitud.')
+      return
+    }
+
+    alert('Solicitud de documentos enviada correctamente.')
+  } catch (error) {
+    console.error('Error enviando solicitud:', error)
+    alert('No se pudo enviar la solicitud.')
+  }
+}
   const [mensajeGuardado, setMensajeGuardado] = useState('')
   const totalRequeridos = Object.values(documentosRequeridos).filter(Boolean).length
 
@@ -288,6 +335,19 @@ const totalPendientes = totalRequeridos - totalRecibidos
       className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3"
     />
   </div>
+
+    <div>
+  <label className="text-xs font-black uppercase tracking-wide text-gray-500">
+    Email del cliente
+  </label>
+  <input
+    type="email"
+    value={emailCliente}
+    onChange={(event) => setEmailCliente(event.target.value)}
+    placeholder="cliente@email.com"
+    className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3"
+  />
+</div>
 
   <div>
     <label className="text-xs font-black uppercase tracking-wide text-gray-500">
@@ -491,6 +551,15 @@ const totalPendientes = totalRequeridos - totalRecibidos
   className="mt-6 rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white"
 >
   GUARDAR CAMBIOS
+</button>
+
+<button
+  type="button"
+  onClick={enviarSolicitudDocumentos}
+  className="mt-3 rounded-xl bg-[#c9a646] px-5 py-3 text-sm font-black text-[#071a32]"
+>
+  ENVIAR SOLICITUD DE DOCUMENTOS
+  
 </button>
 
 </section>
