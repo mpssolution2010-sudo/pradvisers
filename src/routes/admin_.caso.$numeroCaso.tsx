@@ -255,10 +255,12 @@ setTimeout(() => setMensajeGuardado(''), 3000)
 
     const data = await response.json()
 
-    if (!response.ok) {
-      alert(data.error ?? 'No se pudo enviar la solicitud.')
-      return
-    }
+  if (!response.ok) {
+  alert(
+    `${data.error ?? 'No se pudo enviar la solicitud.'}\n\n${JSON.stringify(data.detalle ?? data)}`
+  )
+  return
+}
 
     alert('Solicitud de documentos enviada correctamente.')
   } catch (error) {
