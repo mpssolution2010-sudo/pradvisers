@@ -263,10 +263,10 @@ setTimeout(() => setMensajeGuardado(''), 3000)
 }
 
     alert('Solicitud de documentos enviada correctamente.')
-  } catch (error) {
-    console.error('Error enviando solicitud:', error)
-    alert('No se pudo enviar la solicitud.')
-  }
+    
+} catch (error) {
+  console.error('Error enviando solicitud:', error)
+ alert(`Error enviando solicitud:\n\n${String(error)}`)
 }
   const [mensajeGuardado, setMensajeGuardado] = useState('')
   const totalRequeridos = Object.values(documentosRequeridos).filter(Boolean).length
