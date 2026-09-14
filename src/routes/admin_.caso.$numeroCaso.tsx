@@ -11,6 +11,7 @@ function AdminCasoPage() {
   const [caso, setCaso] = useState<any>(null)
   const [clienteEditado, setClienteEditado] = useState('')
   const [emailCliente, setEmailCliente] = useState('')
+  const [mensajeCliente, setMensajeCliente] = useState('')
   const [tipoEditado, setTipoEditado] = useState('')
   const [propiedadEditada, setPropiedadEditada] = useState('')
   const [ubicacionEditada, setUbicacionEditada] = useState('')
