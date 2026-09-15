@@ -17,6 +17,10 @@ function AdminCasoPage() {
   const [ubicacionEditada, setUbicacionEditada] = useState('')
   const [progresoEditado, setProgresoEditado] = useState(0)
   const [estadoEditado, setEstadoEditado] = useState('Caso activo')
+  const [fotosGaleria, setFotosGaleria] = useState<any[]>([])
+const [fotosSeleccionadas, setFotosSeleccionadas] = useState<File[]>([])
+const [subiendoFotos, setSubiendoFotos] = useState(false)
+  
   useEffect(() => {
   const cargarCaso = async () => {
     try {
@@ -48,6 +52,158 @@ function AdminCasoPage() {
   cargarCaso()
 }, [numeroCaso])
 
+  useEffect(() => {
+  const cargarGaleria = async () => {
+    try {
+      const response = await fetch(
+        `/api/foto-propiedad?numero-caso=${encodeURIComponent(
+          numeroCaso,
+        )}&accion=galeria`,
+      )
+
+      if (!response.ok) {
+        setFotosGaleria([])
+        return
+      }
+
+      const data = await response.json()
+      setFotosGaleria(data.fotos ?? [])
+    } catch (error) {
+      console.error('Error cargando galería:', error)
+      setFotosGaleria([])
+    }
+  }
+
+  cargarGaleria()
+}, [numeroCaso])
+
+  const subirFotosGaleria = async () => {
+  if (fotosSeleccionadas.length === 0) {
+    alert('Selecciona al menos una foto.')
+    return
+  }
+
+    const marcarFotoPrincipal = async (id: string) => {
+    const eliminarFotoGaleria = async (id: string) => {
+  const confirmar = window.confirm(
+    '¿Seguro que deseas eliminar esta foto?',
+  )
+
+  if (!confirmar) return
+
+  try {
+    const response = await fetch(
+      `/api/foto-propiedad?numero-caso=${encodeURIComponent(
+        numeroCaso,
+      )}&id=${encodeURIComponent(id)}`,
+      {
+        method: 'DELETE',
+      },
+    )
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      alert(data.error ?? 'No se pudo eliminar la foto.')
+      return
+    }
+
+    const responseGaleria = await fetch(
+      `/api/foto-propiedad?numero-caso=${encodeURIComponent(
+        numeroCaso,
+      )}&accion=galeria`,
+    )
+
+    const dataGaleria = await responseGaleria.json()
+
+    setFotosGaleria(dataGaleria.fotos ?? [])
+
+    alert('Foto eliminada correctamente.')
+  } catch (error) {
+    console.error('Error eliminando foto:', error)
+    alert('No se pudo eliminar la foto.')
+  }
+}
+  try {
+    const response = await fetch('/api/foto-propiedad', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        numeroCaso,
+        id,
+      }),
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      alert(data.error ?? 'No se pudo cambiar la foto principal.')
+      return
+    }
+
+    setFotosGaleria((fotos) =>
+      fotos.map((foto) => ({
+        ...foto,
+        principal: foto.id === id,
+      })),
+    )
+
+    alert('Foto principal actualizada.')
+  } catch (error) {
+    console.error('Error cambiando foto principal:', error)
+    alert('No se pudo cambiar la foto principal.')
+  }
+}
+
+  if (fotosGaleria.length + fotosSeleccionadas.length > 30) {
+    alert('El expediente puede tener un máximo de 30 fotos.')
+    return
+  }
+
+  setSubiendoFotos(true)
+
+  try {
+    for (const foto of fotosSeleccionadas) {
+      const formData = new FormData()
+
+      formData.append('numero-caso', numeroCaso)
+      formData.append('foto', foto)
+
+      const response = await fetch('/api/foto-propiedad', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        alert(data.error ?? 'No se pudo subir una de las fotos.')
+        return
+      }
+    }
+
+    const responseGaleria = await fetch(
+      `/api/foto-propiedad?numero-caso=${encodeURIComponent(
+        numeroCaso,
+      )}&accion=galeria`,
+    )
+
+    const dataGaleria = await responseGaleria.json()
+
+    setFotosGaleria(dataGaleria.fotos ?? [])
+    setFotosSeleccionadas([])
+
+    alert('Fotos añadidas correctamente.')
+  } catch (error) {
+    console.error('Error subiendo fotos:', error)
+    alert('No se pudieron subir las fotos.')
+  } finally {
+    setSubiendoFotos(false)
+  }
+}
+  
   const [documentosRequeridos, setDocumentosRequeridos] = useState<
   Record<string, boolean>
 >({
@@ -438,6 +594,119 @@ const totalPendientes = totalRequeridos - totalRecibidos
           </section>
         </div>
 
+        <section className="mt-6 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#c9a646]">
+    Galería de la propiedad
+  </p>
+
+  <h2 className="mt-2 text-xl font-black text-[#071a32]">
+    Fotos del expediente
+  </h2>
+
+  <p className="mt-2 text-sm text-gray-600">
+    Puedes guardar hasta 30 fotos.
+  </p>
+
+  <input
+    type="file"
+    accept="image/*"
+    multiple
+    onChange={(event) =>
+      setFotosSeleccionadas(
+        Array.from(event.target.files ?? []),
+      )
+    }
+    className="mt-4 w-full rounded-xl border border-gray-300 bg-white px-4 py-3"
+  />
+
+  <button
+    type="button"
+    onClick={subirFotosGaleria}
+    disabled={subiendoFotos}
+    className="mt-4 rounded-xl bg-[#c9a646] px-5 py-3 text-sm font-black text-[#071a32] disabled:opacity-50"
+  >
+    {subiendoFotos ? 'SUBIENDO FOTOS...' : 'SUBIR FOTOS'}
+  </button>
+
+{fotosGaleria.length > 0 && (
+  <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {fotosGaleria.map((foto) => (
+      <div
+        key={foto.id}
+        className="overflow-hidden rounded-2xl border border-gray-200 bg-white"
+      >
+        <img
+          src={foto.url}
+          alt="Foto de la propiedad"
+          className="h-40 w-full object-cover"
+        />
+
+        <div className="p-3">
+          {foto.principal ? (
+            <p className="text-xs font-black uppercase text-[#c9a646]">
+              Foto principal
+            </p>
+          ) : (
+            <button
+              type="button"
+              onClick={() => marcarFotoPrincipal(foto.id)}
+              className="text-xs font-black text-[#071a32]"
+            >
+              HACER PRINCIPAL
+            </button>
+          )}
+
+          <button
+            type="button"
+            onClick={() => eliminarFotoGaleria(foto.id)}
+            className="mt-3 block text-xs font-black text-red-600"
+          >
+            ELIMINAR
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+
+  <p className="mt-3 text-sm text-gray-500">
+    {fotosGaleria.length} de 30 fotos guardadas
+  </p>
+</section>
+
+        <section className="mt-6 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#c9a646]">
+    Galería de la propiedad
+  </p>
+
+  <h2 className="mt-2 text-2xl font-black text-[#071a32]">
+    Fotos del expediente
+  </h2>
+
+  <p className="mt-2 text-sm text-gray-600">
+    {fotosGaleria.length} de 30 fotos
+  </p>
+
+  <input
+    type="file"
+    accept="image/*"
+    multiple
+    onChange={(event) => {
+      const archivos = Array.from(event.target.files ?? [])
+      setFotosSeleccionadas(archivos)
+    }}
+    className="mt-5 w-full rounded-xl border border-gray-300 bg-white px-4 py-3"
+  />
+
+  <button
+    type="button"
+    onClick={subirFotosGaleria}
+    disabled={subiendoFotos || fotosSeleccionadas.length === 0}
+    className="mt-4 rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white disabled:opacity-50"
+  >
+    {subiendoFotos ? 'SUBIENDO FOTOS...' : 'SUBIR FOTOS'}
+  </button>
+</section>        
         <section className="mt-6 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
           <p className="text-xs font-black uppercase tracking-[0.2em] text-[#c9a646]">
             Documentos
