@@ -60,7 +60,7 @@ export default async (req: Request, _context: Context) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Property Advisers Real Estate <onboarding@resend.dev>',
+        from: 'Property Advisers Real Estate <documentos@propertyadvisers-pr.com>',
         to: [emailCliente],
         subject: `Documentos requeridos – ${numeroCaso}`,
         html: `
