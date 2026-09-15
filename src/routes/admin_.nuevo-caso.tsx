@@ -43,6 +43,28 @@ function NuevoCasoPage() {
       return
     }
 
+    let fotoUrl = ''
+
+if (fotoPropiedad) {
+  const formData = new FormData()
+
+  formData.append('numero-caso', numero)
+  formData.append('foto', fotoPropiedad)
+
+  const responseFoto = await fetch('/api/foto-propiedad', {
+    method: 'POST',
+    body: formData,
+  })
+
+  const dataFoto = await responseFoto.json()
+
+  if (!responseFoto.ok) {
+    alert(dataFoto.error ?? 'No se pudo guardar la foto de la propiedad.')
+    return
+  }
+
+  fotoUrl = dataFoto.url
+}
     const nuevoCaso = {
       numero,
       cliente,
@@ -51,6 +73,7 @@ function NuevoCasoPage() {
       ubicacion,
       estado,
       progreso,
+      fotoPropiedad: fotoUrl,
       pendientes: 0,
     }
 
