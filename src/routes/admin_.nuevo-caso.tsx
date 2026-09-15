@@ -13,6 +13,8 @@ function NuevoCasoPage() {
   const [ubicacion, setUbicacion] = useState('')
   const [estado, setEstado] = useState('Caso activo')
   const [progreso, setProgreso] = useState(0)
+  const [fotoPropiedad, setFotoPropiedad] = useState<File | null>(null)
+  
   const crearExpediente = async () => {
   try {
     if (!numero || !cliente || !tipo || !propiedad || !ubicacion) {
@@ -146,6 +148,28 @@ function NuevoCasoPage() {
                 className="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3"
               />
             </div>
+
+            </div>
+
+<div>
+  <label className="text-sm font-black text-[#071a32]">
+    Foto de la propiedad
+  </label>
+
+  <input
+    type="file"
+    accept="image/*"
+    onChange={(event) =>
+      setFotoPropiedad(event.target.files?.[0] ?? null)
+    }
+    className="mt-2 w-full rounded-xl border border-gray-300 bg-white px-4 py-3"
+  />
+</div>
+
+<div>
+  <label className="text-sm font-black text-[#071a32]">
+    Ubicación
+  </label>
 
             <div>
               <label className="text-sm font-black text-[#071a32]">
