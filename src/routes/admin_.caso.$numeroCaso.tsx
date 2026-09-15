@@ -315,6 +315,16 @@ const totalPendientes = totalRequeridos - totalRecibidos
             <p className="mt-1 text-sm text-gray-500">
                {caso?.ubicacion ?? 'cargando...'}
             </p>
+
+            {caso?.fotoPropiedad && (
+  <div className="mt-6 overflow-hidden rounded-2xl border border-gray-200">
+    <img
+      src={caso.fotoPropiedad}
+      alt={`Propiedad de ${caso.cliente}`}
+      className="h-64 w-full object-cover"
+    />
+  </div>
+)}
           </section>
 
 <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
