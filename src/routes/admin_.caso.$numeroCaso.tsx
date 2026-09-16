@@ -83,79 +83,7 @@ const [subiendoFotos, setSubiendoFotos] = useState(false)
     return
   }
 
-    const marcarFotoPrincipal = async (id: string) => {
-    const eliminarFotoGaleria = async (id: string) => {
-  const confirmar = window.confirm(
-    '¿Seguro que deseas eliminar esta foto?',
-  )
-
-  if (!confirmar) return
-
-  try {
-    const response = await fetch(
-      `/api/foto-propiedad?numero-caso=${encodeURIComponent(
-        numeroCaso,
-      )}&id=${encodeURIComponent(id)}`,
-      {
-        method: 'DELETE',
-      },
-    )
-
-    const data = await response.json()
-
-    if (!response.ok) {
-      alert(data.error ?? 'No se pudo eliminar la foto.')
-      return
-    }
-
-    const responseGaleria = await fetch(
-      `/api/foto-propiedad?numero-caso=${encodeURIComponent(
-        numeroCaso,
-      )}&accion=galeria`,
-    )
-
-    const dataGaleria = await responseGaleria.json()
-
-    setFotosGaleria(dataGaleria.fotos ?? [])
-
-    alert('Foto eliminada correctamente.')
-  } catch (error) {
-    console.error('Error eliminando foto:', error)
-    alert('No se pudo eliminar la foto.')
-  }
-}
-  try {
-    const response = await fetch('/api/foto-propiedad', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        numeroCaso,
-        id,
-      }),
-    })
-
-    const data = await response.json()
-
-    if (!response.ok) {
-      alert(data.error ?? 'No se pudo cambiar la foto principal.')
-      return
-    }
-
-    setFotosGaleria((fotos) =>
-      fotos.map((foto) => ({
-        ...foto,
-        principal: foto.id === id,
-      })),
-    )
-
-    alert('Foto principal actualizada.')
-  } catch (error) {
-    console.error('Error cambiando foto principal:', error)
-    alert('No se pudo cambiar la foto principal.')
-  }
-}
+   
 
   if (fotosGaleria.length + fotosSeleccionadas.length > 30) {
     alert('El expediente puede tener un máximo de 30 fotos.')
@@ -203,8 +131,82 @@ const [subiendoFotos, setSubiendoFotos] = useState(false)
     setSubiendoFotos(false)
   }
 }
+  const marcarFotoPrincipal = async (id: string) => {
+  try {
+    const response = await fetch('/api/foto-propiedad', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        numeroCaso,
+        id,
+      }),
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      alert(data.error ?? 'No se pudo cambiar la foto principal.')
+      return
+    }
+
+    setFotosGaleria((fotos) =>
+      fotos.map((foto) => ({
+        ...foto,
+        principal: foto.id === id,
+      })),
+    )
+
+    alert('Foto principal actualizada.')
+  } catch (error) {
+    console.error('Error cambiando foto principal:', error)
+    alert('No se pudo cambiar la foto principal.')
+  }
+}
+
+const eliminarFotoGaleria = async (id: string) => {
+  const confirmar = window.confirm(
+    '¿Seguro que deseas eliminar esta foto?',
+  )
+
+  if (!confirmar) return
+
+  try {
+    const response = await fetch(
+      `/api/foto-propiedad?numero-caso=${encodeURIComponent(
+        numeroCaso,
+      )}&id=${encodeURIComponent(id)}`,
+      {
+        method: 'DELETE',
+      },
+    )
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      alert(data.error ?? 'No se pudo eliminar la foto.')
+      return
+    }
+
+    const responseGaleria = await fetch(
+      `/api/foto-propiedad?numero-caso=${encodeURIComponent(
+        numeroCaso,
+      )}&accion=galeria`,
+    )
+
+    const dataGaleria = await responseGaleria.json()
+
+    setFotosGaleria(dataGaleria.fotos ?? [])
+
+    alert('Foto eliminada correctamente.')
+  } catch (error) {
+    console.error('Error eliminando foto:', error)
+    alert('No se pudo eliminar la foto.')
+  }
+}
   
-  const [documentosRequeridos, setDocumentosRequeridos] = useState<
+}  const [documentosRequeridos, setDocumentosRequeridos] = useState<
   Record<string, boolean>
 >({
   'Contrato de opción': true,
@@ -217,6 +219,7 @@ const [subiendoFotos, setSubiendoFotos] = useState(false)
   'Declaratoria de herederos': false,
   'Caudal relicto': false,
 })
+  
 const [documentosRecibidos, setDocumentosRecibidos] = useState<
   Record<string, boolean>
 >({})
