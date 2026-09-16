@@ -204,6 +204,7 @@ const eliminarFotoGaleria = async (id: string) => {
     console.error('Error eliminando foto:', error)
     alert('No se pudo eliminar la foto.')
   }
+  } 
   
   const [documentosRequeridos, setDocumentosRequeridos] = useState<
   Record<string, boolean>
