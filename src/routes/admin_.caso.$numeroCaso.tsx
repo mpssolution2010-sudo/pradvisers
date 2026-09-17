@@ -282,6 +282,75 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
 
   cargarDocumentosRecibidos()
 }, [numeroCaso])
+
+  const subirArchivosExpediente = async () => {
+  if (archivosSeleccionados.length === 0) {
+    alert('Selecciona al menos un documento.')
+    return
+  }
+
+ useEffect(() => {
+  const cargarArchivosExpediente = async () => {
+    try {
+      const response = await fetch(
+        `/api/archivo-expediente?numero-caso=${encodeURIComponent(numeroCaso)}`,
+      )
+
+      if (!response.ok) {
+        setArchivosExpediente([])
+        return
+      }
+
+      const data = await response.json()
+      setArchivosExpediente(data.archivos ?? [])
+    } catch (error) {
+      console.error('Error cargando archivos del expediente:', error)
+      setArchivosExpediente([])
+    }
+  }
+
+  cargarArchivosExpediente()
+}, [numeroCaso])
+  setSubiendoArchivos(true)
+
+  try {
+    for (const archivo of archivosSeleccionados) {
+      const formData = new FormData()
+
+      formData.append('numero-caso', numeroCaso)
+      formData.append('archivo', archivo)
+
+      const response = await fetch('/api/archivo-expediente', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        alert(data.error ?? 'No se pudo subir uno de los documentos.')
+        return
+      }
+    }
+
+    const responseArchivos = await fetch(
+      `/api/archivo-expediente?numero-caso=${encodeURIComponent(numeroCaso)}`,
+    )
+
+    const dataArchivos = await responseArchivos.json()
+
+    setArchivosExpediente(dataArchivos.archivos ?? [])
+    setArchivosSeleccionados([])
+
+    alert('Documentos guardados correctamente.')
+  } catch (error) {
+    console.error('Error subiendo documentos:', error)
+    alert('No se pudieron subir los documentos.')
+  } finally {
+    setSubiendoArchivos(false)
+  }
+}
+  
   const guardarDatosExpediente = async () => {
   try {
     const responseActual = await fetch('/api/casos')
@@ -639,6 +708,7 @@ const totalPendientes = totalRequeridos - totalRecibidos
 
   <button
     type="button"
+    onClick={SubirArchivosExpedientes}
     disabled={subiendoArchivos || archivosSeleccionados.length === 0}
     className="mt-4 rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white disabled:opacity-50"
   >
