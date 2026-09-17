@@ -475,11 +475,14 @@ const totalPendientes = totalRequeridos - totalRecibidos
                {caso?.ubicacion ?? 'cargando...'}
             </p>
 
-            {caso?.fotoPropiedad && (
+           {(fotosGaleria.find((foto) => foto.principal)?.url || caso?.fotoPropiedad) && (
   <div className="mt-6 overflow-hidden rounded-2xl border border-gray-200">
     <img
-      src={caso.fotoPropiedad}
-      alt={`Propiedad de ${caso.cliente}`}
+      src={
+        fotosGaleria.find((foto) => foto.principal)?.url ||
+        caso?.fotoPropiedad
+      }
+      alt={`Propiedad de ${caso?.cliente ?? 'cliente'}`}
       className="h-64 w-full object-cover"
     />
   </div>
