@@ -289,31 +289,9 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
     return
   }
 
- useEffect(() => {
-  const cargarArchivosExpediente = async () => {
-    try {
-      const response = await fetch(
-        `/api/archivo-expediente?numero-caso=${encodeURIComponent(numeroCaso)}`,
-      )
-
-      if (!response.ok) {
-        setArchivosExpediente([])
-        return
-      }
-
-      const data = await response.json()
-      setArchivosExpediente(data.archivos ?? [])
-    } catch (error) {
-      console.error('Error cargando archivos del expediente:', error)
-      setArchivosExpediente([])
-    }
-  }
-
-  cargarArchivosExpediente()
-}, [numeroCaso])
   setSubiendoArchivos(true)
-
-  try {
+    
+    try {
     for (const archivo of archivosSeleccionados) {
       const formData = new FormData()
 
@@ -350,6 +328,88 @@ const [documentosRecibidos, setDocumentosRecibidos] = useState<
     setSubiendoArchivos(false)
   }
 }
+ useEffect(() => {
+  const cargarArchivosExpediente = async () => {
+    try {
+      const response = await fetch(
+        `/api/archivo-expediente?numero-caso=${encodeURIComponent(numeroCaso)}`,
+      )
+
+      if (!response.ok) {
+        setArchivosExpediente([])
+        return
+      }
+
+      const data = await response.json()
+      setArchivosExpediente(data.archivos ?? [])
+    } catch (error) {
+      console.error('Error cargando archivos del expediente:', error)
+      setArchivosExpediente([])
+    }
+  }
+
+  cargarArchivosExpediente()
+}, [numeroCaso])
+  const guardarNotaCaso = async () => {
+  if (notaNueva.trim() === '') {
+    alert('Escribe una nota antes de guardar.')
+    return
+  }
+
+  setGuardandoNota(true)
+
+  try {
+    const response = await fetch('/api/notas-expediente', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        numeroCaso,
+        texto: notaNueva,
+      }),
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      alert(data.error ?? 'No se pudo guardar la nota.')
+      return
+    }
+
+    setNotasCaso((notas) => [data.nota, ...notas])
+    setNotaNueva('')
+
+    alert('Nota guardada correctamente.')
+  } catch (error) {
+    console.error('Error guardando nota:', error)
+    alert('No se pudo guardar la nota.')
+  } finally {
+    setGuardandoNota(false)
+  }
+}
+  useEffect(() => {
+  const cargarNotasCaso = async () => {
+    try {
+      const response = await fetch(
+        `/api/notas-expediente?numero-caso=${encodeURIComponent(numeroCaso)}`,
+      )
+
+      if (!response.ok) {
+        setNotasCaso([])
+        return
+      }
+
+      const data = await response.json()
+      setNotasCaso(data.notas ?? [])
+    } catch (error) {
+      console.error('Error cargando notas del expediente:', error)
+      setNotasCaso([])
+    }
+  }
+
+  cargarNotasCaso()
+}, [numeroCaso])
   
   const guardarDatosExpediente = async () => {
   try {
@@ -754,6 +814,7 @@ const totalPendientes = totalRequeridos - totalRecibidos
 
   <button
     type="button"
+    onClick={guardandoNotaCaso}
     disabled={guardandoNota || notaNueva.trim() === ''}
     className="mt-4 rounded-xl bg-[#c9a646] px-5 py-3 text-sm font-black text-[#071a32] disabled:opacity-50"
   >
