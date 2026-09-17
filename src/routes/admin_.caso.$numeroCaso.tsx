@@ -446,12 +446,34 @@ const totalPendientes = totalRequeridos - totalRecibidos
             Property Advisers Real Estate
           </p>
 
-          <h1 className="mt-2 text-3xl font-black text-[#071a32]">
-            Expediente {numeroCaso}
-          </h1>
+          <header className="border-b border-gray-200 bg-white">
+  <div className="mx-auto flex max-w-7xl items-start justify-between px-6 py-5">
+    <div>
+      <p className="text-xs font-black uppercase tracking-[0.25em] text-[#c9a646]">
+        Property Advisers Real Estate
+      </p>
+
+      <h1 className="mt-2 text-3xl font-black text-[#071a32]">
+        Expediente {numeroCaso}
+      </h1>
+
+      <p className="mt-1 text-sm text-gray-500">
+        Administración interna del caso
+      </p>
+    </div>
+
+    <a
+      href="/admin"
+      className="rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white shadow-sm"
+    >
+      ← REGRESAR AL PANEL
+    </a>
+  </div>
+</header>
+          
 
           <p className="mt-1 text-sm text-gray-500">
-            Administración interna del caso
+       
           </p>
         </div>
       </header>
