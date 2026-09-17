@@ -702,39 +702,7 @@ const totalPendientes = totalRequeridos - totalRecibidos
   </p>
 </section>
 
-        <section className="mt-6 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#c9a646]">
-    Galería de la propiedad
-  </p>
-
-  <h2 className="mt-2 text-2xl font-black text-[#071a32]">
-    Fotos del expediente
-  </h2>
-
-  <p className="mt-2 text-sm text-gray-600">
-    {fotosGaleria.length} de 30 fotos
-  </p>
-
-  <input
-    type="file"
-    accept="image/*"
-    multiple
-    onChange={(event) => {
-      const archivos = Array.from(event.target.files ?? [])
-      setFotosSeleccionadas(archivos)
-    }}
-    className="mt-5 w-full rounded-xl border border-gray-300 bg-white px-4 py-3"
-  />
-
-  <button
-    type="button"
-    onClick={subirFotosGaleria}
-    disabled={subiendoFotos || fotosSeleccionadas.length === 0}
-    className="mt-4 rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white disabled:opacity-50"
-  >
-    {subiendoFotos ? 'SUBIENDO FOTOS...' : 'SUBIR FOTOS'}
-  </button>
-</section>        
+      
         <section className="mt-6 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
           <p className="text-xs font-black uppercase tracking-[0.2em] text-[#c9a646]">
             Documentos
