@@ -483,7 +483,7 @@ const totalPendientes = totalRequeridos - totalRecibidos
         caso?.fotoPropiedad
       }
       alt={`Propiedad de ${caso?.cliente ?? 'cliente'}`}
-      className="h-64 w-full object-cover"
+      className="aspect-square w-full object-cover"
     />
   </div>
 )}
