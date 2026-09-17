@@ -768,7 +768,7 @@ const totalPendientes = totalRequeridos - totalRecibidos
 
   <button
     type="button"
-    onClick={SubirArchivosExpedientes}
+    onClick={subirArchivosExpediente}
     disabled={subiendoArchivos || archivosSeleccionados.length === 0}
     className="mt-4 rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white disabled:opacity-50"
   >
