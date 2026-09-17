@@ -20,6 +20,14 @@ function AdminCasoPage() {
   const [fotosGaleria, setFotosGaleria] = useState<any[]>([])
 const [fotosSeleccionadas, setFotosSeleccionadas] = useState<File[]>([])
 const [subiendoFotos, setSubiendoFotos] = useState(false)
+
+const [archivosExpediente, setArchivosExpediente] = useState<any[]>([])
+const [archivosSeleccionados, setArchivosSeleccionados] = useState<File[]>([])
+const [subiendoArchivos, setSubiendoArchivos] = useState(false)
+
+const [notasCaso, setNotasCaso] = useState<any[]>([])
+const [notaNueva, setNotaNueva] = useState('')
+const [guardandoNota, setGuardandoNota] = useState(false)  
   
   useEffect(() => {
   const cargarCaso = async () => {
@@ -605,6 +613,106 @@ const totalPendientes = totalRequeridos - totalRecibidos
 >
   GUARDAR DATOS DEL EXPEDIENTE
 </button>
+
+<div className="mt-8 border-t border-gray-200 pt-6">
+  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#c9a646]">
+    Archivo del expediente
+  </p>
+
+  <h3 className="mt-2 text-xl font-black text-[#071a32]">
+    Documentos internos
+  </h3>
+
+  <p className="mt-2 text-sm text-gray-600">
+    Guarda documentos PDF y Word relacionados con este caso.
+  </p>
+
+  <input
+    type="file"
+    multiple
+    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    onChange={(event) =>
+      setArchivosSeleccionados(Array.from(event.target.files ?? []))
+    }
+    className="mt-4 w-full rounded-xl border border-gray-300 bg-white px-4 py-3"
+  />
+
+  <button
+    type="button"
+    disabled={subiendoArchivos || archivosSeleccionados.length === 0}
+    className="mt-4 rounded-xl bg-[#071a32] px-5 py-3 text-sm font-black text-white disabled:opacity-50"
+  >
+    {subiendoArchivos ? 'SUBIENDO ARCHIVOS...' : 'SUBIR DOCUMENTOS'}
+  </button>
+
+  <div className="mt-4 space-y-2">
+    {archivosExpediente.length === 0 ? (
+      <p className="text-sm text-gray-500">
+        No hay documentos internos guardados todavía.
+      </p>
+    ) : (
+      archivosExpediente.map((archivo) => (
+        <div
+          key={archivo.id}
+          className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3"
+        >
+          <p className="text-sm font-bold text-[#071a32]">
+            {archivo.nombre}
+          </p>
+        </div>
+      ))
+    )}
+  </div>
+</div>
+
+<div className="mt-8 border-t border-gray-200 pt-6">
+  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#c9a646]">
+    Seguimiento del caso
+  </p>
+
+  <h3 className="mt-2 text-xl font-black text-[#071a32]">
+    Notas del expediente
+  </h3>
+
+  <textarea
+    value={notaNueva}
+    onChange={(event) => setNotaNueva(event.target.value)}
+    placeholder="Escribe una nota sobre lo ocurrido hoy..."
+    rows={5}
+    className="mt-4 w-full rounded-xl border border-gray-300 bg-white px-4 py-3"
+  />
+
+  <button
+    type="button"
+    disabled={guardandoNota || notaNueva.trim() === ''}
+    className="mt-4 rounded-xl bg-[#c9a646] px-5 py-3 text-sm font-black text-[#071a32] disabled:opacity-50"
+  >
+    {guardandoNota ? 'GUARDANDO NOTA...' : 'GUARDAR NOTA'}
+  </button>
+
+  <div className="mt-5 space-y-3">
+    {notasCaso.length === 0 ? (
+      <p className="text-sm text-gray-500">
+        Todavía no hay notas registradas en este expediente.
+      </p>
+    ) : (
+      notasCaso.map((nota) => (
+        <div
+          key={nota.id}
+          className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3"
+        >
+          <p className="text-xs font-bold text-gray-500">
+            {nota.fecha}
+          </p>
+          <p className="mt-1 text-sm text-gray-700">
+            {nota.texto}
+          </p>
+        </div>
+      ))
+    )}
+  </div>
+</div>
+  
 </section>
 
           <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
