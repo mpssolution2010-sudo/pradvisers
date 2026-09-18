@@ -814,7 +814,7 @@ const totalPendientes = totalRequeridos - totalRecibidos
 
   <button
     type="button"
-    onClick={guardandoNotaCaso}
+    onClick={guardarNotaCaso}
     disabled={guardandoNota || notaNueva.trim() === ''}
     className="mt-4 rounded-xl bg-[#c9a646] px-5 py-3 text-sm font-black text-[#071a32] disabled:opacity-50"
   >
