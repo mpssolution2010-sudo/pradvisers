@@ -782,11 +782,11 @@ const totalPendientes = totalRequeridos - totalRecibidos
       </p>
     ) : (
       archivosExpediente.map((archivo) => (
+       
         <div
           key={archivo.id}
           className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3"
         >
-       <div>
   <p className="text-sm font-bold text-[#071a32]">
     {archivo.nombre}
   </p>
