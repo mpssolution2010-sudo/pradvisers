@@ -786,10 +786,20 @@ const totalPendientes = totalRequeridos - totalRecibidos
           key={archivo.id}
           className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3"
         >
-          <p className="text-sm font-bold text-[#071a32]">
-            {archivo.nombre}
-          </p>
-        </div>
+       <div>
+  <p className="text-sm font-bold text-[#071a32]">
+    {archivo.nombre}
+  </p>
+
+  <a
+    href={`/api/archivo-expediente?numero-caso=${encodeURIComponent(numeroCaso)}&id=${encodeURIComponent(archivo.id)}`}
+    target="_blank"
+    rel="noreferrer"
+    className="mt-2 inline-block text-xs font-black uppercase text-[#c9a646]"
+  >
+    ABRIR DOCUMENTO
+  </a>
+</div>
       ))
     )}
   </div>
