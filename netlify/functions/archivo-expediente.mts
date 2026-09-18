@@ -13,7 +13,7 @@ export default async (req: Request, _context: Context) => {
     const archivo = formData.get('archivo')
 
     if (typeof numeroCaso !== 'string' || !numeroCaso) {
-      return Response.json(
+      (
         { error: 'Falta el número de caso.' },
         { status: 400 },
       )
@@ -44,7 +44,7 @@ export default async (req: Request, _context: Context) => {
       fecha: new Date().toISOString(),
     })
 
-    return Response.json({
+    ({
       guardado: true,
       id,
       nombre: archivo.name,
@@ -56,11 +56,52 @@ export default async (req: Request, _context: Context) => {
     const numeroCaso = url.searchParams.get('numero-caso')
 
     if (!numeroCaso) {
-      return Response.json(
+      (
         { error: 'Falta el número de caso.' },
         { status: 400 },
       )
     }
+
+const id = url.searchParams.get('id')
+
+if (id) {
+  const claveInfo = `${numeroCaso}/${id}/info`
+
+  const info = await store.get(claveInfo, {
+    type: 'json',
+  }) as any
+
+  if (!info?.claveArchivo) {
+    return Response.json(
+      { error: 'No se encontró el documento.' },
+      { status: 404 },
+    )
+  }
+
+  const contenido = await store.get(info.claveArchivo, {
+    type: 'arrayBuffer',
+  })
+
+  if (!contenido) {
+    return Response.json(
+      { error: 'No se encontró el archivo.' },
+      { status: 404 },
+    )
+  }
+
+  const nombreSeguro = String(info.nombre ?? 'documento').replace(
+    /["\r\n]/g,
+    '',
+  )
+
+  return new Response(contenido, {
+    headers: {
+      'Content-Type': info.tipo ?? 'application/octet-stream',
+      'Content-Disposition': `inline; filename="${nombreSeguro}"`,
+      'Cache-Control': 'private, no-store',
+    },
+  })
+}
 
     const listado = await store.list({
       prefix: `${numeroCaso}/`,
@@ -84,7 +125,7 @@ export default async (req: Request, _context: Context) => {
       String(b.fecha).localeCompare(String(a.fecha)),
     )
 
-    return Response.json({
+    ({
       archivos,
     })
   }
