@@ -13,7 +13,7 @@ export default async (req: Request, _context: Context) => {
     const archivo = formData.get('archivo')
 
     if (typeof numeroCaso !== 'string' || !numeroCaso) {
-      (
+      return Response.json(
         { error: 'Falta el número de caso.' },
         { status: 400 },
       )
@@ -44,8 +44,9 @@ export default async (req: Request, _context: Context) => {
       fecha: new Date().toISOString(),
     })
 
-    ({
-      guardado: true,
+return Response.json(
+    {
+     guardado: true,
       id,
       nombre: archivo.name,
     })
@@ -56,7 +57,7 @@ export default async (req: Request, _context: Context) => {
     const numeroCaso = url.searchParams.get('numero-caso')
 
     if (!numeroCaso) {
-      (
+      return Response.json(
         { error: 'Falta el número de caso.' },
         { status: 400 },
       )
@@ -124,10 +125,11 @@ if (id) {
     archivos.sort((a: any, b: any) =>
       String(b.fecha).localeCompare(String(a.fecha)),
     )
-
-    ({
+    return Response.json({
       archivos,
     })
+
+
   }
 
   return new Response('Método no permitido', {
