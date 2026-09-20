@@ -1,6 +1,7 @@
 // Homepage 2026 - Property Advisers
 import { createFileRoute } from '@tanstack/react-router'
 import SurveyForm from '../components/SurveyForm'
+import { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -38,11 +39,30 @@ const services = [
       'Análisis comparativo de mercado para ayudarte a conocer el posicionamiento de una propiedad.',
   },
 ]
-
+const imagenesCarrusel = [
+  '/images/carrusel/1 WEB.png',
+  '/images/carrusel/2 WEB.png',
+  '/images/carrusel/3 WEB.png',
+  '/images/carrusel/4 WEB.png',
+  '/images/carrusel/5 WEB.png',
+  '/images/carrusel/6 WEB.png',
+  '/images/carrusel/7 WEB.png',
+]
 const whatsappLink =
   'https://wa.me/17873935871?text=Saludos%2C%20deseo%20orientaci%C3%B3n%20inmobiliaria'
 
 function Home() {
+    const [imagenActual, setImagenActual] = useState(0)
+
+  useEffect(() => {
+    const intervalo = setInterval(() => {
+      setImagenActual((anterior) =>
+        (anterior + 1) % imagenesCarrusel.length
+      )
+    }, 5000)
+
+    return () => clearInterval(intervalo)
+  }, [])
   return (
     <div className="min-h-screen bg-[#f5f5f5] text-gray-900">
 
@@ -122,7 +142,22 @@ function Home() {
         id="inicio"
         className="relative overflow-hidden bg-gradient-to-br from-[#071a32] via-[#0b294d] to-[#103d68] text-white px-6 py-20 sm:py-28"
       >
-        <div className="max-w-6xl mx-auto">
+       {/* CARRUSEL DE IMÁGENES */}
+<div className="absolute inset-0 z-0">
+  {imagenesCarrusel.map((imagen, index) => (
+    <div
+      key={imagen}
+      className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+        index === imagenActual ? 'opacity-100' : 'opacity-0'
+      }`}
+      style={{ backgroundImage: `url("${imagen}")` }}
+    />
+  ))}
+
+  {/* CAPA OSCURA PARA LEER EL TEXTO */}
+  <div className="absolute inset-0 bg-[#071a32]/65" />
+</div>
+      <div className="relative z-10 max-w-6xl mx-auto">
           <div className="max-w-4xl">
 
             <p className="uppercase tracking-[0.22em] text-[#d4af57] text-xs sm:text-sm font-bold mb-5">
