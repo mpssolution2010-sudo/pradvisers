@@ -188,7 +188,7 @@ function Home() {
       {/* HERO */}
       <section
         id="inicio"
-        className="relative overflow-hidden bg-gradient-to-br from-[#071a32] via-[#0b294d] to-[#103d68] text-white px-6 py-20 sm:py-28"
+        className="relative overflow-hidden bg-gradient-to-br from-[#071a32] via-[#0b294d] to-[#103d68] text-white px-6 pt-12 pb-16 sm:py-28"
       >
        {/* CARRUSEL DE IMÁGENES */}
 <div className="absolute inset-0 z-0 hidden md:block">
@@ -225,36 +225,36 @@ function Home() {
               Property Advisers Real Estate • Puerto Rico
             </p>
 
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black leading-tight mb-6">
+         <h1 className="text-3xl sm:text-6xl lg:text-7xl font-black leading-tight mb-6">
               Tu hogar.
               <span className="block text-[#d4af57]">
                 Tu vida. Nuestra misión.
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-white/90 max-w-2xl mb-6 leading-relaxed">
+         <p className="text-base sm:text-xl text-white/90 max-w-2xl mb-6 leading-relaxed">
               Más que una propiedad, te ayudamos a tomar decisiones
               inmobiliarias con estrategia, orientación y conocimiento del
               mercado de Puerto Rico.
             </p>
 
-            <p className="text-base sm:text-lg text-white/75 max-w-2xl mb-8">
+           <p className="text-sm sm:text-lg text-white/75 max-w-2xl mb-6">
               Compra, vende, alquila o evalúa tus opciones inmobiliarias con
               el respaldo de Property Advisers Real Estate.
             </p>
 
-            <div className="flex flex-wrap gap-3">
+           <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3">
 
               <a
                 href="#contacto"
-                className="px-6 py-3 rounded-full bg-white text-[#071a32] font-bold hover:bg-gray-100 transition"
+            className="w-full sm:w-auto text-center px-6 py-3 rounded-full bg-white text-[#071a32] font-bold hover:bg-gray-100 transition"
               >
                 QUIERO COMPRAR
               </a>
 
               <a
                 href="#contacto"
-                className="px-6 py-3 rounded-full bg-[#c9a646] text-[#071a32] font-bold hover:brightness-110 transition"
+                className="w-full sm:w-auto text-center px-6 py-3 rounded-full bg-[#c9a646] text-[#071a32] font-bold hover:brightness-110 transition"
               >
                 QUIERO VENDER
               </a>
@@ -263,7 +263,7 @@ function Home() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="px-6 py-3 rounded-full border-2 border-white text-white font-bold hover:bg-white hover:text-[#071a32] transition"
+                className="w-full sm:w-auto text-center px-6 py-3 rounded-full border-2 border-white text-white font-bold hover:bg-white hover:text-[#071a32] transition"
               >
                 HABLAR POR WHATSAPP
               </a>
