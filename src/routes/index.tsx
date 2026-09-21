@@ -80,8 +80,7 @@ function Home() {
 
       {/* HEADER PROPERTY ADVISERS 2026 */}
      <header className="sticky top-0 z-50 relative bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
-
+       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-1 sm:py-3 flex items-center justify-between gap-4">
           {/* LOGO */}
           <a href="/" className="flex items-center shrink-0">
             <img
