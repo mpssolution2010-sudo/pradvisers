@@ -210,7 +210,7 @@ function Home() {
       className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
         index === imagenActual ? 'opacity-100' : 'opacity-0'
       }`}
-      style={{ backgroundImage: `url("${imagen}")` }}
+     style={{ backgroundImage: `url("${imagen}")` }}
     />
   ))}
 </div>     
