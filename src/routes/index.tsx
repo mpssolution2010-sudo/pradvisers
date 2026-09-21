@@ -307,7 +307,7 @@ function Home() {
             </a>
 
             <a
-              href="#contacto"
+              href="/servicios/venta"
               className="group rounded-2xl bg-[#f5f5f5] border border-gray-200 p-7 hover:-translate-y-1 hover:shadow-xl transition"
             >
               <div className="text-4xl mb-4">💰</div>
