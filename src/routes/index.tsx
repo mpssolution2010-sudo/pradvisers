@@ -739,7 +739,7 @@ function Home() {
         target="_blank"
         rel="noreferrer"
         aria-label="Chatea por WhatsApp al 787-393-5871"
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2"
+        className="fixed bottom-3 right-3 z-50 flex items-center gap-2"
       >
 
         <span
@@ -749,14 +749,13 @@ function Home() {
           ¡Escríbenos! 787-393-5871
         </span>
 
-        <span className="relative w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
-
+        <span className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full
           <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-50 animate-ping" />
 
           <svg
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="relative w-7 h-7"
+          className="relative w-6 h-6 sm:w-7 sm:h-7"
             aria-hidden="true"
           >
             <path d="M20.52 3.48A11.78 11.78 0 0 0 12.01 0C5.4 0 .03 5.37.03 11.98c0 2.11.55 4.17 1.6 5.99L0 24l6.2-1.62a11.96 11.96 0 0 0 5.81 1.48h.01c6.6 0 11.97-5.37 11.97-11.98 0-3.2-1.25-6.2-3.47-8.4A11.77 11.77 0 0 0 12.02 0Zm0 21.8h-.01a9.83 9.83 0 0 1-5.01-1.37l-.36-.21-3.68.96.98-3.59-.23-.37a9.79 9.79 0 0 1-1.5-5.24c0-5.42 4.41-9.83 9.83-9.83 2.62 0 5.09 1.02 6.94 2.88a9.74 9.74 0 0 1 2.88 6.95c0 5.42-4.41 9.82-9.84 9.82Zm5.39-7.36c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.16-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.39-1.47-.88-.78-1.48-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.66-1.6-.91-2.18-.24-.57-.48-.49-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.06 2.88 1.21 3.08.15.2 2.09 3.19 5.06 4.47.71.3 1.26.49 1.69.62.71.23 1.35.2 1.86.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.27.17-1.4-.07-.13-.27-.2-.57-.35Z" />
