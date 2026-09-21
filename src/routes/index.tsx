@@ -252,7 +252,7 @@ function Home() {
               </a>
 
               <a
-                href="#contacto"
+                href="/servicios/venta"
                 className="w-full sm:w-auto text-center px-6 py-3 rounded-full bg-[#c9a646] text-[#071a32] font-bold hover:brightness-110 transition"
               >
                 QUIERO VENDER
