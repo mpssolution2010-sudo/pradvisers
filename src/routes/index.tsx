@@ -48,6 +48,17 @@ const imagenesCarrusel = [
   '/images/carrusel/6 WEB.png',
   '/images/carrusel/7 WEB.png',
 ]
+
+const imagenesCarruselMobile = [
+  '/images/carrusel-mobile/hero-mobile-1.png',
+  '/images/carrusel-mobile/hero-mobile-2.png',
+  '/images/carrusel-mobile/hero-mobile-3.png',
+  '/images/carrusel-mobile/hero-mobile-4.png',
+  '/images/carrusel-mobile/hero-mobile-5.png',
+  '/images/carrusel-mobile/hero-mobile-6.png',
+  '/images/carrusel-mobile/hero-mobile-7.png',
+]
+
 const whatsappLink =
   'https://wa.me/17873935871?text=Saludos%2C%20deseo%20orientaci%C3%B3n%20inmobiliaria'
 
@@ -143,7 +154,7 @@ function Home() {
         className="relative overflow-hidden bg-gradient-to-br from-[#071a32] via-[#0b294d] to-[#103d68] text-white px-6 py-20 sm:py-28"
       >
        {/* CARRUSEL DE IMÁGENES */}
-<div className="absolute inset-0 z-0">
+<div className="absolute inset-0 z-0 hidden md:block">
   {imagenesCarrusel.map((imagen, index) => (
     <div
       key={imagen}
@@ -153,6 +164,19 @@ function Home() {
       style={{ backgroundImage: `url("${imagen}")` }}
     />
   ))}
+</div>
+   {/* CARRUSEL DE IMÁGENES PARA CELULAR */}
+<div className="absolute inset-0 z-0 md:hidden">
+  {imagenesCarruselMobile.map((imagen, index) => (
+    <div
+      key={imagen}
+      className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+        index === imagenActual ? 'opacity-100' : 'opacity-0'
+      }`}
+      style={{ backgroundImage: `url("${imagen}")` }}
+    />
+  ))}
+</div>     
 
   {/* CAPA OSCURA PARA LEER EL TEXTO */}
   <div className="absolute inset-0 bg-[#071a32]/35" />
