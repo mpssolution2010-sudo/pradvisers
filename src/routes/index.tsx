@@ -113,11 +113,11 @@ function Home() {
               PROPIEDADES
             </a>
 
-            <a href="#comprar" className="hover:text-[#f5b51b] transition">
+            <a href="/servicios/compra" className="hover:text-[#f5b51b] transition">
               COMPRAR
             </a>
 
-            <a href="#vender" className="hover:text-[#f5b51b] transition">
+            <a href="/servicios/venta" className="hover:text-[#f5b51b] transition">
               VENDER
             </a>
 
@@ -145,8 +145,8 @@ function Home() {
       {[
         ["INICIO", "#inicio"],
         ["PROPIEDADES", "#propiedades"],
-        ["COMPRAR", "#comprar"],
-        ["VENDER", "#vender"],
+        ["COMPRAR", "/servicios/compra"],
+        ["VENDER", "/servicios/venta"],
         ["SERVICIOS", "#servicios"],
         ["HERENCIAS", "#herencias"],
         ["NOSOTROS", "#nosotros"],
