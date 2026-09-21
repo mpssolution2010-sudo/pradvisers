@@ -64,6 +64,7 @@ const whatsappLink =
 
 function Home() {
     const [imagenActual, setImagenActual] = useState(0)
+    const [menuMovilAbierto, setMenuMovilAbierto] = useState(false)
 
   useEffect(() => {
     const intervalo = setInterval(() => {
@@ -78,7 +79,7 @@ function Home() {
     <div className="min-h-screen bg-[#f5f5f5] text-gray-900">
 
       {/* HEADER PROPERTY ADVISERS 2026 */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm">
+     <header className="sticky top-0 z-50 relative bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
 
           {/* LOGO */}
@@ -90,6 +91,18 @@ function Home() {
             />
           </a>
 
+          {/* BOTÓN MENÚ MÓVIL */}
+<button
+  type="button"
+  onClick={() => setMenuMovilAbierto(!menuMovilAbierto)}
+  className="lg:hidden ml-auto p-3 text-[#246b8e] rounded-lg hover:bg-gray-100"
+  aria-label={menuMovilAbierto ? "Cerrar menú" : "Abrir menú"}
+  aria-expanded={menuMovilAbierto}
+>
+  <span className="text-3xl leading-none">
+    {menuMovilAbierto ? "✕" : "☰"}
+  </span>
+</button>
           {/* MENÚ */}
           <nav className="hidden lg:flex items-center gap-5 text-xs xl:text-sm font-bold text-[#246b8e]">
 
@@ -126,8 +139,32 @@ function Home() {
             </a>
 
           </nav>
-
-          {/* WHATSAPP */}
+{/* MENÚ DESPLEGABLE MÓVIL */}
+{menuMovilAbierto && (
+  <nav className="lg:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-200 z-50">
+    <div className="flex flex-col px-6 py-4 gap-4 text-sm font-bold text-[#246b8e]">
+      {[
+        ["INICIO", "#inicio"],
+        ["PROPIEDADES", "#propiedades"],
+        ["COMPRAR", "#comprar"],
+        ["VENDER", "#vender"],
+        ["SERVICIOS", "#servicios"],
+        ["HERENCIAS", "#herencias"],
+        ["NOSOTROS", "#nosotros"],
+        ["CONTACTO", "#contacto"],
+      ].map(([nombre, enlace]) => (
+        <a
+          key={nombre}
+          href={enlace}
+          onClick={() => setMenuMovilAbierto(false)}
+          className="block py-2 border-b border-gray-100 hover:text-[#f5b51b] transition"
+        >
+          {nombre}
+        </a>
+      ))}
+    </div>
+  </nav>
+)}          {/* WHATSAPP */}
           <a
             href={whatsappLink}
             target="_blank"
