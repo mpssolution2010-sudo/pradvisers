@@ -35,7 +35,7 @@ function CompraPage() {
             </p>
 
             <h1 className="mb-6 text-4xl font-black sm:text-5xl">
-              Encuentra la propiedad que quieres llamar hogar.
+              Encuentra la propiedad que quieres comprar.
             </h1>
 
             <p className="mx-auto mb-9 max-w-2xl text-lg leading-relaxed text-gray-200">
