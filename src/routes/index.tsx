@@ -180,7 +180,7 @@ function Home() {
 
   {/* CAPA OSCURA PARA LEER EL TEXTO */}
   <div className="absolute inset-0 bg-[#071a32]/35" />
-</div>
+        
       <div className="relative z-10 max-w-6xl mx-auto">
           <div className="max-w-4xl">
 
