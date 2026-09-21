@@ -749,7 +749,7 @@ function Home() {
           ¡Escríbenos! 787-393-5871
         </span>
 
-         <span className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full">
+      <span className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg">
          <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-50 animate-ping" />
 
           <svg
