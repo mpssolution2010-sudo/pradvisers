@@ -215,7 +215,7 @@ function CompraPage() {
   </p>
 
   <form
-    name="solicitud-compradores"
+    name="solicitudes-compradores"
     method="POST"
     data-netlify="true"
     data-netlify-honeypot="bot-field"
@@ -267,7 +267,7 @@ body: new URLSearchParams(
     <input
       type="hidden"
       name="form-name"
-      value="solicitud-compradores"
+      value="solicitudes-compradores"
       />
 
     
