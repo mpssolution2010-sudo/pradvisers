@@ -90,7 +90,9 @@ function HerenciasPage() {
         titulo: "Orientación inicial del caso",
         descripcion:
            "Evaluamos la situación de la propiedad heredada y te orientamos sobre los próximos pasos para prepararla para una posible venta.",
+        },
         {
+          
           icono: "📸",
           titulo: "Identificación de la situación sucesoral",
           descripcion:
