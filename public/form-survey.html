@@ -32,6 +32,23 @@
     <input type="text" name="bot-field-documentos" />
     <input type="file" name="documento" />
   </form>
-
+<form
+  name="solicitudes-compradores"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  hidden
+>
+  <input type="hidden" name="form-name" value="solicitudes-compradores" />
+  <input type="text" name="bot-field" />
+  <input type="text" name="nombre" />
+  <input type="tel" name="telefono" />
+  <input type="email" name="correo" />
+  <input type="text" name="municipio" />
+  <select name="presupuesto"></select>
+  <select name="financiamiento"></select>
+  <select name="servicio"></select>
+</form>
+  
 </body>
 </html>
