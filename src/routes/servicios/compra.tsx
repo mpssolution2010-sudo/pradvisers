@@ -237,7 +237,7 @@ function CompraPage() {
       ].join("\n");
 
       
-fetch("/", {
+fetch("/form-survey.html", {
   method: "POST",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
