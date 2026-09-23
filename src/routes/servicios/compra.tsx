@@ -215,6 +215,10 @@ function CompraPage() {
   </p>
 
   <form
+    name="solicitud-compradores"
+    method="POST"
+    data-netlify="true"
+    data-netlify-honeypot="bot-field"
     onSubmit={(e) => {
       e.preventDefault();
 
@@ -232,14 +236,48 @@ function CompraPage() {
         "Servicio solicitado: " + datos.get("servicio"),
       ].join("\n");
 
-      window.open(
-        "https://wa.me/17873935871?text=" +
-          encodeURIComponent(mensaje),
-        "_blank"
-      );
+      
+fetch("/", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+ 
+body: new URLSearchParams(
+  Array.from(datos.entries()).map(([clave, valor]) => [
+    clave,
+    String(valor),
+  ])
+).toString(),
+  
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Error al enviar el formulario");
+    }
+    alert("¡Solicitud enviada correctamente!");
+  })
+  .catch(() => {
+    alert("No se pudo enviar la solicitud. Inténtalo nuevamente.");
+  });
+      
     }}
     className="space-y-4"
   >
+    <input
+      type="hidden"
+      name="form-name"
+      value="solicitud-compradores"
+      />
+
+    
+<p className="hidden">
+  <label>
+    No completar este campo:
+    <input name="bot-field" />
+  </label>
+</p>
+      
     <input
       type="text"
       name="nombre"
@@ -320,7 +358,7 @@ function CompraPage() {
       type="submit"
       className="w-full rounded-full bg-[#c9a646] px-6 py-4 font-bold text-[#071a32]"
     >
-      ENVIAR SOLICITUD POR WHATSAPP
+      ENVIAR SOLICITUD POR EMAIL
     </button>
   </form>
 </div>             
