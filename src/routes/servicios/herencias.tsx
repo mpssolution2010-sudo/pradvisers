@@ -286,8 +286,11 @@ function HerenciasPage() {
       `Correo electrónico: ${correo}\n\n` +
       `Situación:\n${situacion}`;
 
-    window.location.href =
-      `mailto:jmlpropertyadviserspr@gmail.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`;
+   window.open(
+  `mailto:jmlpropertyadviserspr@gmail.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`,
+  "_self"
+);
+    
   }}
   className="inline-flex w-full items-center justify-center rounded-xl border-2 border-white px-8 py-4 text-center text-base font-bold text-white"
 >
