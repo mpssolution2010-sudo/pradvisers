@@ -242,6 +242,12 @@ function HerenciasPage() {
       SOLICITAR ORIENTACIÓN POR WHATSAPP
     </a>
 
+    <a
+  href="mailto:jmlpropertyadviserspr@gmail.com?subject=Orientación%20sobre%20propiedad%20heredada"
+  className="mt-4 inline-flex w-full items-center justify-center rounded-xl border-2 border-white px-8 py-4 text-center text-base font-bold text-white transition hover:bg-white hover:text-[#246b8e]"
+>
+  ENVIAR EMAIL
+</a>
     <p className="mt-6 text-sm text-white/80">
       Tu hogar, tu vida, nuestra misión.
     </p>
