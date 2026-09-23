@@ -242,12 +242,58 @@ function HerenciasPage() {
       SOLICITAR ORIENTACIÓN POR WHATSAPP
     </a>
 
-    <a
-  href="mailto:jmlpropertyadviserspr@gmail.com?subject=Orientación%20sobre%20propiedad%20heredada"
-  className="mt-4 inline-flex w-full items-center justify-center rounded-xl border-2 border-white px-8 py-4 text-center text-base font-bold text-white transition hover:bg-white hover:text-[#246b8e]"
+    <div className="mt-6 grid gap-4 text-left">
+  <input
+    type="text"
+    id="nombreHerencia"
+    placeholder="Nombre completo"
+    className="w-full rounded-xl border border-white/40 bg-white px-4 py-3 text-gray-900"
+  />
+
+  <input
+    type="tel"
+    id="telefonoHerencia"
+    placeholder="Número de teléfono"
+    className="w-full rounded-xl border border-white/40 bg-white px-4 py-3 text-gray-900"
+  />
+
+  <input
+    type="email"
+    id="correoHerencia"
+    placeholder="Correo electrónico"
+    className="w-full rounded-xl border border-white/40 bg-white px-4 py-3 text-gray-900"
+  />
+</div>
+
+    <textarea
+      id="situacionHerencia
+  placeholder="Cuéntanos brevemente sobre la propiedad heredada o tu situación"
+  rows={4}
+  className="w-full rounded-xl border border-white/40 bg-white px-4 py-3 text-gray-900"
+/>
+    <button
+  type="button"
+  onClick={() => {
+    const nombre = (document.getElementById("nombreHerencia") as HTMLInputElement)?.value || "";
+    const telefono = (document.getElementById("telefonoHerencia") as HTMLInputElement)?.value || "";
+    const correo = (document.getElementById("correoHerencia") as HTMLInputElement)?.value || "";
+    const situacion = (document.getElementById("situacionHerencia") as HTMLTextAreaElement)?.value || "";
+
+    const asunto = "Orientación sobre propiedad heredada";
+    const mensaje =
+      `Nombre: ${nombre}\n` +
+      `Teléfono: ${telefono}\n` +
+      `Correo electrónico: ${correo}\n\n` +
+      `Situación:\n${situacion}`;
+
+    window.location.href =
+      `mailto:jmlpropertyadviserspr@gmail.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(mensaje)}`;
+  }}
+  className="inline-flex w-full items-center justify-center rounded-xl border-2 border-white px-8 py-4 text-center text-base font-bold text-white"
 >
-  ENVIAR EMAIL
-</a>
+  ENVIAR SOLICITUD POR EMAIL
+</button>
+    
     <p className="mt-6 text-sm text-white/80">
       Tu hogar, tu vida, nuestra misión.
     </p>
