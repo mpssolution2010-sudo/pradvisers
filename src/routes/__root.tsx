@@ -123,10 +123,15 @@ if (inviteToken) {
     <html lang="es">
       <head>
         <HeadContent />
-        <script
+        
+     
+<script
   src="https://realtyhd.com/XposurePublicIncludes/js/generated/embed-listings.js"
   type="text/javascript"
-/>      </head>
+  defer
+></script>
+
+      </head>
       <body>
         {recuperandoPassword && (
   <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 px-4">
