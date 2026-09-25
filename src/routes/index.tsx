@@ -367,18 +367,17 @@ function Home() {
       </p>
     </div>
 
-    <div
-      className="xposure-embed-container w-full"
-      data-id="1380382"
-      data-pjt=""
-      data-prt=""
-      data-st=""
-      data-sf=""
-      data-des="true"
-      data-new=""
-      data-big=""
-      data-len=""
-    ></div>
+    
+<div className="text-center mt-8">
+  <a
+    href="https://properties.listingspuertorico.com/trujillo-alto/userId_1380382"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-block bg-[#071a32] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#f5b51b] hover:text-[#071a32] transition"
+  >
+    EXPLORAR PROPIEDADES DISPONIBLES
+  </a>
+</div>
 
   </div>
 </section>
