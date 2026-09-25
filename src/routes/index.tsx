@@ -350,6 +350,40 @@ function Home() {
         </div>
       </section>
 
+      
+{/* PROPIEDADES - XPOSURE MLS */}
+<section id="propiedades" className="px-6 py-20 bg-white">
+  <div className="max-w-7xl mx-auto">
+
+    <div className="text-center mb-10">
+      <h2 className="text-3xl sm:text-4xl font-black text-[#071a32]">
+        Explora nuestras propiedades
+      </h2>
+
+      <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+        Descubre las propiedades disponibles a través de
+        Property Advisers Real Estate. Encuentra tu próximo
+        hogar o una oportunidad de inversión en Puerto Rico.
+      </p>
+    </div>
+
+    <div
+      className="xposure-embed-container w-full"
+      data-id="1380382"
+      data-pjt=""
+      data-prt=""
+      data-st=""
+      data-sf=""
+      data-des="true"
+      data-new=""
+      data-big=""
+      data-len=""
+    ></div>
+
+  </div>
+</section>
+
+
       {/* NOSOTROS */}
       <section id="nosotros" className="px-6 py-20 bg-[#071a32] text-white">
         <div className="max-w-6xl mx-auto grid gap-12 lg:grid-cols-2 items-center">
