@@ -351,35 +351,6 @@ function Home() {
       </section>
 
       
-{/* PROPIEDADES - XPOSURE MLS */}
-<section id="propiedades" className="px-6 py-20 bg-white">
-  <div className="max-w-7xl mx-auto">
-
-    <div className="text-center mb-10">
-      <h2 className="text-3xl sm:text-4xl font-black text-[#071a32]">
-        Explora nuestras propiedades
-      </h2>
-
-      <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-        Descubre las propiedades disponibles a través de
-        Property Advisers Real Estate. Encuentra tu próximo
-        hogar o una oportunidad de inversión en Puerto Rico.
-      </p>
-    </div>
-
-    
-<div className="text-center mt-8">
-  <a
-    href="https://properties.listingspuertorico.com/trujillo-alto/userId_1380382"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-block bg-[#071a32] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#f5b51b] hover:text-[#071a32] transition"
-  >
-    EXPLORAR PROPIEDADES DISPONIBLES
-  </a>
-</div>
-  </div>
-</section>
 
       {/* PROPIEDADES DESTACADAS TRUJILLO ALTO */}
 <section className="px-6 py-20 bg-gray-50">
@@ -440,6 +411,36 @@ function Home() {
 
     </div>
 
+  </div>
+</section>
+
+      {/* PROPIEDADES - XPOSURE MLS */}
+<section id="propiedades" className="px-6 py-20 bg-white">
+  <div className="max-w-7xl mx-auto">
+
+    <div className="text-center mb-10">
+      <h2 className="text-3xl sm:text-4xl font-black text-[#071a32]">
+        Explora nuestras propiedades
+      </h2>
+
+      <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+        Descubre las propiedades disponibles a través de
+        Property Advisers Real Estate. Encuentra tu próximo
+        hogar o una oportunidad de inversión en Puerto Rico.
+      </p>
+    </div>
+
+    
+<div className="text-center mt-8">
+  <a
+    href="https://properties.listingspuertorico.com/trujillo-alto/userId_1380382"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-block bg-[#071a32] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#f5b51b] hover:text-[#071a32] transition"
+  >
+    EXPLORAR PROPIEDADES DISPONIBLES
+  </a>
+</div>
   </div>
 </section>
 
