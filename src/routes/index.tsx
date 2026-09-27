@@ -378,10 +378,70 @@ function Home() {
     EXPLORAR PROPIEDADES DISPONIBLES
   </a>
 </div>
-
   </div>
 </section>
 
+      {/* PROPIEDADES DESTACADAS TRUJILLO ALTO */}
+<section className="px-6 py-20 bg-gray-50">
+  <div className="max-w-7xl mx-auto">
+
+    <div className="text-center mb-10">
+      <h2 className="text-3xl sm:text-4xl font-black text-[#071a32]">
+        Propiedades destacadas en Trujillo Alto
+      </h2>
+
+      <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+        Explora una selección de propiedades disponibles en Trujillo Alto.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      {/* PROPIEDAD 1 */}
+
+      <a
+  href="https://properties.listingspuertorico.com/listing/38fy4?u=1380382"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition"
+>
+  <img
+    src="/images/propiedades/propiedad-1-trujillo-alto.jpg"
+    alt="Casa en Barrio Las Cuevas, Trujillo Alto"
+    className="w-full h-56 object-cover"
+  />
+
+  <div className="p-5">
+    <p className="text-sm font-bold uppercase tracking-wide text-[#f5b51b]">
+      CASA EN VENTA
+    </p>
+
+    <h3 className="mt-2 text-xl font-black text-[#071a32]">
+      Bo. Las Cuevas, Trujillo Alto
+    </h3>
+
+    <p className="mt-2 text-2xl font-black text-[#071a32]">
+      $610,000
+    </p>
+
+    <p className="mt-2 text-gray-600">
+      4 habitaciones • 2 baños • 3,100 pies²
+    </p>
+
+    <p className="mt-4 font-bold text-[#071a32]">
+      VER PROPIEDAD →
+    </p>
+  </div>
+</a>
+
+      {/* PROPIEDAD 2 */}
+
+      {/* PROPIEDAD 3 */}
+
+    </div>
+
+  </div>
+</section>
 
       {/* NOSOTROS */}
       <section id="nosotros" className="px-6 py-20 bg-[#071a32] text-white">
