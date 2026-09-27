@@ -358,7 +358,7 @@ function Home() {
 
     <div className="text-center mb-10">
       <h2 className="text-3xl sm:text-4xl font-black text-[#071a32]">
-        Propiedades destacadas en Trujillo Alto
+        Propiedades destacadas
       </h2>
 
       <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
