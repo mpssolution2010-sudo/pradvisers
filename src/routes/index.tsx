@@ -407,6 +407,41 @@ function Home() {
 
       {/* PROPIEDAD 2 */}
 
+<a
+  href="https://properties.listingspuertorico.com/listing/37zzx?u=1380382"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition"
+>
+  <img
+    src="/images/propiedades/propiedad-2-trujillo-alto.jpg"
+    alt="Casa en Andreas Court, Trujillo Alto"
+    className="w-full h-56 object-cover"
+  />
+
+  <div className="p-5">
+    <p className="text-sm font-bold uppercase tracking-wide text-[#f5b51b]">
+      CASA EN VENTA
+    </p>
+
+    <h3 className="mt-2 text-xl font-black text-[#071a32]">
+      Andreas Court, Trujillo Alto
+    </h3>
+
+    <p className="mt-2 text-2xl font-black text-[#071a32]">
+      $595,000
+    </p>
+
+    <p className="mt-2 text-gray-600">
+      4 habitaciones • 2 baños • 2,400 pies²
+    </p>
+
+    <p className="mt-4 font-bold text-[#071a32]">
+      VER PROPIEDAD →
+    </p>
+  </div>
+</a>
+
       {/* PROPIEDAD 3 */}
 
     </div>
