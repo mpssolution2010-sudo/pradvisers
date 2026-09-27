@@ -352,7 +352,7 @@ function Home() {
 
       
 
-      {/* PROPIEDADES DESTACADAS TRUJILLO ALTO */}
+      {/* PROPIEDADES DESTACADAS */}
 <section className="px-6 py-20 bg-gray-50">
   <div className="max-w-7xl mx-auto">
 
