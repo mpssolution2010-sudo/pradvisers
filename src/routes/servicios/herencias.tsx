@@ -243,12 +243,12 @@ function HerenciasPage() {
     </a>
 
 <form
-  name="herencias"
+  name="solicitudes-herencias"
   method="POST"
   data-netlify="true"
   className="mt-6 grid gap-4 text-left"
 >
-  <input type="hidden" name="form-name" value="herencias" />
+  <input type="hidden" name="form-name" value="solicitudes-herencias" />
   <input
     type="text"
     id="nombreHerencia"
