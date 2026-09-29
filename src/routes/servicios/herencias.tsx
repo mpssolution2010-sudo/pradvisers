@@ -245,9 +245,31 @@ function HerenciasPage() {
 <form
   name="solicitudes-herencias"
   method="POST"
-  action="/"
   data-netlify="true"
   data-netlify-honeypot="bot-field"
+  onSubmit={async (e) => {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const formData = new FormData(form);
+
+  const datos = new URLSearchParams();
+  formData.forEach((value, key) => {
+    datos.append(key, value.toString());
+  });
+
+  const response = await fetch("/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: datos.toString(),
+  });
+
+  if (response.ok) {
+    window.location.href = "/gracias";
+  }
+}}
   className="mt-6 grid gap-4 text-left"
 >
   <input type="hidden" name="form-name" value="solicitudes-herencias" />
