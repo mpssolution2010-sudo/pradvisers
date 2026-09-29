@@ -275,7 +275,7 @@ function HerenciasPage() {
 
     <textarea
       id="situacionHerencia"
-      name"situacion"
+      name="situacion"
   placeholder="Cuéntanos brevemente sobre la propiedad heredada o tu situación"
   rows={4}
   className="w-full rounded-xl border border-white/40 bg-white px-4 py-3 text-gray-900"
