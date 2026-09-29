@@ -246,9 +246,11 @@ function HerenciasPage() {
   name="solicitudes-herencias"
   method="POST"
   data-netlify="true"
+  data-netlify-honeypot="bot-field"
   className="mt-6 grid gap-4 text-left"
 >
   <input type="hidden" name="form-name" value="solicitudes-herencias" />
+  <inputtype="hidden" name="bot-field" />
   <input
     type="text"
     id="nombreHerencia"
