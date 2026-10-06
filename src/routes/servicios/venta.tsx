@@ -236,7 +236,26 @@ function VentaPage() {
 <form
   name="solicitudes-vendedores"
   method="POST"
-  action="/gracias"
+  onSubmit={async (e) => {
+  e.preventDefault()
+
+  const form = e.currentTarget
+  const formData = new FormData(form)
+
+  const response = await fetch('/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams(formData as any).toString(),
+  })
+
+  if (response.ok) {
+    window.location.href = '/gracias'
+  } else {
+    alert('Hubo un problema al enviar la información. Intenta nuevamente.')
+  }
+}}
   data-netlify="true"
   data-netlify-honeypot="bot-field"
   className="mx-auto mb-8 max-w-2xl rounded-2xl bg-white p-6 text-left shadow-xl"
