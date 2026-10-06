@@ -234,12 +234,21 @@ function VentaPage() {
       y las condiciones del mercado inmobiliario.
     </p>
 <form
-  name="vendedor"
+  name="solicitudes-vendedores"
   method="POST"
+  action="gracias"
   data-netlify="true"
+  data-netlify-honeypot="bot-field"
   className="mx-auto mb-8 max-w-2xl rounded-2xl bg-white p-6 text-left shadow-xl"
 >
-  <input type="hidden" name="form-name" value="vendedor" />
+  <input type="hidden" name="form-name" value="solicitudes-vendedores" />
+
+  <p className="hidden">
+  <label>
+    No llenar este campo:
+    <input name="bot-field" />
+  </label>
+</p>
 
   <h3 className="mb-2 text-2xl font-bold text-[#246b8e]">
     Cuéntanos sobre tu propiedad
