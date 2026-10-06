@@ -243,7 +243,7 @@ function VentaPage() {
   const formData = new FormData(form)
   formData.set('form-name', 'solicitudes-vendedores')
 
-  const response = await fetch('/', {
+ const response = await fetch('/form-vendedores.html', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
