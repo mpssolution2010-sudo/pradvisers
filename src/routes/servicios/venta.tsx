@@ -259,46 +259,72 @@ function VentaPage() {
     sobre los próximos pasos.
   </p>
 
-  <div className="grid gap-4 sm:grid-cols-2">
+ <div className="grid gap-4 sm:grid-cols-2">
+
+  <div>
+    <label className="mb-2 block text-sm font-bold text-gray-700">
+      Nombre y apellido *
+    </label>
     <input
       type="text"
       name="nombre"
-      placeholder="Nombre y apellido"
+      placeholder="Ej. Juan Pérez"
       required
-      className="rounded-lg border border-gray-300 px-4 py-3"
-    />
-
-    <input
-      type="tel"
-      name="telefono"
-      placeholder="Teléfono"
-      required
-      className="rounded-lg border border-gray-300 px-4 py-3"
-    />
-
-    <input
-      type="email"
-      name="email"
-      placeholder="Correo electrónico"
-      required
-      className="rounded-lg border border-gray-300 px-4 py-3"
-    />
-
-    <input
-      type="text"
-      name="municipio"
-      placeholder="Municipio de la propiedad"
-      required
-      className="rounded-lg border border-gray-300 px-4 py-3"
+      className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400"
     />
   </div>
 
+  <div>
+    <label className="mb-2 block text-sm font-bold text-gray-700">
+      Teléfono *
+    </label>
+    <input
+      type="tel"
+      name="telefono"
+      placeholder="787-000-0000"
+      required
+      className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400"
+    />
+  </div>
+
+  <div>
+    <label className="mb-2 block text-sm font-bold text-gray-700">
+      Correo electrónico *
+    </label>
+    <input
+      type="email"
+      name="email"
+      placeholder="nombre@email.com"
+      required
+      className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400"
+    />
+  </div>
+
+  <div>
+    <label className="mb-2 block text-sm font-bold text-gray-700">
+      Municipio de la propiedad *
+    </label>
+    <input
+      type="text"
+      name="municipio"
+      placeholder="Ej. San Juan"
+      required
+      className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400"
+    />
+  </div>
+
+</div>
+  
+ <div className="mt-4">
+  <label className="mb-2 block text-sm font-bold text-gray-700">
+    Tipo de propiedad *
+  </label>
   <select
     name="tipoPropiedad"
     required
-    className="mt-4 w-full rounded-lg border border-gray-300 px-4 py-3"
+    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900"
   >
-    <option value="">Tipo de propiedad</option>
+    <option value="">Selecciona una opción</option>
     <option value="Casa">Casa</option>
     <option value="Apartamento">Apartamento</option>
     <option value="Terreno">Terreno</option>
@@ -306,12 +332,17 @@ function VentaPage() {
     <option value="Multifamiliar">Multifamiliar</option>
     <option value="Otro">Otro</option>
   </select>
+</div>
 
+<div className="mt-4">
+  <label className="mb-2 block text-sm font-bold text-gray-700">
+    Motivo de venta
+  </label>
   <select
     name="motivoVenta"
-    className="mt-4 w-full rounded-lg border border-gray-300 px-4 py-3"
+    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900"
   >
-    <option value="">Motivo de venta</option>
+    <option value="">Selecciona una opción</option>
     <option value="Venta regular">Venta regular</option>
     <option value="Herencia o sucesión">Herencia o sucesión</option>
     <option value="Mudanza">Mudanza</option>
@@ -319,21 +350,31 @@ function VentaPage() {
     <option value="Inversión">Inversión</option>
     <option value="Otro">Otro</option>
   </select>
+</div>
 
+<div className="mt-4">
+  <label className="mb-2 block text-sm font-bold text-gray-700">
+    Precio esperado de venta
+  </label>
   <input
     type="text"
     name="precio"
-    placeholder="Precio esperado de venta (opcional)"
-    className="mt-4 w-full rounded-lg border border-gray-300 px-4 py-3"
+    placeholder="Opcional"
+    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400"
   />
+</div>
 
+<div className="mt-4">
+  <label className="mb-2 block text-sm font-bold text-gray-700">
+    Información adicional
+  </label>
   <textarea
     name="mensaje"
-    placeholder="Información adicional"
+    placeholder="Cuéntanos cualquier detalle adicional sobre la propiedad"
     rows={4}
-    className="mt-4 w-full rounded-lg border border-gray-300 px-4 py-3"
+    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400"
   />
-
+</div>
   <button
     type="submit"
     className="mt-5 w-full rounded-xl bg-[#e0c477] px-8 py-4 font-bold text-[#246b8e] shadow-md transition hover:opacity-90"
