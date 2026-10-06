@@ -241,6 +241,7 @@ function VentaPage() {
 
   const form = e.currentTarget
   const formData = new FormData(form)
+  formData.set('form-name', 'solicitudes-vendedores')
 
   const response = await fetch('/', {
     method: 'POST',
