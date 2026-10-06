@@ -233,7 +233,106 @@ function VentaPage() {
       una estrategia de venta de acuerdo con tus necesidades
       y las condiciones del mercado inmobiliario.
     </p>
+<form
+  name="vendedor"
+  method="POST"
+  data-netlify="true"
+  className="mx-auto mb-8 max-w-2xl rounded-2xl bg-white p-6 text-left shadow-xl"
+>
+  <input type="hidden" name="form-name" value="vendedor" />
 
+  <h3 className="mb-2 text-2xl font-bold text-[#246b8e]">
+    Cuéntanos sobre tu propiedad
+  </h3>
+
+  <p className="mb-6 text-sm text-gray-600">
+    Completa la información y nos comunicaremos contigo para orientarte
+    sobre los próximos pasos.
+  </p>
+
+  <div className="grid gap-4 sm:grid-cols-2">
+    <input
+      type="text"
+      name="nombre"
+      placeholder="Nombre y apellido"
+      required
+      className="rounded-lg border border-gray-300 px-4 py-3"
+    />
+
+    <input
+      type="tel"
+      name="telefono"
+      placeholder="Teléfono"
+      required
+      className="rounded-lg border border-gray-300 px-4 py-3"
+    />
+
+    <input
+      type="email"
+      name="email"
+      placeholder="Correo electrónico"
+      required
+      className="rounded-lg border border-gray-300 px-4 py-3"
+    />
+
+    <input
+      type="text"
+      name="municipio"
+      placeholder="Municipio de la propiedad"
+      required
+      className="rounded-lg border border-gray-300 px-4 py-3"
+    />
+  </div>
+
+  <select
+    name="tipoPropiedad"
+    required
+    className="mt-4 w-full rounded-lg border border-gray-300 px-4 py-3"
+  >
+    <option value="">Tipo de propiedad</option>
+    <option value="Casa">Casa</option>
+    <option value="Apartamento">Apartamento</option>
+    <option value="Terreno">Terreno</option>
+    <option value="Comercial">Comercial</option>
+    <option value="Multifamiliar">Multifamiliar</option>
+    <option value="Otro">Otro</option>
+  </select>
+
+  <select
+    name="motivoVenta"
+    className="mt-4 w-full rounded-lg border border-gray-300 px-4 py-3"
+  >
+    <option value="">Motivo de venta</option>
+    <option value="Venta regular">Venta regular</option>
+    <option value="Herencia o sucesión">Herencia o sucesión</option>
+    <option value="Mudanza">Mudanza</option>
+    <option value="Dificultad con pagos">Dificultad con pagos</option>
+    <option value="Inversión">Inversión</option>
+    <option value="Otro">Otro</option>
+  </select>
+
+  <input
+    type="text"
+    name="precio"
+    placeholder="Precio esperado de venta (opcional)"
+    className="mt-4 w-full rounded-lg border border-gray-300 px-4 py-3"
+  />
+
+  <textarea
+    name="mensaje"
+    placeholder="Información adicional"
+    rows={4}
+    className="mt-4 w-full rounded-lg border border-gray-300 px-4 py-3"
+  />
+
+  <button
+    type="submit"
+    className="mt-5 w-full rounded-xl bg-[#e0c477] px-8 py-4 font-bold text-[#246b8e] shadow-md transition hover:opacity-90"
+  >
+    ENVIAR INFORMACIÓN
+  </button>
+</form>
+    
     <a
       href="https://wa.me/17873935871?text=Hola%2C%20deseo%20vender%20mi%20propiedad%20y%20recibir%20orientaci%C3%B3n."
       target="_blank"
