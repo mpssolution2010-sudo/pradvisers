@@ -259,7 +259,7 @@ function HerenciasPage() {
     datos.append(key, value.toString());
   });
 
-  const response = await fetch("/form-herencias.html", {
+  const response = await fetch("/", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
