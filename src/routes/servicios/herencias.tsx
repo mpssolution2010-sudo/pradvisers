@@ -260,9 +260,7 @@ const response = await fetch("/form-herencias.html", {
     "Content-Type": "application/x-www-form-urlencoded",
   },
   body: new URLSearchParams(formData as any).toString(),
-});
-    
-  });
+})
 
   if (response.ok) {
     window.location.href = "/gracias";
