@@ -252,13 +252,14 @@ function HerenciasPage() {
 
   const form = e.currentTarget;
   const formData = new FormData(form);
+  formData.set('form-name', 'solicitudes-herencias')
 
   const datos = new URLSearchParams();
   formData.forEach((value, key) => {
     datos.append(key, value.toString());
   });
 
-  const response = await fetch("/", {
+  const response = await fetch("/form-herencias.html", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
