@@ -236,7 +236,7 @@ function VentaPage() {
 <form
   name="solicitudes-vendedores"
   method="POST"
-  action="gracias"
+  action="/gracias"
   data-netlify="true"
   data-netlify-honeypot="bot-field"
   className="mx-auto mb-8 max-w-2xl rounded-2xl bg-white p-6 text-left shadow-xl"
