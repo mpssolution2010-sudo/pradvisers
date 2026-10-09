@@ -121,7 +121,7 @@ function Home() {
               VENDER
             </a>
 
-            <a href="#" className="hover:text-[#f5b51b] transition">
+            <a href="/#servicios" className="hover:text-[#f5b51b] transition">
               SERVICIOS
             </a>
 
@@ -151,7 +151,7 @@ function Home() {
         ["PROPIEDADES", "#propiedades"],
         ["COMPRAR", "/servicios/compra"],
         ["VENDER", "/servicios/venta"],
-        ["SERVICIOS", "#servicios"],
+        ["SERVICIOS", "/#servicios"],
         ["SHORT SALE", "/servicios/short-sale"],       
         ["HERENCIAS", "/servicios/herencias"],
         ["NOSOTROS", "#nosotros"],
