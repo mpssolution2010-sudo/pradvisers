@@ -626,7 +626,13 @@ function Home() {
             {services.map((service) => (
               <div
                 key={service.title}
-                className="rounded-2xl bg-[#f5f5f5] p-7 border-t-4 border-[#c9a646] hover:shadow-xl transition"
+
+                onClick={() => {
+                if (service.title === "Short Sale") {
+                window.location.href = "/servicios/short-sale";
+                  }
+                      }}                
+                className="rounded-2xl bg-[#f5f5f5] p-7 border-t-4 border-[#c9a646] hover:shadow-xl transition cursor-pointer"
               >
                 <h3 className="font-black text-xl text-[#071a32] mb-3">
                   {service.title}
