@@ -103,7 +103,24 @@ function ShortSalePage() {
   method="POST"
   data-netlify="true"
   data-netlify-honeypot="bot-field"
-  className="grid gap-5 rounded-2xl bg-white p-6 shadow-lg"
+  onSubmit={async (e) => {
+  e.preventDefault();
+  const form = e.currentTarget;
+  const formData = new FormData(form);
+  formData.set("form-name", "solicitudes-short-sale");
+  const response = await fetch("/form-short-sale.html",{
+  method: "POST",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded", 
+  }, 
+    body:new URLSearchParams(formData as any).toString()
+  });
+    if (response.ok) {
+  window.location.href = "/gracias";
+}  
+  }}
+    
+    className="grid gap-5 rounded-2xl bg-white p-6 shadow-lg"
 >
   <input
     type="hidden"
