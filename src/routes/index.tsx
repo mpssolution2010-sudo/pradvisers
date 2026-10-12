@@ -1,7 +1,7 @@
 // Homepage 2026 - Property Advisers
 import { createFileRoute } from '@tanstack/react-router'
 import SurveyForm from '../components/SurveyForm'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/')({
   component: Home,
