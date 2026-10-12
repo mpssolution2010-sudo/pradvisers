@@ -173,6 +173,7 @@ function Home() {
         ["SERVICIOS", "#servicios"],   
         ["NOSOTROS", "#nosotros"],
         ["CONTACTO", "#contacto"],
+    ].map(([nombre, enlace]) => (
      <React.Fragment key={nombre}>
   <a
      
@@ -203,12 +204,12 @@ function Home() {
     </a>
     
   </div>
-   )}
-    </React.Fragment> 
-    ))}
-    </div>
+  </React.Fragment>    
+  )}
+  ))}
+  </div>
   </nav>
-)}        
+  )}        
       
       {/* WHATSAPP */}
           <a
