@@ -65,6 +65,7 @@ const whatsappLink =
 function Home() {
     const [imagenActual, setImagenActual] = useState(0)
     const [menuMovilAbierto, setMenuMovilAbierto] = useState(false)
+    const [submenuServiciosAbierto, setSubmenuServiciosAbierto] = useState(false);
 
   useEffect(() => {
     const intervalo = setInterval(() => {
@@ -121,22 +122,35 @@ function Home() {
               VENDER
             </a>
 
-            <a href="/#servicios" className="hover:text-[#f5b51b] transition">
-              SERVICIOS
-            </a>
+           <div className="relative group">
+  <a
+    href="/#servicios"
+    className="hover:text-[#f5b51b] transition inline-flex items-center gap-1"
+  >
+    SERVICIOS <span>▾</span>
+  </a>
 
-            <a href="/servicios/short-sale" className="hover:text-[#f5b51b] transition">
-              SHORT SALE
-            </a>
-            
-            <a href="/servicios/herencias" className="hover:text-[#f5b51b] transition">
-              HERENCIAS
-            </a>
-
-            
-            <a href="/servicios/precio-correcto" className="hover:text-[#f5b51b] transition">
-              PRECIO CORRECTO
-            </a>
+  <div className="absolute left-0 top-full z-50 hidden w-60 rounded-lg border border-gray-200 bg-white py-2 shadow-lg group-hover:block group-focus-within:block">
+    <a
+      href="/servicios/short-sale"
+      className="block px-4 py-3 hover:bg-gray-100"
+    >
+      SHORT SALE
+    </a>
+    <a
+      href="/servicios/herencias"
+      className="block px-4 py-3 hover:bg-gray-100"
+    >
+      HERENCIAS Y SUCESIONES
+    </a>
+    <a
+      href="/servicios/precio-correcto"
+      className="block px-4 py-3 hover:bg-gray-100"
+    >
+      PRECIO CORRECTO
+    </a>
+  </div>
+</div>
 
             <a href="#nosotros" className="hover:text-[#f5b51b] transition">
               NOSOTROS
@@ -156,21 +170,42 @@ function Home() {
         ["PROPIEDADES", "#propiedades"],
         ["COMPRAR", "/servicios/compra"],
         ["VENDER", "/servicios/venta"],
-        ["SERVICIOS", "/#servicios"],
-        ["SHORT SALE", "/servicios/short-sale"],       
-        ["HERENCIAS", "/servicios/herencias"],
-        ["PRECIO CORRECTO", "/servicios/precio-correcto"],       
+        ["SERVICIOS", "#servicios"],   
         ["NOSOTROS", "#nosotros"],
         ["CONTACTO", "#contacto"],
-      ].map(([nombre, enlace]) => (
-        <a
+     <React.Fragment key={nombre}>
+  <a
+     
           key={nombre}
           href={enlace}
-          onClick={() => setMenuMovilAbierto(false)}
+          onClick={(e) => {
+  if (nombre === "SERVICIOS") {
+    e.preventDefault();
+    setSubmenuServiciosAbierto(!submenuServiciosAbierto);
+  } else {
+    setMenuMovilAbierto(false);
+  }
+}}
           className="block py-2 border-b border-gray-100 hover:text-[#f5b51b] transition"
         >
-          {nombre}
+      {nombre === "SERVICIOS" ? "SERVICIOS ▾" : nombre}
         </a>
+        {nombre === "SERVICIOS" && submenuServiciosAbierto && (
+  <div className="ml-4 flex flex-col gap-3 border-l-2 border-[#c9a646] pl-4">
+    <a href="/servicios/short-sale" onClick={() => setMenuMovilAbierto(false)}>
+      SHORT SALE
+    </a>
+    <a href="/servicios/herencias" onClick={() => setMenuMovilAbierto(false)}>
+      HERENCIAS Y SUCESIONES
+    </a>
+    <a href="/servicios/precio-correcto" onClick={() => setMenuMovilAbierto(false)}>
+      PRECIO CORRECTO
+    </a>
+    
+  </div>
+       )}
+    </React.Fragment>   
+)}
       ))}
     </div>
   </nav>
