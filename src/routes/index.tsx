@@ -203,13 +203,14 @@ function Home() {
     </a>
     
   </div>
-       )}
-    </React.Fragment>   
-)}
-      ))}
+   )}
+    </React.Fragment> 
+    ))}
     </div>
   </nav>
-)}          {/* WHATSAPP */}
+)}        
+      
+      {/* WHATSAPP */}
           <a
             href={whatsappLink}
             target="_blank"
