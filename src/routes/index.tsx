@@ -203,11 +203,12 @@ function Home() {
       PRECIO CORRECTO
     </a>
     
-  </div>
-  </React.Fragment>    
-  )}
-  ))}
-  </div>
+ </div>
+)}
+</React.Fragment>
+))}
+    
+    </div>
   </nav>
   )}        
       
