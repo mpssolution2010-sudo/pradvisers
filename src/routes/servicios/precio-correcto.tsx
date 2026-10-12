@@ -9,6 +9,17 @@ export const Route = createFileRoute('/servicios/precio-correcto')({
 export default function PrecioCorrecto() {
   return (
     <main className="min-h-screen bg-white">
+
+      
+<header className="flex justify-end px-6 py-4">
+  <a
+    href="/"
+    className="rounded-lg border border-[#246b8e] px-5 py-2 text-sm font-bold text-[#246b8e] transition hover:bg-[#246b8e] hover:text-white"
+  >
+    INICIO
+  </a>
+</header>
+      
       <section className="bg-[#f5f5f5] px-6 py-20 text-center">
         <div className="mx-auto max-w-5xl">
           <p className="mb-5 font-bold uppercase tracking-widest text-[#b59b51]">
