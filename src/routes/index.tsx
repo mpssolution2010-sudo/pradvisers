@@ -133,6 +133,11 @@ function Home() {
               HERENCIAS
             </a>
 
+            
+            <a href="/servicios/precio-correcto" className="hover:text-[#f5b51b] transition">
+              PRECIO CORRECTO
+            </a>
+
             <a href="#nosotros" className="hover:text-[#f5b51b] transition">
               NOSOTROS
             </a>
@@ -154,6 +159,7 @@ function Home() {
         ["SERVICIOS", "/#servicios"],
         ["SHORT SALE", "/servicios/short-sale"],       
         ["HERENCIAS", "/servicios/herencias"],
+        ["PRECIO CORRECTO", "/servicios/precio-correcto"],       
         ["NOSOTROS", "#nosotros"],
         ["CONTACTO", "#contacto"],
       ].map(([nombre, enlace]) => (
