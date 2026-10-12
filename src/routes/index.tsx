@@ -636,8 +636,12 @@ function Home() {
                 onClick={() => {
                 if (service.title === "Short Sale") {
                 window.location.href = "/servicios/short-sale";
-                  }
-                      }}                
+                      }
+
+                if (service.title === "Estudios de mercado") {
+                 window.location.href = "/servicios/precio-correcto";
+                      }
+                  }}  
                 className="rounded-2xl bg-[#f5f5f5] p-7 border-t-4 border-[#c9a646] hover:shadow-xl transition cursor-pointer"
               >
                 <h3 className="font-black text-xl text-[#071a32] mb-3">
