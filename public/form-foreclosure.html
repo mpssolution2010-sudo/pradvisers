@@ -1,1 +1,47 @@
 
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulario Foreclosure - Property Advisers</title>
+</head>
+<body>
+  <form
+    name="solicitudes-foreclosure"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+  >
+    <input
+      type="hidden"
+      name="form-name"
+      value="solicitudes-foreclosure"
+    />
+
+    <p hidden>
+      <label>
+        No completar:
+        <input name="bot-field" />
+      </label>
+    </p>
+
+    <input type="text" name="nombre" />
+    <input type="tel" name="telefono" />
+    <input type="email" name="email" />
+    <input type="text" name="municipio" />
+
+    <select name="situacion_hipotecaria">
+      <option value="">Seleccionar</option>
+      <option value="atrasos">Atrasos hipotecarios</option>
+      <option value="demanda">Demanda de ejecución</option>
+      <option value="subasta">Fecha de subasta</option>
+      <option value="orientacion">Deseo orientación inmobiliaria</option>
+    </select>
+
+    <textarea name="mensaje"></textarea>
+
+    <button type="submit">Enviar solicitud</button>
+  </form>
+</body>
+</html>
