@@ -173,6 +173,13 @@ function Home() {
 </a>
 
     
+<a
+  href="/servicios/terrenos"
+  className="block px-4 py-3 hover:bg-gray-100"
+>
+  TERRENOS
+</a>
+
   </div>
 </div>
 
