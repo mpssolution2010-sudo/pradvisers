@@ -253,6 +253,13 @@ function Home() {
 >
   PROPIEDADES ABANDONADAS
 </a>
+    
+<a
+  href="/servicios/terrenos"
+  onClick={() => setMenuMovilAbierto(false)}
+>
+  TERRENOS
+</a>
 
     
  </div>
