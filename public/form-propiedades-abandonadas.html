@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulario de Propiedades Abandonadas</title>
+</head>
+<body>
+
+  <form
+    name="solicitudes-propiedades-abandonadas"
+    method="POST"
+    data-netlify="true"
+    data-netlify-honeypot="bot-field"
+    action="/gracias"
+  >
+
+    <input
+      type="hidden"
+      name="form-name"
+      value="solicitudes-propiedades-abandonadas"
+    />
+
+    <p hidden>
+      <label>
+        No completar este campo:
+        <input name="bot-field" />
+      </label>
+    </p>
+
+    <p>
+      <label>
+        Nombre completo:
+        <input type="text" name="nombre" />
+      </label>
+    </p>
+
+    <p>
+      <label>
+        Teléfono:
+        <input type="tel" name="telefono" />
+      </label>
+    </p>
+
+    <p>
+      <label>
+        Correo electrónico:
+        <input type="email" name="email" />
+      </label>
+    </p>
+
+    <p>
+      <label>
+        Municipio:
+        <input type="text" name="municipio" />
+      </label>
+    </p>
+
+    <p>
+      <label>
+        Condición de la propiedad:
+        <select name="condicion_propiedad">
+          <option value="Desocupada">Desocupada</option>
+          <option value="Abandonada">Abandonada</option>
+          <option value="Deteriorada">Deteriorada</option>
+          <option value="Heredada">Heredada</option>
+          <option value="Terreno sin uso">Terreno sin uso</option>
+          <option value="Otra">Otra situación</option>
+        </select>
+      </label>
+    </p>
+
+    <p>
+      <label>
+        Mensaje:
+        <textarea name="mensaje"></textarea>
+      </label>
+    </p>
+
+    <button type="submit">
+      Enviar solicitud
+    </button>
+
+  </form>
+
+</body>
+</html>
