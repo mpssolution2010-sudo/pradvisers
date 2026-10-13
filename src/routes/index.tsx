@@ -149,6 +149,12 @@ function Home() {
     >
       PRECIO CORRECTO
     </a>
+    <a
+  href="/servicios/alquileres"
+  className="block px-4 py-3 hover:bg-gray-100"
+>
+  ALQUILERES
+</a> 
   </div>
 </div>
 
@@ -199,9 +205,13 @@ function Home() {
     <a href="/servicios/herencias" onClick={() => setMenuMovilAbierto(false)}>
       HERENCIAS Y SUCESIONES
     </a>
+    
     <a href="/servicios/precio-correcto" onClick={() => setMenuMovilAbierto(false)}>
       PRECIO CORRECTO
     </a>
+    <a href="/servicios/alquileres" onClick={() => setMenuMovilAbierto(false)}>
+  ALQUILERES
+</a>
     
  </div>
 )}
