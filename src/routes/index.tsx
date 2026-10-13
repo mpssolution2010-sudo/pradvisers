@@ -163,6 +163,15 @@ function Home() {
 >
   FORECLOSURE
 </a>
+
+    
+<a
+  href="/servicios/propiedades-abandonadas"
+  className="block px-4 py-3 hover:bg-gray-100"
+>
+  PROPIEDADES ABANDONADAS
+</a>
+
     
   </div>
 </div>
@@ -228,6 +237,14 @@ function Home() {
   onClick={() => setMenuMovilAbierto(false)}
 >
   FORECLOSURE
+</a>
+
+    
+<a
+  href="/servicios/propiedades-abandonadas"
+  onClick={() => setMenuMovilAbierto(false)}
+>
+  PROPIEDADES ABANDONADAS
 </a>
 
     
