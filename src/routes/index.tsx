@@ -155,6 +155,15 @@ function Home() {
 >
   ALQUILERES
 </a> 
+
+    
+<a
+  href="/servicios/foreclosure"
+  className="block px-4 py-3 hover:bg-gray-100"
+>
+  FORECLOSURE
+</a>
+    
   </div>
 </div>
 
@@ -212,6 +221,15 @@ function Home() {
     <a href="/servicios/alquileres" onClick={() => setMenuMovilAbierto(false)}>
   ALQUILERES
 </a>
+
+    
+<a
+  href="/servicios/foreclosure"
+  onClick={() => setMenuMovilAbierto(false)}
+>
+  FORECLOSURE
+</a>
+
     
  </div>
 )}
