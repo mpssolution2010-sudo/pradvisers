@@ -122,17 +122,45 @@ function ForeclosurePage() {
             formulario para que podamos comunicarnos contigo.
           </p>
 
-          <form
-            name="solicitudes-foreclosure"
-            method="POST"
-            action="/gracias"
-            className="mt-8 space-y-5"
-          >
+         
+<form
+  name="solicitudes-foreclosure"
+  method="POST"
+  data-netlify="true"
+  data-netlify-honeypot="bot-field"
+  onSubmit={async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    formData.set("form-name", "solicitudes-foreclosure");
+
+    try {
+      const response = await fetch("/form-foreclosure.html", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formData as any).toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error("No se pudo enviar el formulario");
+      }
+
+      window.location.href = "/gracias";
+    } catch (error) {
+      alert("No se pudo enviar la solicitud. Inténtalo nuevamente.");
+    }
+  }}
+  className="mt-8 space-y-5"
+>
+
             <input
               type="hidden"
               name="form-name"
               value="solicitudes-foreclosure"
             />
+  <input type="hidden" name="bot-field" />
 
             <input
               type="text"
