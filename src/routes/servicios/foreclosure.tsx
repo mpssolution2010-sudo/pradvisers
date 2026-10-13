@@ -110,6 +110,113 @@ function ForeclosurePage() {
         </p>
       </section>
 
+      
+      <section className="bg-white px-5 py-16">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-center text-3xl font-bold">
+            Solicita orientación inmobiliaria
+          </h2>
+          <p className="mt-4 text-center text-gray-600">
+            Si tienes atrasos hipotecarios o enfrentas una
+            posible ejecución hipotecaria, completa este
+            formulario para que podamos comunicarnos contigo.
+          </p>
+
+          <form
+            name="solicitudes-foreclosure"
+            method="POST"
+            action="/gracias"
+            className="mt-8 space-y-5"
+          >
+            <input
+              type="hidden"
+              name="form-name"
+              value="solicitudes-foreclosure"
+            />
+
+            <input
+              type="text"
+              name="nombre"
+              placeholder="Nombre completo"
+              aria-label="Nombre completo"
+              required
+              className="w-full rounded-lg border p-4"
+            />
+
+            <input
+              type="tel"
+              name="telefono"
+              placeholder="Teléfono"
+              aria-label="Teléfono"
+              required
+              className="w-full rounded-lg border p-4"
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Correo electrónico"
+              aria-label="Correo electrónico"
+              required
+              className="w-full rounded-lg border p-4"
+            />
+
+            <input
+              type="text"
+              name="municipio"
+              placeholder="Municipio de la propiedad"
+              aria-label="Municipio de la propiedad"
+              required
+              className="w-full rounded-lg border p-4"
+            />
+
+            <select
+              name="situacion_hipotecaria"
+              aria-label="Situación hipotecaria"
+              required
+              defaultValue=""
+              className="w-full rounded-lg border bg-white p-4"
+            >
+              <option value="" disabled>
+                Selecciona tu situación
+              </option>
+              <option value="atrasos">
+                Atrasos hipotecarios
+              </option>
+              <option value="demanda">
+                Demanda de ejecución
+              </option>
+              <option value="subasta">
+                Fecha de subasta
+              </option>
+              <option value="orientacion">
+                Deseo orientación inmobiliaria
+              </option>
+            </select>
+
+            <textarea
+              name="mensaje"
+              placeholder="Cuéntanos brevemente tu situación (opcional)"
+              aria-label="Mensaje"
+              rows={4}
+              className="w-full rounded-lg border p-4"
+            />
+
+            <p className="text-sm text-gray-600">
+              No incluyas números de Seguro Social,
+              cuentas bancarias ni documentos confidenciales.
+            </p>
+
+            <button
+              type="submit"
+              className="w-full rounded-lg bg-[#09243e] px-6 py-4 font-bold text-white hover:bg-[#246b8e]"
+            >
+              ENVIAR SOLICITUD
+            </button>
+          </form>
+        </div>
+      </section>
+
     </main>
   );
 }
