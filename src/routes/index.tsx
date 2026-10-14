@@ -114,11 +114,11 @@ function Home() {
               PROPIEDADES
             </a>
 
-            <a href="//compra" className="hover:text-[#f5b51b] transition">
+            <a href="/servicios/compra" className="hover:text-[#f5b51b] transition">
               COMPRAR
             </a>
 
-            <a href="//venta" className="hover:text-[#f5b51b] transition">
+            <a href="/servicios/venta" className="hover:text-[#f5b51b] transition">
               VENDER
             </a>
 
