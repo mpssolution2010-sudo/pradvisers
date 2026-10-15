@@ -485,7 +485,7 @@ function Home() {
   className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition"
 >
   <img
-    src="/images/propiedades/propiedad-1 Villa Carolina.jpg"
+    src="/images/propiedades/Villa-carolina.jpg"
     alt="Casa en Urb. Villa Carolina, Carolina"
     className="w-full h-56 object-cover"
   />
