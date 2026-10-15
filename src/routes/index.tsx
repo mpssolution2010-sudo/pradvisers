@@ -470,7 +470,7 @@ function Home() {
       </h2>
 
       <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-        Explora una selección de propiedades disponibles en Trujillo Alto.
+      Nuestros listados de propiedades exclusivos
       </p>
     </div>
 
