@@ -521,7 +521,7 @@ function Home() {
   className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition"
 >
   <img
-    src="/images/propiedades/propiedad-2-trujillo-alto.jpg"
+    src="/images/propiedades/terreno-coamo.jpg"
     alt="Terreno en Bo. Cuyón, Coamo"
     className="w-full h-56 object-cover"
   />
