@@ -479,32 +479,31 @@ function Home() {
       {/* PROPIEDAD 1 */}
 
       <a
-  href="https://properties.listingspuertorico.com/listing/38fy4?u=1380382"
+  href="https://properties.listingspuertorico.com/listing/39bi0?u=1380382"
   target="_blank"
   rel="noopener noreferrer"
   className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition"
 >
   <img
-    src="/images/propiedades/propiedad-1-trujillo-alto.jpg"
-    alt="Casa en Barrio Las Cuevas, Trujillo Alto"
+    src="/images/propiedades/propiedad-1 Villa Carolina.jpg"
+    alt="Casa en Urb. Villa Carolina, Carolina"
     className="w-full h-56 object-cover"
   />
 
   <div className="p-5">
     <p className="text-sm font-bold uppercase tracking-wide text-[#f5b51b]">
-      CASA EN VENTA
+      CASA EN ALQUILER
     </p>
 
     <h3 className="mt-2 text-xl font-black text-[#071a32]">
-      Bo. Las Cuevas, Trujillo Alto
-    </h3>
+      Villa Carolina, Carolina    </h3>
 
     <p className="mt-2 text-2xl font-black text-[#071a32]">
-      $610,000
+      $1,500/mes
     </p>
 
     <p className="mt-2 text-gray-600">
-      4 habitaciones • 2 baños • 3,100 pies²
+      3 habitaciones • 2 baños • 1,200 pies²
     </p>
 
     <p className="mt-4 font-bold text-[#071a32]">
